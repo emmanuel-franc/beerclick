@@ -17,24 +17,30 @@ export class ItemComponent {
   constructor() {
 
   }
-  isBuyable(item): boolean {
-    let buyable = true;
+  isBuyable(item, multiplicator: number = 1): boolean {
+    let buyable = true; // Item is true by default because ALL cost must be buyable
 
     item.forEach((cost)=> {
-      if(cost.qty > cost.type.qty) buyable = false;
+      if((cost.qty * multiplicator) > cost.type.qty) {
+        buyable = false; // If not buyable, set variable to false (see line 21)
+      }
     });
 
     return buyable;
   }
 
-  buy(item): void {
+  buy(item, multiplicator: number = 1): void { // multiplicator default value = 1 (same as if statement)
     if(this.isBuyable(item.cost)) {
       item.cost.forEach((cost) => {
-        cost.type.qty -= cost.qty;
+        cost.type.qty -= (cost.qty * multiplicator);
       });
 
       item.qty += 1;
     }
+  }
+
+  sell(): void {
+
   }
 
 

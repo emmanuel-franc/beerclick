@@ -60,21 +60,4 @@ export class AppComponent {
     }, 1000);
   }
 
-  isBuyable(item) {
-    let buyable = true;
-
-    item.forEach((cost)=> {
-      if(cost.qty > cost.type.qty) buyable = false;
-    });
-
-    return buyable;
-  }
-
-  buy(item): void {
-    item.cost.forEach((cost) => {
-      cost.type.qty -= cost.qty;
-    });
-
-    item.qty += 1;
-  }
 }
