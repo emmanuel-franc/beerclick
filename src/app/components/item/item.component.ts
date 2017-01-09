@@ -14,7 +14,9 @@ export class ItemComponent {
 
   @Input() item: Consumable | Beer;
 
-  constructor() {}
+  constructor() {
+    
+  }
 
   isBuyable(item, multiplicator: number = 1): boolean {
     let buyable = true; // Item is true by default because ALL cost must be buyable
