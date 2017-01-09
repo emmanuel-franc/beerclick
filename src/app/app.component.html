@@ -1,42 +1,11 @@
-<div class="col-30">
-  <h1>{{title}}</h1>
-  <h2>Bank: {{bank}}</h2>
-
-  <h2>Ingredients:</h2>
-  Malt: {{malt}}<br>
-  Houblon: {{houblon}}
-
-  <h2>Beers:</h2>
-  pill: {{pill}}<br>
-  lagger: {{lagger}}<br>
-  stout: {{stout}}
+<h1>Player money : {{player.ressources.money.qty}}</h1>
+<div *ngFor="let consumable of player.ressources.consumables">
+  <h2>Stock : {{consumable.qty}} {{consumable.name }}</h2>
+  <app-item [item]="consumable"></app-item>
 </div>
 
-<div class="col-70">
-  <h3>Pill cost: 5$ and 1 houblon - each Pill add 1$/second in bank</h3>
-  <button type="button" name="button" (click)="increment('pill', 10)" [disabled]="houblon < 10 || bank < 50">buy 10 pill</button>
-  <button type="button" name="button" (click)="increment('pill')" [disabled]="!houblon || bank < 5">buy pill</button>
-  <button type="button" name="button" (click)="decrement('pill')" [disabled]="pill === 0">sell pill</button>
-
-  <h3>Lagger cost: 10$ and 1 houblon - each lagger add 2$/second in bank</h3>
-  <button type="button" name="button" (click)="increment('lagger', 10)" [disabled]="houblon < 10 || bank < 100">buy 10 lagger</button>
-  <button type="button" name="button" (click)="increment('lagger')" [disabled]="!houblon || bank < 10">buy lagger</button>
-  <button type="button" name="button" (click)="decrement('lagger')" [disabled]="lagger === 0">sell lagger</button>
-
-  <h3>stout cost: 20$, 1 houblon and 1 malt - each stout add 3$/second in bank</h3>
-  <button type="button" name="button" (click)="increment('stout', 10)" [disabled]="houblon < 10 || malt < 10 || bank < 200">buy 10 stout</button>
-  <button type="button" name="button" (click)="increment('stout')" [disabled]="!houblon || !malt || bank < 20">buy stout</button>
-  <button type="button" name="button" (click)="decrement('stout')" [disabled]="stout === 0">sell stout</button>
-
-  <h3>Malt cost: 10$</h3>
-  <button type="button" name="button" (click)="increment('malt', 10)" [disabled]="bank < 100">buy 10 malt</button>
-  <button type="button" name="button" (click)="increment('malt')" [disabled]="bank < 10">buy malt</button>
-  <button type="button" name="button" (click)="decrement('malt')" [disabled]="malt === 0">sell malt</button>
-
-  <h3>Houblon cost: 10$</h3>
-  <button type="button" name="button" (click)="increment('houblon', 10)" [disabled]="bank < 100">buy 10 houblon</button>
-  <button type="button" name="button" (click)="increment('houblon')" [disabled]="bank < 10">buy houblon</button>
-  <button type="button" name="button" (click)="decrement('houblon')" [disabled]="houblon === 0">sell houblon</button>
+<div *ngFor="let beer of player.ressources.beers">
+  <h2>Stock :{{beer.qty}} {{beer.name }}</h2>
+  <app-item [item]="beer"></app-item>
 </div>
 
-<button (click)="stopIncrement()">Stop increment</button>
