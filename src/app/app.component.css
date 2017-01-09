@@ -1,0 +1,9 @@
+.col-30 {
+    width: 30%;
+    float: left;
+}
+
+.col-70 {
+    width: 70%;
+    float: left;
+}
