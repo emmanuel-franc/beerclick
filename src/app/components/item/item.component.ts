@@ -15,7 +15,7 @@ export class ItemComponent {
   @Input() item: Consumable | Beer;
 
   constructor() {
-    
+
   }
 
   isBuyable(item, multiplicator: number = 1): boolean {
