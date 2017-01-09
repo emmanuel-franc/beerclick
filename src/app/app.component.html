@@ -5,7 +5,6 @@
 </div>
 
 <div *ngFor="let beer of player.ressources.beers">
-  <h2>Stock :{{beer.qty}} {{beer.name }}</h2>
+  <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
   <app-item [item]="beer"></app-item>
 </div>
-

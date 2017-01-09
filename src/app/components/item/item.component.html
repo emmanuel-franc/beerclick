@@ -1,5 +1,11 @@
-<h3>{{item.name}} cost:
-  <span *ngFor="let c of item.cost; let last = last;">{{c.qty}} {{c.type.name}} <span *ngIf="!last">and - </span></span> - each {{item.name}} add 1$/second in bank <!-- TODOAdd Income-->
+<h3>{{item.name}} cost :
+  <span *ngFor="let c of item.price; let last = last;">{{c.qty}} {{c.type.name}}
+    <span *ngIf="!last">and </span>
+  </span>
+
+  <span *ngIf="item.type != 'cereal'">
+  - each {{item.name}} add 1$/second in bank <!-- TODOAdd Income-->
+  </span>
 </h3>
 <button type="button" (click)="buy(item, 10)">buy 10 {{item.name}}</button>
 <button type="button" (click)="buy(item)">buy {{item.name}}</button>

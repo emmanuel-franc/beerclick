@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { Consumable,
   Beer,
-  Cost,
+  Price,
   Player } from '../../models';
 
 @Component({
@@ -21,8 +21,8 @@ export class ItemComponent {
   isBuyable(item, multiplicator: number = 1): boolean {
     let buyable = true; // Item is true by default because ALL cost must be buyable
 
-    item.forEach((cost)=> {
-      if((cost.qty * multiplicator) > cost.type.qty) {
+    item.forEach((price)=> {
+      if((price.qty * multiplicator) > price.type.qty) {
         buyable = false; // If not buyable, set variable to false (see line 21)
       }
     });
@@ -31,9 +31,9 @@ export class ItemComponent {
   }
 
   buy(item, multiplicator: number = 1): void { // multiplicator default value = 1 (same as if statement)
-    if(this.isBuyable(item.cost)) {
-      item.cost.forEach((cost) => {
-        cost.type.qty -= (cost.qty * multiplicator);
+    if(this.isBuyable(item.price)) {
+      item.price.forEach((price) => {
+        price.type.qty -= (price.qty * multiplicator);
       });
 
       item.qty += 1;
@@ -46,9 +46,9 @@ export class ItemComponent {
       item.qty -= 1;
 
       // Add X% of the item cost, to the stock
-      item.cost.forEach((cost) => {
-        if(cost.type.name == "money") {
-          cost.type.qty += (cost.qty / 2);
+      item.price.forEach((price) => {
+        if(price.type.name == "money") {
+          price.type.qty += (price.qty / 2);
         }
       });
     }

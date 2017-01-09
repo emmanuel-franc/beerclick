@@ -1,7 +1,8 @@
-import { Cost } from "./cost.model";
+import { Price } from "./price.model";
 
 export class Consumable {
   name: string;
   qty: number;
-  cost?: [Cost];
+  type: string;
+  price?: [Price];
 }
