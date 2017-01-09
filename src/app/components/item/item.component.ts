@@ -14,9 +14,8 @@ export class ItemComponent {
 
   @Input() item: Consumable | Beer;
 
-  constructor() {
+  constructor() {}
 
-  }
   isBuyable(item, multiplicator: number = 1): boolean {
     let buyable = true; // Item is true by default because ALL cost must be buyable
 
@@ -39,9 +38,17 @@ export class ItemComponent {
     }
   }
 
-  sell(): void {
+  sell(item): void {
+    if(item.qty > 0) {
+      // Remove one from the item
+      item.qty -= 1;
 
+      // Add X% of the item cost, to the stock
+      item.cost.forEach((cost) => {
+        if(cost.type.name == "money") {
+          cost.type.qty += (cost.qty / 2);
+        }
+      });
+    }
   }
-
-
 }
