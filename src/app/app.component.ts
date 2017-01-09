@@ -47,12 +47,12 @@ export class AppComponent {
     }
   };
 
-
   constructor() {
 
     setInterval(() => {
       let income = 1;
       this.player.ressources.beers.forEach((beer) => {
+        // TODO add decimals
         income += Math.floor(beer.qty * beer.ratio);
       });
 
