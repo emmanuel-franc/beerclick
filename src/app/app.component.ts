@@ -49,6 +49,32 @@ export class AppComponent {
 
 
   constructor() {
+
+    setInterval(() => {
+      let income = 1;
+      this.player.ressources.beers.forEach((beer) => {
+        income += Math.floor(beer.qty * beer.ratio);
+      });
+
+      this.player.ressources.money.qty += income;
+    }, 1000);
   }
 
+  isBuyable(item) {
+    let buyable = true;
+
+    item.forEach((cost)=> {
+      if(cost.qty > cost.type.qty) buyable = false;
+    });
+
+    return buyable;
+  }
+
+  buy(item): void {
+    item.cost.forEach((cost) => {
+      cost.type.qty -= cost.qty;
+    });
+
+    item.qty += 1;
+  }
 }
