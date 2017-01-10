@@ -1,9 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Consumable,
-  Beer,
-  Price,
-  Player } from '../../models';
+import { Consumable, Beer } from '../../models';
 
 @Component({
   selector: 'app-item',
@@ -31,10 +28,10 @@ export class ItemComponent {
 
   buy(item, multiplicator: number = 1): void { // multiplicator default value = 1 (same as if statement)
     if(this.isBuyable(item.price, multiplicator)) {
-      item.cost.forEach((price) => {
+      item.price.forEach((price) => {
         price.type.qty -= (price.qty * multiplicator);
 
-        item.qty += 1 * multiplicator;
+        item.qty += multiplicator;
       });
     }
   }
@@ -42,11 +39,11 @@ export class ItemComponent {
   sell(item, multiplicator: number = 1): void {
     if(item.qty * multiplicator > 0) {
       // Remove one from the item
-      item.qty -= 1 * multiplicator;
+      item.qty -= multiplicator;
 
       // Add X% of the item cost, to the stock
-      item.cost.forEach((price) => {
-        if(price.type.name == "money") {
+      item.price.forEach((price) => {
+        if(price.type.type  === "bank") {
           price.type.qty += (price.qty * multiplicator) / 2;
         }
       });

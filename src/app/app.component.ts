@@ -11,7 +11,7 @@ export class AppComponent {
   money: Consumable = {
     name: '$',
     type: 'bank',
-    qty: 0
+    qty: 100
   };
 
   hop: Consumable = {
