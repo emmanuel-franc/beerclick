@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Beer, Consumable, Price, Player } from "./models"
+import { Beer, Consumable, Price, Player } from "./models";
+
+const data = require("../assets/data/data.json");
 
 @Component({
   selector: 'app-root',
@@ -8,24 +10,27 @@ import { Beer, Consumable, Price, Player } from "./models"
 })
 export class AppComponent {
 
-  money: Consumable = {
+/*  money: Consumable = {
     name: '$',
-    type: 'bank',
-    qty: 100
+    category: 'bank',
+    qty: 100,
+    unlocked: true
   };
 
   hop: Consumable = {
     name: 'hop',
-    type: 'cereal',
+    category: 'cereal',
     qty: 0,
-    price: [new Price(10, this.money)]
+    price: [new Price(10, this.money)],
+    unlocked: true
   };
 
   malt: Consumable = {
     name: 'malt',
-    type: 'cereal',
+    category: 'cereal',
     qty: 0,
-    price: [new Price(10, this.money)]
+    price: [new Price(10, this.money)],
+    unlocked: true
   };
 
   stout: Beer = {
@@ -45,24 +50,47 @@ export class AppComponent {
   };
 
   player: Player = {
-    ressources: {
+    resources: {
       money: this.money,
       consumables: [this.malt, this.hop],
       beers: [this.stout, this.lagger]
     }
-  };
+  };*/
+
+  player: Player;
 
   constructor() {
 
-    setInterval(() => {
+    // Add the player money
+    let money: Consumable = data.player.resources.money;
+
+    // Add all consumables
+    let consumables: any = [];
+    data.consumables.forEach((consumable) => {
+      consumables.push(consumable);
+    });
+
+    // Add all beers
+    let beers: any = [];
+    data.beers.forEach((beer) => {
+     beers.push(beer);
+    });
+
+    this.player = new Player(money, consumables, beers);
+
+
+
+    console.log(this.player)
+
+/*    setInterval(() => {
       let income = 1;
-      this.player.ressources.beers.forEach((beer) => {
+      this.player.resources.beers.forEach((beer) => {
         // TODO add decimals
         income += Math.floor(beer.qty * beer.ratio);
       });
 
-      this.player.ressources.money.qty += income;
-    }, 1000);
+      this.player.resources.money.qty += income;
+    }, 1000);*/
   }
 
 }

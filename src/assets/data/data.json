@@ -1,0 +1,104 @@
+{
+  "player": {
+    "resources": {
+      "money": {
+        "name": "$",
+        "category": "bank",
+        "qty": 0,
+        "unlocked": true
+      }
+    }
+  },
+  "consumables": [
+    {
+      "name": "hop",
+      "category": "Cereals",
+      "qty": 0,
+      "price": [
+        {
+          "qty": 10,
+          "name": "$"
+        }
+      ],
+      "unlocked": true
+    },
+    {
+      "name": "wheat",
+      "category": "Cereals",
+      "qty": 0,
+      "price": [
+        {
+          "qty": 10,
+          "name": "$"
+        }
+      ],
+      "unlocked": true
+    },
+    {
+      "name": "barley",
+      "category": "Cereals",
+      "qty": 0,
+      "price": [
+        {
+          "qty": 10,
+          "name": "$"
+        }
+      ],
+      "unlocked": true
+    }
+  ],
+  "beers": [
+    {
+      "name": "Pilsner",
+      "category": "Lagers",
+      "qty": 0,
+      "ratio": 1.1,
+      "price": [
+        {
+          "qty": 5,
+          "name": "$"
+        },
+        {
+          "qty": 1,
+          "name": "hop"
+        }
+      ]
+    },
+    {
+      "name": "Bitter",
+      "category": "Ales",
+      "qty": 0,
+      "ratio": 1.2,
+      "price": [
+        {
+          "qty": 10,
+          "name": "$"
+        },
+        {
+          "qty": 1,
+          "name": "wheat"
+        }
+      ]
+    },
+    {
+      "name": "Dry Stout",
+      "category": "Stout",
+      "qty": 0,
+      "ratio": 1.3,
+      "price": [
+        {
+          "qty": 10,
+          "name": "$"
+        },
+        {
+          "qty": 1,
+          "name": "barley"
+        },
+        {
+          "qty": 1,
+          "name": "wheat"
+        }
+      ]
+    }
+  ]
+}

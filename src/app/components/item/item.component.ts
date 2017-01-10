@@ -12,6 +12,7 @@ export class ItemComponent {
   @Input() item: Consumable | Beer;
 
   constructor() {
+    console.log(this.item)
   }
 
   isBuyable(item, multiplicator: number = 1): boolean {
