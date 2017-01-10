@@ -1,8 +1,9 @@
-import { Cost } from "./cost.model";
+import { Price } from "./price.model";
 
 export class Beer {
   name: string;
   qty: number;
-  cost: [Cost];
+  type: string;
+  price: [Price];
   ratio: number;
 }

@@ -1,6 +1,6 @@
 import { Consumable } from "./consumable.model";
 
-export class Cost {
+export class Price {
   qty: number;
   type: Consumable;
 

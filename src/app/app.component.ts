@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Beer, Consumable, Cost, Player } from "./models"
+import { Beer, Consumable, Price, Player } from "./models"
 
 @Component({
   selector: 'app-root',
@@ -9,33 +9,38 @@ import { Beer, Consumable, Cost, Player } from "./models"
 export class AppComponent {
 
   money: Consumable = {
-    name: 'money',
+    name: '$',
+    type: 'bank',
     qty: 0
   };
 
   hop: Consumable = {
     name: 'hop',
+    type: 'cereal',
     qty: 0,
-    cost: [new Cost(10, this.money)]
+    price: [new Price(10, this.money)]
   };
 
   malt: Consumable = {
     name: 'malt',
+    type: 'cereal',
     qty: 0,
-    cost: [new Cost(10, this.money)]
+    price: [new Price(10, this.money)]
   };
 
   stout: Beer = {
     name: 'stout',
+    type: 'beer',
     qty: 0,
-    cost: [new Cost(10, this.money), new Cost(1, this.hop)],
+    price: [new Price(10, this.money), new Price(1, this.hop)],
     ratio: 1.5
   };
 
   lagger: Beer = {
     name: 'lagger',
+    type: 'beer',
     qty: 0,
-    cost: [new Cost(2, this.hop), new Cost(1, this.malt)],
+    price: [new Price(2, this.hop), new Price(1, this.malt)],
     ratio: 1.2
   };
 
