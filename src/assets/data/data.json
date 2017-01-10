@@ -4,7 +4,7 @@
       "money": {
         "name": "$",
         "category": "bank",
-        "qty": 0,
+        "qty": 1000,
         "unlocked": true
       }
     }

@@ -58,27 +58,28 @@ export class AppComponent {
   };*/
 
   player: Player;
+  money: Consumable;
+  consumables: Consumable[];
+  beers: Beer[];
 
   constructor() {
-
+    this.consumables = [];
+    this.beers = [];
+    
     // Add the player money
-    let money: Consumable = data.player.resources.money;
-
+    this.money = data.player.resources.money;
+  
     // Add all consumables
-    let consumables: any = [];
     data.consumables.forEach((consumable) => {
-      consumables.push(consumable);
+      this.consumables.push(consumable);
     });
 
     // Add all beers
-    let beers: any = [];
     data.beers.forEach((beer) => {
-     beers.push(beer);
+      this.beers.push(beer);
     });
 
-    this.player = new Player(money, consumables, beers);
-
-
+    this.player = new Player(this.money, this.consumables, this.beers);
 
     console.log(this.player)
 
