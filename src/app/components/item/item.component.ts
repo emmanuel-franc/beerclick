@@ -42,7 +42,7 @@ export class ItemComponent {
   sell(item, multiplicator: number = 1): void {
     if(item.qty * multiplicator > 0) {
       // Remove one from the item
-      item.qty -= (1 * multiplicator);
+      item.qty -= 1 * multiplicator;
 
       // Add X% of the item cost, to the stock
       item.cost.forEach((price) => {
