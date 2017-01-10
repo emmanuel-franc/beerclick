@@ -4,7 +4,7 @@
   <app-item [item]="consumable"></app-item>
 </div>
 
-<!--<div *ngFor="let beer of player.resources.beers">-->
-  <!--<h2>Stock : {{beer.qty}} {{beer.name }}</h2>-->
-  <!--<app-item [item]="beer.name"></app-item>-->
-<!--</div>-->
+<div *ngFor="let beer of player.resources.beers">
+  <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
+  <app-item [item]="beer"></app-item>
+</div>

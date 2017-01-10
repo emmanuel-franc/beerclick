@@ -4,6 +4,6 @@ export class Beer {
   name: string;
   category: string;
   qty: number;
-  price: [Price];
+  price: Price[];
   ratio: number;
 }

@@ -4,6 +4,6 @@ export class Consumable {
   name: string;
   category: string;
   qty: number;
-  price?: [Price];
+  price?: Price[];
   unlocked: boolean;
 }

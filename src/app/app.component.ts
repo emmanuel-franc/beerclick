@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { Beer, Consumable, Price, Player } from "./models";
+import {Component} from '@angular/core';
+import {Beer, Consumable, Price, Player} from "./models";
+
+import * as _ from "lodash";
 
 const data = require("../assets/data/data.json");
 
@@ -10,52 +12,52 @@ const data = require("../assets/data/data.json");
 })
 export class AppComponent {
 
-/*  money: Consumable = {
-    name: '$',
-    category: 'bank',
-    qty: 100,
-    unlocked: true
-  };
+  /*  money: Consumable = {
+   name: '$',
+   category: 'bank',
+   qty: 100,
+   unlocked: true
+   };
 
-  hop: Consumable = {
-    name: 'hop',
-    category: 'cereal',
-    qty: 0,
-    price: [new Price(10, this.money)],
-    unlocked: true
-  };
+   hop: Consumable = {
+   name: 'hop',
+   category: 'cereal',
+   qty: 0,
+   price: [new Price(10, this.money)],
+   unlocked: true
+   };
 
-  malt: Consumable = {
-    name: 'malt',
-    category: 'cereal',
-    qty: 0,
-    price: [new Price(10, this.money)],
-    unlocked: true
-  };
+   malt: Consumable = {
+   name: 'malt',
+   category: 'cereal',
+   qty: 0,
+   price: [new Price(10, this.money)],
+   unlocked: true
+   };
 
-  stout: Beer = {
-    name: 'stout',
-    type: 'beer',
-    qty: 0,
-    price: [new Price(10, this.money), new Price(1, this.hop)],
-    ratio: 1.5
-  };
+   stout: Beer = {
+   name: 'stout',
+   type: 'beer',
+   qty: 0,
+   price: [new Price(10, this.money), new Price(1, this.hop)],
+   ratio: 1.5
+   };
 
-  lagger: Beer = {
-    name: 'lagger',
-    type: 'beer',
-    qty: 0,
-    price: [new Price(2, this.hop), new Price(1, this.malt)],
-    ratio: 1.2
-  };
+   lagger: Beer = {
+   name: 'lagger',
+   type: 'beer',
+   qty: 0,
+   price: [new Price(2, this.hop), new Price(1, this.malt)],
+   ratio: 1.2
+   };
 
-  player: Player = {
-    resources: {
-      money: this.money,
-      consumables: [this.malt, this.hop],
-      beers: [this.stout, this.lagger]
-    }
-  };*/
+   player: Player = {
+   resources: {
+   money: this.money,
+   consumables: [this.malt, this.hop],
+   beers: [this.stout, this.lagger]
+   }
+   };*/
 
   player: Player;
   money: Consumable;
@@ -65,33 +67,44 @@ export class AppComponent {
   constructor() {
     this.consumables = [];
     this.beers = [];
-    
+
     // Add the player money
     this.money = data.player.resources.money;
-  
+
     // Add all consumables
     data.consumables.forEach((consumable) => {
+      let price: Price[] = consumable.price.map((p) => new Price(p.qty, this.money));
+      consumable.price = price;
       this.consumables.push(consumable);
     });
 
     // Add all beers
     data.beers.forEach((beer) => {
+      let price: Price[] = beer.price.map((p) => {
+        let type: Consumable;
+        if(p.name === "$") {
+          type = this.money;
+        } else {
+          type = _.find(this.consumables, (consumable) => consumable.name === p.name);
+        }
+        return new Price(p.qty, type);
+      });
+      beer.price = price;
       this.beers.push(beer);
     });
 
     this.player = new Player(this.money, this.consumables, this.beers);
-
     console.log(this.player)
 
-/*    setInterval(() => {
-      let income = 1;
-      this.player.resources.beers.forEach((beer) => {
-        // TODO add decimals
-        income += Math.floor(beer.qty * beer.ratio);
-      });
+    /*    setInterval(() => {
+     let income = 1;
+     this.player.resources.beers.forEach((beer) => {
+     // TODO add decimals
+     income += Math.floor(beer.qty * beer.ratio);
+     });
 
-      this.player.resources.money.qty += income;
-    }, 1000);*/
+     this.player.resources.money.qty += income;
+     }, 1000);*/
   }
 
 }
