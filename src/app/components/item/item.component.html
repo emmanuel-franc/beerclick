@@ -3,8 +3,8 @@
     <span *ngIf="!last">and </span>
   </span>
 
-  <span *ngIf="item.category != 'cereal'">
-  - each {{item.name}} add 1$/second in bank <!-- TODOAdd Income-->
+  <span *ngIf="item.ratio">
+  - each {{item.name}} add {{ 1*item.ratio }}$/second in bank <!-- TODOAdd Income-->
   </span>
 </h3>
 <button type="button" (click)="buy(item, 10)">buy 10 {{item.name}}</button>

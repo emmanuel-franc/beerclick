@@ -46,13 +46,12 @@ export class AppComponent {
     });
 
     this.player = new Player(this.money, this.consumables, this.beers);
-    console.log(this.player)
 
     setInterval(() => {
       let income = 1;
       this.player.resources.beers.forEach((beer) => {
         // TODO add decimals
-        income += Math.floor(beer.qty * beer.ratio);
+        income += beer.qty * beer.ratio;
       });
 
       this.player.resources.money.qty += income;
