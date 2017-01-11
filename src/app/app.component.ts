@@ -50,7 +50,6 @@ export class AppComponent {
     setInterval(() => {
       let income = 1;
       this.player.resources.beers.forEach((beer) => {
-        // TODO add decimals
         income += beer.qty * beer.ratio;
       });
 
