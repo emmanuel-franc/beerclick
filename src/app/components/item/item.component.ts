@@ -18,7 +18,7 @@ export class ItemComponent {
     let buyable = true; // Item is true by default because ALL cost must be buyable
 
     item.forEach((price)=> {
-      if((price.qty * multiplicator) >= price.type.qty) {
+      if((price.qty * multiplicator) > price.type.qty) {
         buyable = false; // If not buyable, set variable to false (see line 21)
       }
     });
@@ -30,20 +30,20 @@ export class ItemComponent {
     if(this.isBuyable(item.price, multiplicator)) {
       item.price.forEach((price) => {
         price.type.qty -= (price.qty * multiplicator);
-
-        item.qty += multiplicator;
       });
+
+      item.qty += multiplicator;
     }
   }
 
   sell(item, multiplicator: number = 1): void {
-    if(item.qty * multiplicator > 0) {
+    if(item.qty  >= multiplicator) { // If we have more item then we want to sell
       // Remove one from the item
       item.qty -= multiplicator;
 
       // Add X% of the item cost, to the stock
       item.price.forEach((price) => {
-        if(price.type.type  === "bank") {
+        if(price.type.category  === "bank") {
           price.type.qty += (price.qty * multiplicator) / 2;
         }
       });
