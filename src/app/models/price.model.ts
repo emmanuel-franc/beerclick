@@ -2,10 +2,10 @@ import { Consumable } from "./consumable.model";
 
 export class Price {
   qty: number;
-  type: Consumable;
+  consumable: Consumable;
 
-  constructor(number, type) {
+  constructor(number, consumable) {
     number ? this.qty = number : '';
-    type ? this.type = type : '';
+    consumable ? this.consumable = consumable : '';
   }
 }

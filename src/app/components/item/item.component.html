@@ -1,5 +1,5 @@
 <h3>{{item.name}} cost :
-  <span *ngFor="let c of item.price; let last = last;">{{c.qty}} {{c.type.name}}
+  <span *ngFor="let c of item.price; let last = last;">{{c.qty}} {{c.consumable.name}}
     <span *ngIf="!last">and </span>
   </span>
 

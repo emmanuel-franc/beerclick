@@ -6,4 +6,5 @@ export class Beer {
   qty: number;
   price: Price[];
   ratio: number;
+  unlocked: boolean;
 }

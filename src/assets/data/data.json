@@ -62,7 +62,8 @@
           "qty": 1,
           "name": "hop"
         }
-      ]
+      ],
+      "unlocked": true
     },
     {
       "name": "Bitter",
@@ -78,7 +79,8 @@
           "qty": 1,
           "name": "wheat"
         }
-      ]
+      ],
+      "unlocked": true
     },
     {
       "name": "Dry Stout",
@@ -98,7 +100,8 @@
           "qty": 1,
           "name": "wheat"
         }
-      ]
+      ],
+      "unlocked": true
     }
   ]
 }
