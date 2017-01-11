@@ -2,7 +2,8 @@ import { Price } from "./price.model";
 
 export class Consumable {
   name: string;
+  category: string;
   qty: number;
-  type: string;
-  price?: [Price];
+  price?: Price[];
+  unlocked: boolean;
 }

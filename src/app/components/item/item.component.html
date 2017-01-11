@@ -1,9 +1,9 @@
 <h3>{{item.name}} cost :
-  <span *ngFor="let c of item.price; let last = last;">{{c.qty}} {{c.type.name}}
+  <span *ngFor="let c of item.price; let last = last;">{{c.qty}} {{c.consumable.name}}
     <span *ngIf="!last">and </span>
   </span>
 
-  <span *ngIf="item.type != 'cereal'">
+  <span *ngIf="item.category != 'cereal'">
   - each {{item.name}} add 1$/second in bank <!-- TODOAdd Income-->
   </span>
 </h3>

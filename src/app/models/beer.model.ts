@@ -2,8 +2,9 @@ import { Price } from "./price.model";
 
 export class Beer {
   name: string;
+  category: string;
   qty: number;
-  type: string;
-  price: [Price];
+  price: Price[];
   ratio: number;
+  unlocked: boolean;
 }

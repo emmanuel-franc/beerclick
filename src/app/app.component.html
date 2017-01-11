@@ -1,10 +1,10 @@
-<h1>Player money : {{player.ressources.money.qty}}</h1>
-<div *ngFor="let consumable of player.ressources.consumables">
+<h1>Player money : {{player.resources.money.qty}}</h1>
+<div *ngFor="let consumable of player.resources.consumables;">
   <h2>Stock : {{consumable.qty}} {{consumable.name }}</h2>
   <app-item [item]="consumable"></app-item>
 </div>
 
-<div *ngFor="let beer of player.ressources.beers">
+<div *ngFor="let beer of player.resources.beers">
   <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
   <app-item [item]="beer"></app-item>
 </div>
