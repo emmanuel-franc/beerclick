@@ -1,3 +1,4 @@
 <div class="appEvent">
-  This is event's holder
+  <p *ngIf="chosenEvent">{{chosenEvent.name}} broke {{chosenEvent.action.loss}} of your beers !</p>
+  <p *ngIf="!chosenEvent">events container</p>
 </div>

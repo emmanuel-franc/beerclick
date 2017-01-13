@@ -44,9 +44,14 @@ export class ItemComponent {
 
       //unlock event Arthor
       if(this.totalBeers >= 15) {
-        this.EventService.onEventChange(() => {
-          this.EventService.eventUnlocked(0)
-        });
+        this.EventService.eventUnlocked(0)
+        console.log('send totalbeers')
+      }
+  
+      //used for dev to have 2 events
+      if(this.totalBeers >= 20) {
+        this.EventService.eventUnlocked(1)
+        console.log('send totalbeers')
       }
     }
   }

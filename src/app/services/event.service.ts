@@ -27,7 +27,6 @@ export class EventService {
     if(!_.includes(this.eventsIdUnlocked, eventId)){
       this.eventsIdUnlocked.push(eventId);
       console.log('in event unlocked')
-      this.callbacks.forEach(callback => callback())
     }
   }
 
@@ -38,11 +37,13 @@ export class EventService {
   getEventsUnlocked() : any {
     for(let i = 0; i < this.eventsIdUnlocked.length; i++) {
       let eventFound = _.find(this.eventsList.events, ['id', i]);
-      this.eventsUnlocked.push(eventFound);
+      
+      if(!_.includes(this.eventsUnlocked, eventFound)) {
+        this.eventsUnlocked.push(eventFound);
+      }
     }
-  
-    //this.callbacks.forEach(callback => callback())
-    return this.eventsUnlocked;
+
+   return this.eventsUnlocked;
   }
 
   onEventChange(callback:Function) : Function {
