@@ -15,14 +15,12 @@ export class EventComponent implements OnInit {
   
   chosenEvent:any;
   timeOut:any;
-  eventList: Function;
+  eventList: any[];
   
   constructor(public EventService:EventService) {
-    //this.eventList = [];
+    this.eventList = [];
   
-    this.EventService.onEventChange(() => {
-      this.eventList = this.EventService.getEventsUnlocked()
-    });
+    this.eventList = this.EventService.getEventsUnlocked();
     this.EventService.init();
   }
   
@@ -43,17 +41,22 @@ export class EventComponent implements OnInit {
   
   
   randomEvent() {
-    this.eventList = this.EventService.onEventChange(() => {
-      this.EventService.getEventsUnlocked()
-    });
+    this.eventList = this.EventService.getEventsUnlocked();
+
     console.log('eventlist',this.eventList)
-    let maxTime = 900; // 5 minutes
-    let minTime = 800; // 1 minute
+
+    let maxTime = 3000; // 5 minutes
+    let minTime = 1000; // 1 minute
     let randomTime = Math.random() * (maxTime - minTime) + minTime;
     
     this.timeOut = setTimeout(() => {
       //set mechanic of random appear of events
       this.chosenEvent = this.eventList[Math.floor(Math.random()*this.eventList.length)];
+      
+      if(this.chosenEvent.action.loss) {
+      
+      }
+      
       this.randomEvent();
     }, randomTime)
   }
