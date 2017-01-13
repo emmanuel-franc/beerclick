@@ -15,10 +15,12 @@ export class AppComponent {
   money: Consumable;
   consumables: Consumable[];
   beers: Beer[];
+  totalBeers:number;
 
   constructor() {
     this.consumables = [];
     this.beers = [];
+    this.totalBeers = this.totalBeers || 0;
 
     // Add the player money
     this.money = data.player.resources.money;
@@ -56,5 +58,4 @@ export class AppComponent {
       this.player.resources.money.qty += income;
     }, 1000);
   }
-
 }
