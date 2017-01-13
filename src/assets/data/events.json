@@ -1,0 +1,11 @@
+{
+  "events": [
+    {
+      "id": 0,
+      "name": "Arthor the beer breaker",
+      "action": {
+        "loss": 1
+      }
+    }
+  ]
+}

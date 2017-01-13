@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Consumable, Beer } from '../../models';
+import {EventService} from "../../services/event.service";
 
 @Component({
   selector: 'app-item',
@@ -10,8 +10,11 @@ import { Consumable, Beer } from '../../models';
 export class ItemComponent {
 
   @Input() item: Consumable | Beer;
+  @Input() totalBeers:number;
+  @Output() totalBeersChange = new EventEmitter<number>();
 
-  constructor() {
+  constructor(public EventService:EventService) {
+    this.totalBeers = this.totalBeers || 0;
   }
 
   isBuyable(item, multiplicator: number = 1): boolean {
@@ -33,6 +36,18 @@ export class ItemComponent {
       });
 
       item.qty += multiplicator;
+
+      if(item.category === "Beers") {
+        this.totalBeers += multiplicator;
+        this.totalBeersChange.emit(this.totalBeers); //send value of totalBeers to parent component
+      }
+
+      //unlock event Arthor
+      if(this.totalBeers >= 15) {
+        this.EventService.onEventChange(() => {
+          this.EventService.eventUnlocked(0)
+        });
+      }
     }
   }
 
@@ -48,5 +63,7 @@ export class ItemComponent {
         }
       });
     }
+    
+    console.log('sell beers',this.totalBeers)
   }
 }

@@ -1,5 +1,5 @@
 <div>
-  <app-event></app-event>
+  <app-event [bank]="player.resources.money"></app-event>
 </div>
 
 <div class="col-30">
@@ -14,6 +14,9 @@
   
   <div *ngFor="let beer of player.resources.beers">
     <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
-    <app-item [item]="beer"></app-item>
+    <app-item [item]="beer" [(totalBeers)]="totalBeers"></app-item>
   </div>
 </div>
+
+totalbeers
+{{totalBeers}}
