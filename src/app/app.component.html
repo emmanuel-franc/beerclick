@@ -22,9 +22,6 @@
 <div class="col-4">
   <div *ngFor="let beer of player.resources.beers">
     <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
-    <app-item [item]="beer" [(totalBeers)]="totalBeers"></app-item>
+    <app-item [item]="beer" [(totalBeersAllTime)]="totalBeersAllTime"></app-item>
   </div>
 </div>
-
-totalbeers
-{{totalBeers}}
