@@ -1,5 +1,5 @@
 <div>
-  <app-event [bank]="player.resources.money" [(totalBeers)]="totalBeers"></app-event><!-- TODO: get totalBeers and beer in component to interact with events -->
+  <app-event [(player)]="player"></app-event>
 </div>
 
 <div class="col-30">
@@ -14,9 +14,12 @@
   
   <div *ngFor="let beer of player.resources.beers">
     <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
-    <app-item [item]="beer" [(totalBeers)]="totalBeers"></app-item>
+    <app-item [item]="beer" [(totalBeersAllTime)]="totalBeersAllTime"></app-item>
   </div>
 </div>
 
 totalbeers
-{{totalBeers}}
+{{totalBeers || 0}}
+<br>
+totalBeersAllTime
+{{totalBeersAllTime}}
