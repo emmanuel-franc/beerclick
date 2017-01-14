@@ -1,53 +1,55 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
+import {Event} from '../models';
 
 import * as _ from "lodash";
 
-const data = require("../../assets/data/events.json");
+const json = require("../../assets/data/events.json");
 
 @Injectable()
 export class EventService {
-  public eventsIdUnlocked:number[];
+  public data:Event[];
   public eventsUnlocked:any[];
-  public callbacks:Function[];
   public eventsList:any;
+  public eventsUnlockedOnChange:EventEmitter<any> = new EventEmitter(); //see http://stackoverflow.com/questions/35878160/angular2-how-to-share-data-change-between-components
   
   constructor() {
-    this.callbacks = [];
-    this.eventsIdUnlocked = [];
     this.eventsUnlocked = [];
-    this.eventsList = undefined;
-  }
-
-  init() {
-    //todo: initialize local storage here
-    this.eventsList = data;
+    this.eventsList = json;
+    this.data = [];
   }
   
-  eventUnlocked(eventId) {
-    if(!_.includes(this.eventsIdUnlocked, eventId)){
-      this.eventsIdUnlocked.push(eventId);
-      console.log('in event unlocked')
-    }
-  }
-
   getEventsList() {
-    return this.eventsList;
+    //todo: initialize local storage here
+    
+    //serialize JSON
+    json.events.forEach((event) => {
+      let newEvent = new Event(event.id, event.name, event.message, event.messageEndPart, event.action.loss, event.action.lossType, event.action.limit);
+      this.data.push(newEvent);
+      console.log('service this.data',this.data);
+    });
+
+    return this.data;
   }
   
-  getEventsUnlocked() : any {
-    for(let i = 0; i < this.eventsIdUnlocked.length; i++) {
-      let eventFound = _.find(this.eventsList.events, ['id', i]);
-      
-      if(!_.includes(this.eventsUnlocked, eventFound)) {
-        this.eventsUnlocked.push(eventFound);
-      }
+  setEventUnlocked(eventId) {
+    let eventFound = _.find(this.eventsList.events, ['id', eventId]);
+
+    //check if eventFound isn't already in the array
+    if(!_.includes(this.eventsUnlocked, eventFound)) {
+      //push eventFound in new array then emit
+      this.eventsUnlocked.push(eventFound);
+      this.eventsUnlockedOnChange.emit(this.eventsUnlocked);
     }
-
-   return this.eventsUnlocked;
   }
+  
+  setEventLocked(eventId) {
+    let eventFound = _.find(this.eventsList.events, ['id', eventId]);
 
-  onEventChange(callback:Function) : Function {
-    this.callbacks.push(callback);
-    return () => this.callbacks.splice(this.callbacks.indexOf(callback), 1);
+    //check if eventFound is in the array
+    if(_.includes(this.eventsUnlocked, eventFound)) {
+      //remove eventFound from it then emit
+      this.eventsUnlocked.splice(this.eventsUnlocked.indexOf(eventFound), 1);
+      this.eventsUnlockedOnChange.emit(this.eventsUnlocked);
+    }
   }
 }
