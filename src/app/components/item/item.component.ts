@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Consumable, Beer } from '../../models';
-import {EventService} from "../../services/event.service";
+import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
 
 @Component({
   selector: 'app-item',
@@ -10,11 +10,11 @@ import {EventService} from "../../services/event.service";
 export class ItemComponent {
 
   @Input() item: Consumable | Beer;
-  @Input() totalBeers:number;
-  @Output() totalBeersChange = new EventEmitter<number>();
-
-  constructor(public EventService:EventService) {
-    this.totalBeers = this.totalBeers || 0;
+  @Input() totalBeersAllTime:number;
+  @Output() totalBeersAllTimeChange = new EventEmitter<number>();
+  
+  constructor(public GlobalStatsService:GlobalStatsService) {
+    this.totalBeersAllTime = this.totalBeersAllTime || 0;
   }
 
   isBuyable(item, multiplicator: number = 1): boolean {
@@ -38,20 +38,12 @@ export class ItemComponent {
       item.qty += multiplicator;
 
       if(item.category === "Beers") {
-        this.totalBeers += multiplicator;
-        this.totalBeersChange.emit(this.totalBeers); //send value of totalBeers to parent component
-      }
+        this.totalBeersAllTime += multiplicator;
 
-      //unlock event Arthor
-      if(this.totalBeers >= 15) {
-        this.EventService.eventUnlocked(0)
-        console.log('send totalbeers')
-      }
-  
-      //used for dev to have 2 events
-      if(this.totalBeers >= 20) {
-        this.EventService.eventUnlocked(1)
-        console.log('send totalbeers')
+        //send value to service
+        this.GlobalStatsService.setTotalBeers(multiplicator);
+
+        this.totalBeersAllTimeChange.emit(this.totalBeersAllTime); //send value of totalBeers to parent component
       }
     }
   }
@@ -67,8 +59,11 @@ export class ItemComponent {
           price.consumable.qty += (price.qty * multiplicator) / 2;
         }
       });
+  
+      if(item.category === "Beers") {
+        //send value to service
+        this.GlobalStatsService.setSubstractTotalBeers(multiplicator);
+      }
     }
-    
-    console.log('sell beers',this.totalBeers)
   }
 }
