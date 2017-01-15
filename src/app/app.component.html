@@ -1,13 +1,25 @@
-<div class="col-30">
-  <h1>Player money : {{player.resources.money.qty | currency: 'USD': true}}</h1>
+<div>
+  <app-event [(player)]="player"></app-event>
 </div>
 
-<div class="col-70">
+<div class="col-4">
+  <h1>Player money : {{player.resources.money.qty | currency: 'USD': true}}</h1>
+  <br>
+  totalbeers
+  {{totalBeers || 0}}
+  <br>
+  totalBeersAllTime
+  {{totalBeersAllTime}}
+</div>
+
+<div class="col-4">
   <div *ngFor="let consumable of player.resources.consumables;">
     <h2>Stock : {{consumable.qty}} {{consumable.name }}</h2>
     <app-item [item]="consumable"></app-item>
   </div>
-  
+</div>
+
+<div class="col-4">
   <div *ngFor="let beer of player.resources.beers">
     <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
     <app-item [item]="beer"></app-item>
