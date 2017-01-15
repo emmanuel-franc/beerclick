@@ -1,8 +1,12 @@
 <div>
+  <div class="col-6">
   <app-event [(player)]="player"></app-event>
+  </div>
+  <div class="col-6">
+    <app-upgrade [(player)]="player"></app-upgrade>
+  </div>
 </div>
 
-<app-upgrade [(player)]="player"></app-upgrade>
 
 <div class="col-4">
   <h1>Player money : {{player.resources.money.qty | currency: 'USD': true}}</h1>
@@ -31,9 +35,3 @@
     </div>
   </div>
 </div>
-
-totalbeers
-{{totalBeers || 0}}
-<br>
-totalBeersAllTime
-{{totalBeersAllTime}}
