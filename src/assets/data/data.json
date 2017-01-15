@@ -32,7 +32,7 @@
           "name": "$"
         }
       ],
-      "unlocked": true
+      "unlocked": false
     },
     {
       "name": "barley",
@@ -44,7 +44,7 @@
           "name": "$"
         }
       ],
-      "unlocked": true
+      "unlocked": false
     }
   ],
   "beers": [
@@ -80,7 +80,7 @@
           "name": "wheat"
         }
       ],
-      "unlocked": true
+      "unlocked": false
     },
     {
       "name": "Dry Stout",
@@ -101,7 +101,31 @@
           "name": "wheat"
         }
       ],
-      "unlocked": true
+      "unlocked": false
+    }
+  ],
+  "upgrades": [
+    {
+      "name": "wheat",
+      "category": "Upgrades",
+      "price": [
+        {
+          "qty": 100,
+          "name": "$"
+        }
+      ],
+      "purchased": false
+    },
+    {
+      "name": "barley",
+      "category": "Upgrades",
+      "price": [
+        {
+          "qty": 200,
+          "name": "$"
+        }
+      ],
+      "purchased": false
     }
   ]
 }
