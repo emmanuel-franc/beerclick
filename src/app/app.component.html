@@ -10,13 +10,17 @@
 
 <div class="col-70">
   <div *ngFor="let consumable of player.resources.consumables;">
-    <h2>Stock : {{consumable.qty}} {{consumable.name }}</h2>
-    <app-item [item]="consumable"></app-item>
+    <div *ngIf="consumable.unlocked">
+      <h2>Stock : {{consumable.qty}} {{consumable.name }}</h2>
+      <app-item [item]="consumable"></app-item>
+    </div>
   </div>
   
   <div *ngFor="let beer of player.resources.beers">
-    <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
-    <app-item [item]="beer" [(totalBeersAllTime)]="totalBeersAllTime"></app-item>
+    <div *ngIf="beer.unlocked">
+      <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
+      <app-item [item]="beer" [(totalBeersAllTime)]="totalBeersAllTime"></app-item>
+    </div>
   </div>
 </div>
 
