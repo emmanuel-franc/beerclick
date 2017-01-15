@@ -1,0 +1,4 @@
+<div class="upgrade" *ngFor="let upgrade of player.resources.upgrades;">
+  <p>Name: {{upgrade.name}}</p>
+  <p>Price: <span *ngFor="let c of upgrade.price;">{{c.qty | currency: 'USD': true}}</span></p>
+</div>
