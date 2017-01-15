@@ -5,4 +5,5 @@ export class Upgrade {
   category: string;
   price: Price[];
   purchased: boolean;
+  seasonalEvent: boolean;
 }

@@ -20,7 +20,7 @@
 
 <div class="col-4">
   <div *ngFor="let consumable of player.resources.consumables;">
-    <div *ngIf="consumable.unlocked">
+    <div *ngIf="consumable.unlocked && !consumable.seasonalEvent">
       <h2>Stock : {{consumable.qty}} {{consumable.name }}</h2>
       <app-item [item]="consumable"></app-item>
     </div>
@@ -29,7 +29,7 @@
 
 <div class="col-4">
   <div *ngFor="let beer of player.resources.beers">
-    <div *ngIf="beer.unlocked">
+    <div *ngIf="beer.unlocked && !beer.seasonalEvent">
       <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
       <app-item [item]="beer" [(totalBeersAllTime)]="totalBeersAllTime"></app-item>
     </div>

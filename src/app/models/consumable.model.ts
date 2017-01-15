@@ -6,4 +6,5 @@ export class Consumable {
   qty: number;
   price?: Price[];
   unlocked: boolean;
+  seasonalEvent: boolean;
 }

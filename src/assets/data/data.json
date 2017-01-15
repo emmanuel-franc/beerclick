@@ -20,7 +20,8 @@
           "name": "$"
         }
       ],
-      "unlocked": true
+      "unlocked": true,
+      "seasonalEvent": false
     },
     {
       "name": "wheat",
@@ -32,7 +33,8 @@
           "name": "$"
         }
       ],
-      "unlocked": false
+      "unlocked": false,
+      "seasonalEvent": false
     },
     {
       "name": "barley",
@@ -44,7 +46,8 @@
           "name": "$"
         }
       ],
-      "unlocked": false
+      "unlocked": false,
+      "seasonalEvent": false
     }
   ],
   "beers": [
@@ -63,7 +66,8 @@
           "name": "hop"
         }
       ],
-      "unlocked": true
+      "unlocked": true,
+      "seasonalEvent": false
     },
     {
       "name": "Bitter",
@@ -80,7 +84,8 @@
           "name": "wheat"
         }
       ],
-      "unlocked": false
+      "unlocked": false,
+      "seasonalEvent": false
     },
     {
       "name": "Dry Stout",
@@ -101,7 +106,30 @@
           "name": "wheat"
         }
       ],
-      "unlocked": false
+      "unlocked": false,
+      "seasonalEvent": false
+    },
+    {
+      "name": "Christmas Beer",
+      "category": "Beers",
+      "qty": 0,
+      "ratio": 1.4,
+      "price": [
+        {
+          "qty": 15,
+          "name": "$"
+        },
+        {
+          "qty": 2,
+          "name": "barley"
+        },
+        {
+          "qty": 2,
+          "name": "wheat"
+        }
+      ],
+      "unlocked": false,
+      "seasonalEvent": true
     }
   ],
   "upgrades": [
@@ -114,7 +142,8 @@
           "name": "$"
         }
       ],
-      "purchased": false
+      "purchased": false,
+      "seasonalEvent": false
     },
     {
       "name": "barley",
@@ -125,7 +154,8 @@
           "name": "$"
         }
       ],
-      "purchased": false
+      "purchased": false,
+      "seasonalEvent": false
     },
     {
       "name": "Bitter",
@@ -136,7 +166,8 @@
           "name": "$"
         }
       ],
-      "purchased": false
+      "purchased": false,
+      "seasonalEvent": false
     },
     {
       "name": "Dry Stout",
@@ -147,7 +178,21 @@
           "name": "$"
         }
       ],
-      "purchased": false
+      "purchased": false,
+      "seasonalEvent": false
+    },
+    {
+      "name": "Christmas Beer",
+      "category": "beers",
+      "price": [
+        {
+          "qty": 150,
+          "name": "$"
+        }
+      ],
+      "purchased": false,
+      "seasonalEvent": true,
+      "seasonalEventName": "Christmas"
     }
   ]
 }
