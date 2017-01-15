@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Beer, Consumable, Price, Player} from "./models";
+import {Beer, Consumable, Upgrade, Price, Player} from "./models";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 
 import * as _ from "lodash";
@@ -16,12 +16,14 @@ export class AppComponent {
   money: Consumable;
   consumables: Consumable[];
   beers: Beer[];
+  upgrades: Upgrade[];
   totalBeers:number;
   totalBeersAllTime:number;
 
   constructor(public GlobalStatsService:GlobalStatsService) {
     this.consumables = [];
     this.beers = [];
+    this.upgrades = [];
     //this.totalBeers = 0;
     this.totalBeersAllTime = this.totalBeersAllTime || 0;
 
@@ -55,7 +57,14 @@ export class AppComponent {
       this.beers.push(beer);
     });
 
-    this.player = new Player(this.money, this.consumables, this.beers);
+    // Add all upgrades
+    data.upgrades.forEach((upgrade) => {
+      let price: Price[] = upgrade.price.map((p) => new Price(p.qty, this.money));
+      upgrade.price = price;
+      this.upgrades.push(upgrade);
+    });
+
+    this.player = new Player(this.money, this.consumables, this.beers, this.upgrades);
 
     setInterval(() => {
       let income = 1;

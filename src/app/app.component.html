@@ -6,6 +6,8 @@
   <h1>Player money : {{player.resources.money.qty | currency: 'USD': true}}</h1>
 </div>
 
+<app-upgrade [(player)]="player"></app-upgrade>
+
 <div class="col-70">
   <div *ngFor="let consumable of player.resources.consumables;">
     <h2>Stock : {{consumable.qty}} {{consumable.name }}</h2>
