@@ -1,7 +1,7 @@
 <h2>Upgrades:</h2>
 
 <div class="upgrade "*ngFor="let upgrade of player.resources.upgrades;" (click)="buyUpgrade(upgrade);">
-  <div *ngIf="!upgrade.purchased && !upgrade.seasonalEvent" class="upgrade-item">
+  <div *ngIf="!upgrade.purchased && upgrade.unlocked" class="upgrade-item">
     <p>Name: {{upgrade.name}}</p>
     <p>Price: <span *ngFor="let c of upgrade.price;">{{c.qty | currency: 'USD': true}}</span></p>
   </div>

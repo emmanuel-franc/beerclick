@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Beer, Consumable, Upgrade, Price, Player} from "./models";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 
@@ -11,7 +11,7 @@ const data = require("../assets/data/data.json");
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   player: Player;
   money: Consumable;
   consumables: Consumable[];
@@ -65,13 +65,28 @@ export class AppComponent {
     });
 
     this.player = new Player(this.money, this.consumables, this.beers, this.upgrades);
-
+  }
+  
+  ngOnInit(){
+    //check date to launch Seasonal Events
+    let actualDate = new Date();
+    
+    //if it's christmas unlock upgrades
+    if(actualDate.getMonth() === 0 &&
+      actualDate.getDate() === 15){
+      let unlockChristmasEventUpgrades = _.filter(this.player.resources.upgrades, {"seasonalEvent": "Christmas"});
+      
+      unlockChristmasEventUpgrades.forEach((upgrade) => {
+        upgrade.unlocked = true;
+      });
+    }
+  
     setInterval(() => {
       let income = 1;
       this.player.resources.beers.forEach((beer) => {
         income += beer.qty * beer.ratio;
       });
-
+    
       this.player.resources.money.qty += income;
     }, 1000);
   }
