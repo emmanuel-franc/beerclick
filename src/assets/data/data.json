@@ -107,7 +107,7 @@
   "upgrades": [
     {
       "name": "wheat",
-      "category": "Upgrades",
+      "category": "consumables",
       "price": [
         {
           "qty": 100,
@@ -118,10 +118,32 @@
     },
     {
       "name": "barley",
-      "category": "Upgrades",
+      "category": "consumables",
       "price": [
         {
-          "qty": 200,
+          "qty": 150,
+          "name": "$"
+        }
+      ],
+      "purchased": false
+    },
+    {
+      "name": "Bitter",
+      "category": "beers",
+      "price": [
+        {
+          "qty": 100,
+          "name": "$"
+        }
+      ],
+      "purchased": false
+    },
+    {
+      "name": "Dry Stout",
+      "category": "beers",
+      "price": [
+        {
+          "qty": 150,
           "name": "$"
         }
       ],
