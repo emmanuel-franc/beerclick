@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { ItemComponent } from './components/item/item.component';
 import { EventComponent } from './components/event/event.component';
 
-import {EventService} from "./services/event.service";
+import {EventService} from "./services/event/event.service";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
 import { ClickZoneComponent } from './components/click-zone/click-zone.component';
