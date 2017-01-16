@@ -13,15 +13,14 @@ export class GlobalStatsService {
     //check if value is defined
     if(value) {
       this.totalBeers += value;
-      console.log('service add', this.totalBeers)
       this.totalBeersOnChange.emit(this.totalBeers);
     }
   }
   
   setSubstractTotalBeers(value) {
+    //check if value is defined
     if(value) {
       this.totalBeers -= value;
-      console.log('service sub', this.totalBeers)
       this.totalBeersOnChange.emit(this.totalBeers);
     }
   }

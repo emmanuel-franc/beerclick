@@ -5,8 +5,6 @@ import {GlobalStatsService} from "../../services/globalStats/global-stats.servic
 
 import * as _ from "lodash";
 
-//const eventsList = require("../../../assets/data/events.json");
-
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
@@ -98,9 +96,9 @@ export class EventComponent implements OnInit {
 
       this.totalBeers = 0;
       //send value of totalBeers to service
-      this.GlobalStatsService.setTotalBeers(this.totalBeers);
+      this.GlobalStatsService.setTotalBeers(this.totalBeers); //TODO : this won't work since setTotalBeers() juste add value. Should create a function resetTotalBeers() in GlobalStatsService
     } else {
-      //get all beers with qty > 0. _.filter creates a new array
+      //get all beers with qty > 0. _.filter creates a new array (see lodash documentation for _.filter)
       let beersWithQty = _.filter(this.player.resources.beers, function(beer){
         return beer.qty > 0
       });

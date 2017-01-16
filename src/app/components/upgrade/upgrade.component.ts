@@ -9,26 +9,24 @@ import * as _ from "lodash";
   styleUrls: ['./upgrade.component.scss']
 })
 export class UpgradeComponent implements OnInit {
-  
+
   @Input() player: Player;
-  
+
   constructor() {
-  
   }
 
   ngOnInit() {
-    console.log('player', this.player)
   }
-  
+
   isBuyable(item): boolean {
     let buyable = true;
-    
+
     item.forEach((price)=> {
       if(price.qty > price.consumable.qty) {
         buyable = false;
       }
     });
-    
+
     return buyable;
   }
   
@@ -37,12 +35,12 @@ export class UpgradeComponent implements OnInit {
       //set unlock on this upgrade
       let purchase = _.find(this.player.resources.upgrades, {'name': item.name});
       purchase.purchased = true;
-      
+
       if(item.category === "consumables") {
         let unlock = _.find(this.player.resources.consumables, {'name': item.name});
         unlock.unlocked = true;
       }
-  
+
       if(item.category === "beers") {
         let unlock = _.find(this.player.resources.beers, {'name': item.name});
         unlock.unlocked = true;

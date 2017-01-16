@@ -22,7 +22,7 @@ export class ItemComponent {
 
     item.forEach((price)=> {
       if((price.qty * multiplicator) > price.consumable.qty) {
-        buyable = false; // If not buyable, set variable to false (see line 21)
+        buyable = false; // If not buyable, set variable to false
       }
     });
 
@@ -43,14 +43,16 @@ export class ItemComponent {
         //send value to service
         this.GlobalStatsService.setTotalBeers(multiplicator);
 
-        this.totalBeersAllTimeChange.emit(this.totalBeersAllTime); //send value of totalBeers to parent component
+        //send value of totalBeersAllTime to parent component (see @Output)
+        this.totalBeersAllTimeChange.emit(this.totalBeersAllTime);
       }
     }
   }
 
   sell(item, multiplicator: number = 1): void {
-    if(item.qty  >= multiplicator) { // If we have more item then we want to sell
-      // Remove one from the item
+    // If we have more item than we want to sell
+    if(item.qty  >= multiplicator) {
+      // Remove multiplicator from the item
       item.qty -= multiplicator;
 
       // Add X% of the item cost, to the stock
@@ -60,6 +62,7 @@ export class ItemComponent {
         }
       });
   
+      //only if beers because we don't mind consumable yet
       if(item.category === "Beers") {
         //send value to service
         this.GlobalStatsService.setSubstractTotalBeers(multiplicator);
