@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ClickzoneComponent } from './clickzone.component';
+import { ClickZoneComponent } from './click-zone.component';
 
 describe('ClickzoneComponent', () => {
-  let component: ClickzoneComponent;
-  let fixture: ComponentFixture<ClickzoneComponent>;
+  let component: ClickZoneComponent;
+  let fixture: ComponentFixture<ClickZoneComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClickzoneComponent ]
+      declarations: [ ClickZoneComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ClickzoneComponent);
+    fixture = TestBed.createComponent(ClickZoneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
