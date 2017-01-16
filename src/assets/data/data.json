@@ -32,7 +32,7 @@
           "name": "$"
         }
       ],
-      "unlocked": true
+      "unlocked": false
     },
     {
       "name": "barley",
@@ -44,7 +44,7 @@
           "name": "$"
         }
       ],
-      "unlocked": true
+      "unlocked": false
     }
   ],
   "beers": [
@@ -80,7 +80,7 @@
           "name": "wheat"
         }
       ],
-      "unlocked": true
+      "unlocked": false
     },
     {
       "name": "Dry Stout",
@@ -101,7 +101,53 @@
           "name": "wheat"
         }
       ],
-      "unlocked": true
+      "unlocked": false
+    }
+  ],
+  "upgrades": [
+    {
+      "name": "wheat",
+      "category": "consumables",
+      "price": [
+        {
+          "qty": 100,
+          "name": "$"
+        }
+      ],
+      "purchased": false
+    },
+    {
+      "name": "barley",
+      "category": "consumables",
+      "price": [
+        {
+          "qty": 150,
+          "name": "$"
+        }
+      ],
+      "purchased": false
+    },
+    {
+      "name": "Bitter",
+      "category": "beers",
+      "price": [
+        {
+          "qty": 100,
+          "name": "$"
+        }
+      ],
+      "purchased": false
+    },
+    {
+      "name": "Dry Stout",
+      "category": "beers",
+      "price": [
+        {
+          "qty": 150,
+          "name": "$"
+        }
+      ],
+      "purchased": false
     }
   ]
 }

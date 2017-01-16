@@ -9,12 +9,14 @@ import { EventComponent } from './components/event/event.component';
 
 import {EventService} from "./services/event.service";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
+import { UpgradeComponent } from './components/upgrade/upgrade.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemComponent,
-    EventComponent
+    EventComponent,
+    UpgradeComponent
   ],
   imports: [
     BrowserModule,
