@@ -1,9 +1,9 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import {Event} from '../models';
+import {Event} from '../../models';
 
 import * as _ from "lodash";
 
-const json = require("../../assets/data/events.json");
+const json = require("../../../assets/data/events.json");
 
 @Injectable()
 export class EventService {

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {Player, Event} from '../../models';
-import {EventService} from "../../services/event.service";
+import {EventService} from "../../services/event/event.service";
 import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
 
 import * as _ from "lodash";

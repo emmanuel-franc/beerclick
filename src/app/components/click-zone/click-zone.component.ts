@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { Player } from '../../models';
 
 @Component({
-  selector: 'app-clickzone',
-  templateUrl: './clickzone.component.html',
-  styleUrls: ['./clickzone.component.scss']
+  selector: 'app-click-zone',
+  templateUrl: './click-zone.component.html',
+  styleUrls: ['./click-zone.component.scss']
 })
-export class ClickzoneComponent {
+export class ClickZoneComponent {
 
   @Input() player:Player;
   generatedMoney:number;

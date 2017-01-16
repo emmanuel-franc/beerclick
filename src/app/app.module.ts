@@ -7,10 +7,10 @@ import { AppComponent } from './app.component';
 import { ItemComponent } from './components/item/item.component';
 import { EventComponent } from './components/event/event.component';
 
-import {EventService} from "./services/event.service";
+import {EventService} from "./services/event/event.service";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
-import { ClickzoneComponent } from './components/clickzone/clickzone.component';
+import { ClickZoneComponent } from './components/click-zone/click-zone.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { ClickzoneComponent } from './components/clickzone/clickzone.component';
     ItemComponent,
     EventComponent,
     UpgradeComponent,
-    ClickzoneComponent
+    ClickZoneComponent
   ],
   imports: [
     BrowserModule,
