@@ -15,7 +15,6 @@ export class GlobalStatsService {
     if(value) {
       this.totalBeers += value;
       this.totalBeersOnChange.emit(this.totalBeers);
-      
     }
   }
 
@@ -25,6 +24,11 @@ export class GlobalStatsService {
       this.totalBeers -= value;
       this.totalBeersOnChange.emit(this.totalBeers);
     }
+  }
+
+  resetTotalBeers() {
+    this.totalBeers = 0;
+    this.totalBeersOnChange.emit(this.totalBeers);
   }
 
   getIncome(player) {
