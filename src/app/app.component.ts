@@ -5,6 +5,7 @@ import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 import * as _ from "lodash";
 
 const data = require("../assets/data/data.json");
+const {version: appVersion} = require("../../package.json"); //http://stackoverflow.com/questions/34907682/how-to-display-app-version-in-angular2/35494456
 
 @Component({
   selector: 'app-root',
@@ -19,8 +20,10 @@ export class AppComponent implements OnInit{
   upgrades: Upgrade[];
   totalBeers:number;
   totalBeersAllTime:number;
+  appVersion;
 
   constructor(public GlobalStatsService:GlobalStatsService) {
+    this.appVersion = appVersion;
     this.consumables = [];
     this.beers = [];
     this.upgrades = [];
