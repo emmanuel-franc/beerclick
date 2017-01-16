@@ -11,6 +11,10 @@
 <div class="col-4">
   <h1>Player money : {{player.resources.money.qty | currency: 'USD': true}}</h1>
   <br>
+
+  <app-clickzone [(player)]="player"></app-clickzone>
+  <br>
+
   totalbeers
   {{totalBeers || 0}}
   <br>
@@ -31,7 +35,7 @@
   <div *ngFor="let beer of player.resources.beers">
     <div *ngIf="beer.unlocked">
       <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
-      <app-item [item]="beer" [(totalBeersAllTime)]="totalBeersAllTime"></app-item>
+      <app-item [player]="player" [item]="beer" [(totalBeersAllTime)]="totalBeersAllTime"></app-item>
     </div>
   </div>
 </div>
