@@ -71,9 +71,9 @@ export class AppComponent implements OnInit{
     //check date to launch Seasonal Events
     let actualDate = new Date();
     
-    //if it's christmas unlock upgrades
-    if(actualDate.getMonth() === 0 &&
-      actualDate.getDate() === 15){
+    //if it's <seasonal event> unlock upgrades
+    if(actualDate.getMonth() >= 0 &&
+      actualDate.getDate() >= 15){ //TODO: set a limit in time of Seasonal Events
       let unlockChristmasEventUpgrades = _.filter(this.player.resources.upgrades, {"seasonalEvent": "Christmas"});
       
       unlockChristmasEventUpgrades.forEach((upgrade) => {

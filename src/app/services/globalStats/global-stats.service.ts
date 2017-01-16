@@ -18,6 +18,7 @@ export class GlobalStatsService {
   }
   
   setSubstractTotalBeers(value) {
+    //check if value is defined
     if(value) {
       this.totalBeers -= value;
       this.totalBeersOnChange.emit(this.totalBeers);
