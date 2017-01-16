@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Consumable, Beer } from '../../models';
+import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
 
 @Component({
   selector: 'app-item',
@@ -10,8 +10,11 @@ import { Consumable, Beer } from '../../models';
 export class ItemComponent {
 
   @Input() item: Consumable | Beer;
-
-  constructor() {
+  @Input() totalBeersAllTime:number;
+  @Output() totalBeersAllTimeChange = new EventEmitter<number>();
+  
+  constructor(public GlobalStatsService:GlobalStatsService) {
+    this.totalBeersAllTime = this.totalBeersAllTime || 0;
   }
 
   isBuyable(item, multiplicator: number = 1): boolean {
@@ -33,6 +36,15 @@ export class ItemComponent {
       });
 
       item.qty += multiplicator;
+
+      if(item.category === "Beers") {
+        this.totalBeersAllTime += multiplicator;
+
+        //send value to service
+        this.GlobalStatsService.setTotalBeers(multiplicator);
+
+        this.totalBeersAllTimeChange.emit(this.totalBeersAllTime); //send value of totalBeers to parent component
+      }
     }
   }
 
@@ -47,6 +59,11 @@ export class ItemComponent {
           price.consumable.qty += (price.qty * multiplicator) / 2;
         }
       });
+  
+      if(item.category === "Beers") {
+        //send value to service
+        this.GlobalStatsService.setSubstractTotalBeers(multiplicator);
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Beer, Consumable, Price, Player} from "./models";
+import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 
 import * as _ from "lodash";
 
@@ -15,10 +16,19 @@ export class AppComponent {
   money: Consumable;
   consumables: Consumable[];
   beers: Beer[];
+  totalBeers:number;
+  totalBeersAllTime:number;
 
-  constructor() {
+  constructor(public GlobalStatsService:GlobalStatsService) {
     this.consumables = [];
     this.beers = [];
+    //this.totalBeers = 0;
+    this.totalBeersAllTime = this.totalBeersAllTime || 0;
+
+    //subscribe to services to detect changes on totalBeers
+    this.GlobalStatsService.totalBeersOnChange.subscribe(data => {
+      this.totalBeers = data;
+    });
 
     // Add the player money
     this.money = data.player.resources.money;
@@ -56,5 +66,4 @@ export class AppComponent {
       this.player.resources.money.qty += income;
     }, 1000);
   }
-
 }

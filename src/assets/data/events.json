@@ -1,0 +1,37 @@
+{
+  "events": [
+    {
+      "id": 0,
+      "name": "Arthor the beer breaker",
+      "message": "Arthor the beer breaker broke",
+      "messageEndPart": "of your beers!",
+      "action": {
+        "loss": 1,
+        "lossType": "beers",
+        "limit": 15
+      }
+    },
+    {
+      "id": 1,
+      "name": "Arthor the beer breaker on drugs",
+      "message": "Arthor the beer breaker on drugs broke",
+      "messageEndPart": "of your beers!",
+      "action": {
+        "loss": 20,
+        "lossType": "beers",
+        "limit": 100
+      }
+    },
+    {
+      "id": 2,
+      "name": "Government taxes",
+      "message": "Government taxes your beer production by $",
+      "messageEndPart": "",
+      "action": {
+        "loss": 200,
+        "lossType": "money",
+        "limit": 1000
+      }
+    }
+  ]
+}
