@@ -20,7 +20,8 @@
           "name": "$"
         }
       ],
-      "unlocked": true
+      "unlocked": true,
+      "seasonalEvent": ""
     },
     {
       "name": "wheat",
@@ -32,7 +33,8 @@
           "name": "$"
         }
       ],
-      "unlocked": false
+      "unlocked": false,
+      "seasonalEvent": ""
     },
     {
       "name": "barley",
@@ -44,7 +46,21 @@
           "name": "$"
         }
       ],
-      "unlocked": false
+      "unlocked": false,
+      "seasonalEvent": ""
+    },
+    {
+      "name": "gingerbread",
+      "category": "Cereals",
+      "qty": 0,
+      "price": [
+        {
+          "qty": 10,
+          "name": "$"
+        }
+      ],
+      "unlocked": false,
+      "seasonalEvent": "Christmas"
     }
   ],
   "beers": [
@@ -63,7 +79,8 @@
           "name": "hop"
         }
       ],
-      "unlocked": true
+      "unlocked": true,
+      "seasonalEvent": ""
     },
     {
       "name": "Bitter",
@@ -80,7 +97,8 @@
           "name": "wheat"
         }
       ],
-      "unlocked": false
+      "unlocked": false,
+      "seasonalEvent": ""
     },
     {
       "name": "Dry Stout",
@@ -101,7 +119,30 @@
           "name": "wheat"
         }
       ],
-      "unlocked": false
+      "unlocked": false,
+      "seasonalEvent": ""
+    },
+    {
+      "name": "Christmas Beer",
+      "category": "Beers",
+      "qty": 0,
+      "ratio": 1.4,
+      "price": [
+        {
+          "qty": 15,
+          "name": "$"
+        },
+        {
+          "qty": 1,
+          "name": "wheat"
+        },
+        {
+          "qty": 1,
+          "name": "gingerbread"
+        }
+      ],
+      "unlocked": false,
+      "seasonalEvent": "Christmas"
     }
   ],
   "upgrades": [
@@ -114,7 +155,9 @@
           "name": "$"
         }
       ],
-      "purchased": false
+      "unlocked": true,
+      "purchased": false,
+      "seasonalEvent": ""
     },
     {
       "name": "barley",
@@ -125,7 +168,22 @@
           "name": "$"
         }
       ],
-      "purchased": false
+      "unlocked": true,
+      "purchased": false,
+      "seasonalEvent": ""
+    },
+    {
+      "name": "gingerbread",
+      "category": "consumables",
+      "price": [
+        {
+          "qty": 100,
+          "name": "$"
+        }
+      ],
+      "unlocked": false,
+      "purchased": false,
+      "seasonalEvent": "Christmas"
     },
     {
       "name": "Bitter",
@@ -136,7 +194,9 @@
           "name": "$"
         }
       ],
-      "purchased": false
+      "unlocked": true,
+      "purchased": false,
+      "seasonalEvent": ""
     },
     {
       "name": "Dry Stout",
@@ -147,7 +207,22 @@
           "name": "$"
         }
       ],
-      "purchased": false
+      "unlocked": true,
+      "purchased": false,
+      "seasonalEvent": ""
+    },
+    {
+      "name": "Christmas Beer",
+      "category": "beers",
+      "price": [
+        {
+          "qty": 150,
+          "name": "$"
+        }
+      ],
+      "unlocked": false,
+      "purchased": false,
+      "seasonalEvent": "Christmas"
     }
   ]
 }

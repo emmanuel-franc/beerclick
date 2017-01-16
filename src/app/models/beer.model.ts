@@ -7,4 +7,5 @@ export class Beer {
   price: Price[];
   ratio: number;
   unlocked: boolean;
+  seasonalEvent: boolean;
 }
