@@ -20,6 +20,7 @@ export class AppComponent implements OnInit{
   upgrades: Upgrade[];
   totalBeers:number;
   totalBeersAllTime:number;
+  income:number;
   appVersion;
 
   constructor(public GlobalStatsService:GlobalStatsService) {
@@ -37,6 +38,14 @@ export class AppComponent implements OnInit{
 
     // Add the player money
     this.money = data.player.resources.money;
+
+    //add the income
+    this.GlobalStatsService.incomeOnChange.subscribe(data => {
+      this.income = data;
+    });
+    if(!this.income) {
+      this.income = 0;
+    }
 
     // Add all consumables
     data.consumables.forEach((consumable) => {
@@ -67,7 +76,11 @@ export class AppComponent implements OnInit{
       this.upgrades.push(upgrade);
     });
 
-    this.player = new Player(this.money, this.consumables, this.beers, this.upgrades);
+    this.player = new Player(this.money, this.income, this.consumables, this.beers, this.upgrades);
+
+    setInterval(() => {
+        this.player.resources.money.qty += this.income;
+    }, 1000);
   }
   
   ngOnInit(){
@@ -83,14 +96,5 @@ export class AppComponent implements OnInit{
         upgrade.unlocked = true;
       });
     }
-  
-    setInterval(() => {
-      let income = 1;
-      this.player.resources.beers.forEach((beer) => {
-        income += beer.qty * beer.ratio;
-      });
-    
-      this.player.resources.money.qty += income;
-    }, 1000);
   }
 }

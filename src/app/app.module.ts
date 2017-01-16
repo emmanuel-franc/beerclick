@@ -10,13 +10,15 @@ import { EventComponent } from './components/event/event.component';
 import {EventService} from "./services/event.service";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
+import { ClickzoneComponent } from './components/clickzone/clickzone.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemComponent,
     EventComponent,
-    UpgradeComponent
+    UpgradeComponent,
+    ClickzoneComponent
   ],
   imports: [
     BrowserModule,

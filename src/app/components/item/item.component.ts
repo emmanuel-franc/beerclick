@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Consumable, Beer } from '../../models';
+import { Consumable, Beer, Player } from '../../models';
 import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
 
 @Component({
@@ -10,6 +10,7 @@ import {GlobalStatsService} from "../../services/globalStats/global-stats.servic
 export class ItemComponent {
 
   @Input() item: Consumable | Beer;
+  @Input() player:Player;
   @Input() totalBeersAllTime:number;
   @Output() totalBeersAllTimeChange = new EventEmitter<number>();
   
@@ -45,6 +46,9 @@ export class ItemComponent {
 
         //send value of totalBeersAllTime to parent component (see @Output)
         this.totalBeersAllTimeChange.emit(this.totalBeersAllTime);
+
+        //everytime we buy a beer, we change income
+        this.GlobalStatsService.setIncome(this.player);
       }
     }
   }
@@ -66,6 +70,9 @@ export class ItemComponent {
       if(item.category === "Beers") {
         //send value to service
         this.GlobalStatsService.setSubstractTotalBeers(multiplicator);
+  
+        //everytime we sell a beer, we change income
+        this.GlobalStatsService.setIncome(this.player);
       }
     }
   }
