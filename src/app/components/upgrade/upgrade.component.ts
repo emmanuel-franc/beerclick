@@ -17,7 +17,6 @@ export class UpgradeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('player', this.player)
   }
   
   isBuyable(item): boolean {

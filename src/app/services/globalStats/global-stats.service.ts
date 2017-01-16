@@ -13,7 +13,6 @@ export class GlobalStatsService {
     //check if value is defined
     if(value) {
       this.totalBeers += value;
-      console.log('service add', this.totalBeers)
       this.totalBeersOnChange.emit(this.totalBeers);
     }
   }
@@ -21,7 +20,6 @@ export class GlobalStatsService {
   setSubstractTotalBeers(value) {
     if(value) {
       this.totalBeers -= value;
-      console.log('service sub', this.totalBeers)
       this.totalBeersOnChange.emit(this.totalBeers);
     }
   }

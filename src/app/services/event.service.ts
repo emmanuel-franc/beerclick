@@ -25,7 +25,6 @@ export class EventService {
     json.events.forEach((event) => {
       let newEvent = new Event(event.id, event.name, event.message, event.messageEndPart, event.action.loss, event.action.lossType, event.action.limit);
       this.data.push(newEvent);
-      console.log('service this.data',this.data);
     });
 
     return this.data;
