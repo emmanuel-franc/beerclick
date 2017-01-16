@@ -32,6 +32,11 @@ export class UpgradeComponent implements OnInit {
   
   buyUpgrade(item) {
     if(this.isBuyable(item.price)) {
+      //forEach get price then substract to player's money qty
+      item.price.forEach((price) => {
+        price.consumable.qty -= price.qty;
+      });
+      
       //set unlock on this upgrade
       let purchase = _.find(this.player.resources.upgrades, {'name': item.name});
       purchase.purchased = true;
