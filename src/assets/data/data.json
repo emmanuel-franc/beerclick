@@ -4,9 +4,10 @@
       "money": {
         "name": "$",
         "category": "bank",
-        "qty": 1000,
+        "qty": 0,
         "unlocked": true
-      }
+      },
+      "income": 0
     }
   },
   "consumables": [

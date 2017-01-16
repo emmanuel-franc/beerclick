@@ -5,14 +5,16 @@ import { Upgrade } from "./upgrade.model";
 export class Player {
   resources: {
     money: Consumable;
+    income:number,
     consumables: Consumable[],
     beers: Beer[],
     upgrades: Upgrade[]
   };
 
-  constructor(money, consumables, beers, upgrades) {
+  constructor(money, income,consumables, beers, upgrades) {
     this.resources = {
       money: money,
+      income: income,
       consumables: consumables,
       beers: beers,
       upgrades: upgrades
