@@ -50,11 +50,7 @@ export class AppComponent implements OnInit{
     }
 
     // Add all perks
-    data.perks.forEach((perk) => {
-      let price: Price[] = perk.price.map((p) => new Price(p.qty, this.money));
-      perk.price = price;
-      this.perks.push(perk);
-    });
+    this.perks = data.perks;
 
     // Add all consumables
     data.consumables.forEach((consumable) => {

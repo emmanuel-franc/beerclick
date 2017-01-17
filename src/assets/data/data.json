@@ -13,84 +13,39 @@
   "perks": [
     {
       "id": 0,
-      "price": [
-        {
-          "qty": 10,
-          "name": "$"
-        }
-      ]
+      "unlocked": true
     },
     {
       "id": 1,
-      "price": [
-        {
-          "qty": 10,
-          "name": "$"
-        }
-      ]
+      "unlocked": false
     },
     {
       "id": 2,
-      "price": [
-        {
-          "qty": 10,
-          "name": "$"
-        }
-      ]
+      "unlocked": false
     },
     {
       "id": 3,
-      "price": [
-        {
-          "qty": 10,
-          "name": "$"
-        }
-      ]
+      "unlocked": false
     },
     {
       "id": 4,
-      "price": [
-        {
-          "qty": 10,
-          "name": "$"
-        }
-      ]
+      "unlocked": false
     },
     {
       "id": 5,
-      "price": [
-        {
-          "qty": 10,
-          "name": "$"
-        }
-      ]
+      "unlocked": false
     },
     {
       "id": 6,
-      "price": [
-        {
-          "qty": 10,
-          "name": "$"
-        }
-      ]
+      "unlocked": false
     },
     {
       "id": 7,
-      "price": [
-        {
-          "qty": 10,
-          "name": "$"
-        }
-      ]
+      "unlocked": false
     },
     {
       "id": 8,
-      "price": [
-        {
-          "qty": 10,
-          "name": "$"
-        }
-      ]
+      "unlocked": false
     }
   ],
   "consumables": [
