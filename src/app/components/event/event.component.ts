@@ -20,12 +20,14 @@ export class EventComponent implements OnInit {
   eventList: any[];
   getEventsList:Event[];
   beersLossEvents:any[];
+  chosenEventQty:number;
   
   constructor(public EventService:EventService, public GlobalStatsService:GlobalStatsService) {
     this.getEventsList = this.EventService.getEventsList();
     this.beersLossEvents = [];
     this.eventList = [];
     this.totalBeers = 0;
+    this.chosenEventQty = 0;
   
     //subscribe to services to detect changes on eventsUnlocked array
     this.EventService.eventsUnlockedOnChange.subscribe(data => {
@@ -87,10 +89,10 @@ export class EventComponent implements OnInit {
   //TODO: optimize beerloss() and moneyloss(). Try to refactor both functions into one
   beerLoss(chosenEvent) {
     //get the number of beers to remove
-    let chosenEventQty = Math.round(this.totalBeers / chosenEvent.action.loss);
+    this.chosenEventQty = Math.round(this.totalBeers / chosenEvent.action.loss);
     
     //check if loss amount exceed totalBeers amount
-    if(chosenEventQty >= this.totalBeers) {
+    if(this.chosenEventQty >= this.totalBeers) {
       //set all beers qty to 0
       _.forEach(this.player.resources.beers, function(beer){
         beer.qty = 0;
@@ -105,7 +107,7 @@ export class EventComponent implements OnInit {
         return beer.qty > 0
       });
 
-      for(let i =0; i < chosenEventQty; i++) {
+      for(let i =0; i < this.chosenEventQty; i++) {
         //get a random beer
         let randomBrokenBeers = beersWithQty[Math.floor(Math.random()*beersWithQty.length)]
 
@@ -119,7 +121,7 @@ export class EventComponent implements OnInit {
       }
 
       //subtract chosenEventQty to totalBeers then send value of totalBeers to service
-      this.GlobalStatsService.setSubstractTotalBeers(chosenEventQty);
+      this.GlobalStatsService.setSubstractTotalBeers(this.chosenEventQty);
 
       //everytime we remove a beer, we change income
       this.GlobalStatsService.setIncome(this.player);
