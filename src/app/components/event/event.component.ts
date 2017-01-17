@@ -107,7 +107,6 @@ export class EventComponent implements OnInit {
       });
 
       for(let i =0; i < chosenEventQty; i++) {
-        console.log('chosenEventQty', chosenEventQty)
         //get a random beer
         let randomBrokenBeers = beersWithQty[Math.floor(Math.random()*beersWithQty.length)]
 
