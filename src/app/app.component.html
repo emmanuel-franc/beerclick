@@ -1,45 +1,43 @@
-<div>
-  <div class="col-6">
-  <app-event [(player)]="player"></app-event>
-  </div>
-  <div class="col-6">
-    <app-upgrade [(player)]="player"></app-upgrade>
-  </div>
-</div>
+<div class="store">
+  <app-upgrade [(player)]="player"></app-upgrade>
 
-
-<div class="col-4">
-  <h1>Player money : {{player.resources.money.qty | currency: 'USD': true}}</h1>
-  <br>
-
-  <app-click-zone [(player)]="player"></app-click-zone>
-  <br>
-
-  totalbeers
-  {{totalBeers || 0}}
-  <br>
-  totalBeersAllTime
-  {{totalBeersAllTime}}
-</div>
-
-<div class="col-4">
   <div *ngFor="let consumable of player.resources.consumables;">
     <div *ngIf="consumable.unlocked">
       <h2>Stock : {{consumable.qty}} {{consumable.name }}</h2>
       <app-item [item]="consumable"></app-item>
     </div>
   </div>
+  
+  <div class="appVersion">
+    Version: {{appVersion}}
+  </div>
 </div>
 
-<div class="col-4">
+<div class="main">
+  <div class="event">
+    <app-event [(player)]="player"></app-event>
+  </div>
+
+  <div class="clickZone">
+    <app-click-zone [(player)]="player"></app-click-zone>
+  </div>
+
+  <div class="stats">
+    <h2>Player money : {{player.resources.money.qty | currency: 'USD': true}}</h2>
+    
+    totalbeers
+    {{totalBeers || 0}}
+    <br>
+    totalBeersAllTime
+    {{totalBeersAllTime}}
+  </div>
+</div>
+
+<div class="store">
   <div *ngFor="let beer of player.resources.beers">
     <div *ngIf="beer.unlocked">
       <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
       <app-item [player]="player" [item]="beer" [(totalBeersAllTime)]="totalBeersAllTime"></app-item>
     </div>
   </div>
-</div>
-
-<div>
-  {{appVersion}}
 </div>
