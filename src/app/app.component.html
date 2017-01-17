@@ -7,7 +7,7 @@
       <app-item [item]="consumable"></app-item>
     </div>
   </div>
-  
+
   <div class="appVersion">
     Version: {{appVersion}}
   </div>
@@ -19,12 +19,16 @@
   </div>
 
   <div class="clickZone">
+    <app-perk></app-perk>
+
     <app-click-zone [(player)]="player"></app-click-zone>
+
+    <app-perk></app-perk>
   </div>
 
   <div class="stats">
     <h2>Player money : {{player.resources.money.qty | currency: 'USD': true}}</h2>
-    
+
     totalbeers
     {{totalBeers || 0}}
     <br>
