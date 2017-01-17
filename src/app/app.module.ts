@@ -11,6 +11,7 @@ import {EventService} from "./services/event/event.service";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
 import { ClickZoneComponent } from './components/click-zone/click-zone.component';
+import { PerkComponent } from './components/perk/perk.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ClickZoneComponent } from './components/click-zone/click-zone.component
     ItemComponent,
     EventComponent,
     UpgradeComponent,
-    ClickZoneComponent
+    ClickZoneComponent,
+    PerkComponent
   ],
   imports: [
     BrowserModule,

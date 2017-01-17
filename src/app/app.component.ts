@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Beer, Consumable, Upgrade, Price, Player} from "./models";
+import {Beer, Consumable, Upgrade, Price, Perk, Player} from "./models";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 
 import * as _ from "lodash";
@@ -15,6 +15,7 @@ const {version: appVersion} = require("../../package.json"); //http://stackoverf
 export class AppComponent implements OnInit{
   player: Player;
   money: Consumable;
+  perks: Perk[];
   consumables: Consumable[];
   beers: Beer[];
   upgrades: Upgrade[];
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit{
 
   constructor(public GlobalStatsService:GlobalStatsService) {
     this.appVersion = appVersion;
+    this.perks = [];
     this.consumables = [];
     this.beers = [];
     this.upgrades = [];
@@ -46,6 +48,9 @@ export class AppComponent implements OnInit{
     if(!this.income) {
       this.income = 0;
     }
+
+    // Add all perks
+    this.perks = data.perks;
 
     // Add all consumables
     data.consumables.forEach((consumable) => {
@@ -76,7 +81,7 @@ export class AppComponent implements OnInit{
       this.upgrades.push(upgrade);
     });
 
-    this.player = new Player(this.money, this.income, this.consumables, this.beers, this.upgrades);
+    this.player = new Player(this.money, this.income, this.perks, this.consumables, this.beers, this.upgrades);
 
     setInterval(() => {
         this.player.resources.money.qty += this.income;

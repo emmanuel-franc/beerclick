@@ -10,6 +10,44 @@
       "income": 0
     }
   },
+  "perks": [
+    {
+      "id": 0,
+      "unlocked": true
+    },
+    {
+      "id": 1,
+      "unlocked": false
+    },
+    {
+      "id": 2,
+      "unlocked": false
+    },
+    {
+      "id": 3,
+      "unlocked": false
+    },
+    {
+      "id": 4,
+      "unlocked": false
+    },
+    {
+      "id": 5,
+      "unlocked": false
+    },
+    {
+      "id": 6,
+      "unlocked": false
+    },
+    {
+      "id": 7,
+      "unlocked": false
+    },
+    {
+      "id": 8,
+      "unlocked": false
+    }
+  ],
   "consumables": [
     {
       "name": "hop",

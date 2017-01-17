@@ -1,0 +1,11 @@
+<div class="perks perks--left">
+  <div *ngFor="let perk of perks; let index = index;">
+    <span class="perks-item" [ngClass]="{'perks-item--locked': !perk.unlocked}" *ngIf="index < 4">{{perk.id}}</span>
+  </div>
+</div>
+
+<div class="perks perks--right">
+  <div *ngFor="let perk of perks; let index = index;">
+    <span class="perks-item" [ngClass]="{'perks-item--locked': !perk.unlocked}" *ngIf="index > 4">{{perk.id}}</span>
+  </div>
+</div>
