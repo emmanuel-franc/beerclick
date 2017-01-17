@@ -121,10 +121,11 @@ export class EventComponent implements OnInit {
         }
       }
 
-      //subtract this.chosenEvent.action.loss to totalBeers then send value of totalBeers to service
+      //subtract chosenEventQty to totalBeers then send value of totalBeers to service
       this.GlobalStatsService.setSubstractTotalBeers(chosenEventQty);
-      
-      //TODO: set new income
+
+      //everytime we remove a beer, we change income
+      this.GlobalStatsService.setIncome(this.player);
     }
   }
 
