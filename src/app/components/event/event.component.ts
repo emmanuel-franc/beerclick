@@ -48,7 +48,6 @@ export class EventComponent implements OnInit {
         }
         //remove events with beer loss when limit -1 (to prevent event to never stop)
         if(this.totalBeers < this.beersLossEvents[i].action.limit) {
-          console.log('totalbeers', this.totalBeers)
           this.EventService.setEventLocked(this.beersLossEvents[i].id);
         }
       }
@@ -115,7 +114,6 @@ export class EventComponent implements OnInit {
 
         //if current beer quantity drops to 0, we remove it from the array then never loop on it again preventing a negative value
         if(randomBrokenBeers.qty === 0) {
-          console.log('splice from table')
           beersWithQty.splice(beersWithQty.indexOf(randomBrokenBeers), 1);
         }
       }
