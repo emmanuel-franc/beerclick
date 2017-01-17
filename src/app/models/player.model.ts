@@ -7,7 +7,7 @@ export class Player {
   resources: {
     money: Consumable;
     income:number,
-    perk: Perk[],
+    perks: Perk[],
     consumables: Consumable[],
     beers: Beer[],
     upgrades: Upgrade[]
@@ -17,7 +17,7 @@ export class Player {
     this.resources = {
       money: money,
       income: income,
-      perk: perk,
+      perks: perk,
       consumables: consumables,
       beers: beers,
       upgrades: upgrades
