@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import {Player} from "../../models/player.model";
+import {Perk} from "../../models/perk.model";
+
+//import * as _ from "lodash";
 
 @Component({
   selector: 'app-perk',
@@ -6,10 +11,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./perk.component.scss']
 })
 export class PerkComponent implements OnInit {
+  @Input() player: Player;
+  perks: Perk[];
+  perksArrayLeft: Perk[];
+  perksArrayRight: Perk[];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
+    this.perks = [];
+    this.perksArrayLeft = [];
+    this.perksArrayRight = []
   }
 
+  ngOnInit() {
+    this.perks = this.player.resources.perks;
+    console.log('PERKSPERKS', this.perks)
+  }
 }
