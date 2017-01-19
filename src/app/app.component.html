@@ -19,13 +19,17 @@
   </div>
 
   <div class="clickZone">
-    <app-perk [(player)]="player"></app-perk>
+    <app-perk [(player)]="player" [totalMoneyAllTime]="totalMoneyAllTime"></app-perk>
 
-    <app-click-zone [(player)]="player"></app-click-zone>
+    <app-click-zone [(player)]="player" [(totalMoneyAllTime)]="totalMoneyAllTime"></app-click-zone>
   </div>
 
   <div class="stats">
     <h2>Player money : {{player.resources.money.qty | currency: 'USD': true}}</h2>
+
+    totalMoneyAllTime
+    {{totalMoneyAllTime || 0 | currency: 'USD': true}}
+    <br>
 
     totalbeers
     {{totalBeers || 0}}

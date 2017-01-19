@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Player } from '../../models';
 
 @Component({
@@ -9,6 +9,8 @@ import { Player } from '../../models';
 export class ClickZoneComponent {
 
   @Input() player:Player;
+  @Input() totalMoneyAllTime:number;
+  @Output() totalMoneyAllTimeChange = new EventEmitter<number>();
   generatedMoney:number;
   clicks:number[];
   
@@ -16,6 +18,8 @@ export class ClickZoneComponent {
     //default money generated is equal to 1
     this.generatedMoney = 1;
     this.clicks = [];
+
+    this.totalMoneyAllTime = this.totalMoneyAllTime || 0;
   }
 
   generateMoney(){
@@ -29,6 +33,10 @@ export class ClickZoneComponent {
 
     //increment money quantity
     this.player.resources.money.qty +=  this.generatedMoney;
+
+    //increment totalMoneyAllTime quantity
+    this.totalMoneyAllTime += this.generatedMoney;
+    this.totalMoneyAllTimeChange.emit(this.totalMoneyAllTime);
 
     //show value generated
     this.clicks.push(this.generatedMoney);

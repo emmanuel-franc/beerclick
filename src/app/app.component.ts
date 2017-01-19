@@ -21,6 +21,7 @@ export class AppComponent implements OnInit{
   upgrades: Upgrade[];
   totalBeers:number;
   totalBeersAllTime:number;
+  totalMoneyAllTime:number;
   income:number;
   appVersion;
 
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit{
     this.upgrades = [];
     //this.totalBeers = 0;
     this.totalBeersAllTime = this.totalBeersAllTime || 0;
+    this.totalMoneyAllTime = this.totalMoneyAllTime || 0;
 
     //subscribe to services to detect changes on totalBeers
     this.GlobalStatsService.totalBeersOnChange.subscribe(data => {
@@ -84,7 +86,9 @@ export class AppComponent implements OnInit{
     this.player = new Player(this.money, this.income, this.perks, this.consumables, this.beers, this.upgrades);
 
     setInterval(() => {
-        this.player.resources.money.qty += this.income;
+      this.player.resources.money.qty += this.income;
+
+      this.totalMoneyAllTime += this.income;
     }, 1000);
   }
   

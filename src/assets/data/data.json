@@ -13,7 +13,7 @@
   "perks": [
     {
       "id": 0,
-      "unlocked": true,
+      "unlocked": false,
       "limit": 10
     },
     {
