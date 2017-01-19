@@ -13,39 +13,48 @@
   "perks": [
     {
       "id": 0,
-      "unlocked": true
+      "unlocked": true,
+      "limit": 10
     },
     {
       "id": 1,
-      "unlocked": false
+      "unlocked": false,
+      "limit": 100
     },
     {
       "id": 2,
-      "unlocked": false
+      "unlocked": false,
+      "limit": 1000
     },
     {
       "id": 3,
-      "unlocked": false
+      "unlocked": false,
+      "limit": 10000
     },
     {
       "id": 4,
-      "unlocked": false
+      "unlocked": false,
+      "limit": 50000
     },
     {
       "id": 5,
-      "unlocked": false
+      "unlocked": false,
+      "limit": 100000
     },
     {
       "id": 6,
-      "unlocked": false
+      "unlocked": false,
+      "limit": 150000
     },
     {
       "id": 7,
-      "unlocked": false
+      "unlocked": false,
+      "limit": 200000
     },
     {
       "id": 8,
-      "unlocked": false
+      "unlocked": false,
+      "limit": 250000
     }
   ],
   "consumables": [
