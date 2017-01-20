@@ -7,16 +7,18 @@ export class Player {
   resources: {
     money: Consumable;
     income:number,
+    totalMoneyAllTime:number,
     perks: Perk[],
     consumables: Consumable[],
     beers: Beer[],
     upgrades: Upgrade[]
   };
 
-  constructor(money, income, perk, consumables, beers, upgrades) {
+  constructor(money, income, totalMoneyAllTime, perk, consumables, beers, upgrades) {
     this.resources = {
       money: money,
       income: income,
+      totalMoneyAllTime: totalMoneyAllTime,
       perks: perk,
       consumables: consumables,
       beers: beers,

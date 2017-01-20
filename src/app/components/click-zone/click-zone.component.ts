@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Player } from '../../models';
+import {GlobalStatsService} from '../../services/globalStats/global-stats.service';
 
 @Component({
   selector: 'app-click-zone',
@@ -10,16 +11,18 @@ export class ClickZoneComponent {
 
   @Input() player:Player;
   @Input() totalMoneyAllTime:number;
-  @Output() totalMoneyAllTimeChange = new EventEmitter<number>();
   generatedMoney:number;
   clicks:number[];
   
-  constructor() {
+  constructor(public GlobalStatsService:GlobalStatsService) {
     //default money generated is equal to 1
     this.generatedMoney = 1;
     this.clicks = [];
 
-    this.totalMoneyAllTime = this.totalMoneyAllTime || 0;
+
+    this.GlobalStatsService.totalMoneyAllTimeOnChange.subscribe(data => {
+      this.totalMoneyAllTime = data;
+    });
   }
 
   generateMoney(){
@@ -35,8 +38,7 @@ export class ClickZoneComponent {
     this.player.resources.money.qty +=  this.generatedMoney;
 
     //increment totalMoneyAllTime quantity
-    this.totalMoneyAllTime += this.generatedMoney;
-    this.totalMoneyAllTimeChange.emit(this.totalMoneyAllTime);
+    this.GlobalStatsService.setTotalMoneyAllTime(this.generatedMoney);
 
     //show value generated
     this.clicks.push(this.generatedMoney);
