@@ -37,4 +37,9 @@ export class PerkComponent implements OnInit {
   ngOnInit() {
     this.perks = this.player.resources.perks;
   }
+
+  addPerk() {
+    //Todo: create popin (or other) to add a perk
+    prompt('Chose a perk');
+  }
 }
