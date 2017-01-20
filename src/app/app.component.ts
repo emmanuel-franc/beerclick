@@ -22,6 +22,7 @@ export class AppComponent implements OnInit{
   totalBeers:number;
   totalBeersAllTime:number;
   income:number;
+  totalMoneyAllTime:number;
   appVersion;
 
   constructor(public GlobalStatsService:GlobalStatsService) {
@@ -30,8 +31,7 @@ export class AppComponent implements OnInit{
     this.consumables = [];
     this.beers = [];
     this.upgrades = [];
-    //this.totalBeers = 0;
-    this.totalBeersAllTime = this.totalBeersAllTime || 0;
+    this.totalMoneyAllTime = 0;
 
     //subscribe to services to detect changes on totalBeers
     this.GlobalStatsService.totalBeersOnChange.subscribe(data => {
@@ -40,6 +40,11 @@ export class AppComponent implements OnInit{
 
     // Add the player money
     this.money = data.player.resources.money;
+
+    // Add the player all time money
+    this.GlobalStatsService.totalMoneyAllTimeOnChange.subscribe(data => {
+      this.totalMoneyAllTime = data;
+    });
 
     //add the income
     this.GlobalStatsService.incomeOnChange.subscribe(data => {
@@ -81,10 +86,12 @@ export class AppComponent implements OnInit{
       this.upgrades.push(upgrade);
     });
 
-    this.player = new Player(this.money, this.income, this.perks, this.consumables, this.beers, this.upgrades);
+    this.player = new Player(this.money, this.income, this.totalMoneyAllTime ,this.perks, this.consumables, this.beers, this.upgrades);
 
     setInterval(() => {
-        this.player.resources.money.qty += this.income;
+      this.player.resources.money.qty += this.income;
+
+      this.GlobalStatsService.setTotalMoneyAllTime(this.income);
     }, 1000);
   }
   
