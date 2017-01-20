@@ -1,0 +1,16 @@
+{
+  "perksList": [
+    {
+      "id": 0,
+      "name": "magical perk",
+      "image": "pathToImgEventuallyInBase64",
+      "price": [
+        {
+          "qty": 10,
+          "name": "$"
+        }
+      ],
+      "purchased": false
+    }
+  ]
+}
