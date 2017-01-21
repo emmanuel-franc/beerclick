@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import {Player} from "../../models/player.model";
-import {Perk} from "../../models/perk.model";
+import {Player, PerkSlot, Perk, Price} from "../../models";
 
 import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
 
@@ -11,23 +10,28 @@ import {GlobalStatsService} from "../../services/globalStats/global-stats.servic
   styleUrls: ['./perk.component.scss']
 })
 export class PerkComponent implements OnInit {
-  @Input() player: Player;
+  @Input() player:Player;
   totalMoneyAllTime:number;
-  perks: Perk[];
+  perkSlots:PerkSlot[];
+  perksList:Perk[];
+  popinIsVisible:boolean;
+  perkSlotId:number;
 
   constructor(public GlobalStatsService:GlobalStatsService) {
-    this.perks = [];
+    this.perkSlots = [];
+    this.perksList = [];
+    this.popinIsVisible = false;
 
     //subscribe to services to detect changes on totalBeers
     this.GlobalStatsService.totalMoneyAllTimeOnChange.subscribe(data => {
 
       this.totalMoneyAllTime  = data;
 
-      for(let i = 0; i < this.perks.length; i++) {
+      for(let i = 0; i < this.perkSlots.length; i++) {
         //unlock perkslot when limit is reached
-        if(!this.player.resources.perks[i].unlocked) {
-          if(this.totalMoneyAllTime >= this.perks[i].limit) {
-            this.player.resources.perks[i].unlocked = true;
+        if(!this.player.resources.perkSlots[i].unlocked) {
+          if(this.totalMoneyAllTime >= this.perkSlots[i].limit) {
+            this.player.resources.perkSlots[i].unlocked = true;
           }
         }
       }
@@ -35,11 +39,12 @@ export class PerkComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.perks = this.player.resources.perks;
+    this.perkSlots = this.player.resources.perkSlots;
+    this.perksList = this.player.resources.perks;
   }
 
-  addPerk() {
-    //Todo: create popin (or other) to add a perk
-    prompt('Chose a perk');
+  addPerk(id) {
+    this.popinIsVisible = true;
+    this.perkSlotId = id;
   }
 }

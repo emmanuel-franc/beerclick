@@ -1,0 +1,10 @@
+<div class="popin" [ngClass]="{'popin--visible': popinIsVisible}">
+  <!-- TODO: find a way to *ngIf data = perkList -->
+  <div class="list">
+    <div class="list-item"
+         *ngFor="let perk of player.resources.perks"
+         (click)="setPerk(perk)">
+      <button [disabled]="!perk.unlocked">{{perk.name}}</button>
+    </div>
+  </div>
+</div>

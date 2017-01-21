@@ -1,5 +1,5 @@
 {
-  "perksList": [
+  "perks": [
     {
       "id": 0,
       "name": "magical perk",
@@ -10,6 +10,33 @@
           "name": "$"
         }
       ],
+      "unlocked": true,
+      "purchased": false
+    },
+    {
+      "id": 1,
+      "name": "Forever St Patrick's day",
+      "image": "pathToImgEventuallyInBase64",
+      "price": [
+        {
+          "qty": 10,
+          "name": "$"
+        }
+      ],
+      "unlocked": true,
+      "purchased": false
+    },
+    {
+      "id": 2,
+      "name": "Farmer",
+      "image": "pathToImgEventuallyInBase64",
+      "price": [
+        {
+          "qty": 1000,
+          "name": "$"
+        }
+      ],
+      "unlocked": false,
       "purchased": false
     }
   ]

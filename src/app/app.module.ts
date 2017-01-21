@@ -12,6 +12,7 @@ import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
 import { ClickZoneComponent } from './components/click-zone/click-zone.component';
 import { PerkComponent } from './components/perk/perk.component';
+import { PopinComponent } from './components/popin/popin.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PerkComponent } from './components/perk/perk.component';
     EventComponent,
     UpgradeComponent,
     ClickZoneComponent,
-    PerkComponent
+    PerkComponent,
+    PopinComponent
   ],
   imports: [
     BrowserModule,

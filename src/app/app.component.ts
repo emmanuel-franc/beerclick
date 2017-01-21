@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Beer, Consumable, Upgrade, Price, Perk, Player} from "./models";
+import {Beer, Consumable, Upgrade, Price, PerkSlot, Perk, Player} from "./models";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 
 import * as _ from "lodash";
 
 const data = require("../assets/data/data.json");
+const perksList = require("../assets/data/perks.json");
 const {version: appVersion} = require("../../package.json"); //http://stackoverflow.com/questions/34907682/how-to-display-app-version-in-angular2/35494456
 
 @Component({
@@ -15,7 +16,8 @@ const {version: appVersion} = require("../../package.json"); //http://stackoverf
 export class AppComponent implements OnInit{
   player: Player;
   money: Consumable;
-  perks: Perk[];
+  perkSlots: PerkSlot[];
+  perks:Perk[];
   consumables: Consumable[];
   beers: Beer[];
   upgrades: Upgrade[];
@@ -27,6 +29,7 @@ export class AppComponent implements OnInit{
 
   constructor(public GlobalStatsService:GlobalStatsService) {
     this.appVersion = appVersion;
+    this.perkSlots = [];
     this.perks = [];
     this.consumables = [];
     this.beers = [];
@@ -54,8 +57,15 @@ export class AppComponent implements OnInit{
       this.income = 0;
     }
 
+    // Add all perkSlots
+    this.perkSlots = data.perkSlot;
+
     // Add all perks
-    this.perks = data.perks;
+    perksList.perks.forEach((perk) => {
+      let price: Price[] = perk.price.map((p) => new Price(p.qty, this.money));
+      perk.price = price;
+      this.perks.push(perk);
+    });
 
     // Add all consumables
     data.consumables.forEach((consumable) => {
@@ -86,7 +96,7 @@ export class AppComponent implements OnInit{
       this.upgrades.push(upgrade);
     });
 
-    this.player = new Player(this.money, this.income, this.totalMoneyAllTime ,this.perks, this.consumables, this.beers, this.upgrades);
+    this.player = new Player(this.money, this.income, this.totalMoneyAllTime ,this.perkSlots, this.perks, this.consumables, this.beers, this.upgrades);
 
     setInterval(() => {
       this.player.resources.money.qty += this.income;
@@ -94,16 +104,16 @@ export class AppComponent implements OnInit{
       this.GlobalStatsService.setTotalMoneyAllTime(this.income);
     }, 1000);
   }
-  
+
   ngOnInit(){
     //check date to launch Seasonal Events
     let actualDate = new Date();
-    
+
     //if it's <seasonal event> unlock upgrades
     if(actualDate.getMonth() >= 0 &&
       actualDate.getDate() >= 15){ //TODO: set a limit in time of Seasonal Events
       let unlockChristmasEventUpgrades = _.filter(this.player.resources.upgrades, {"seasonalEvent": "Christmas"});
-      
+
       unlockChristmasEventUpgrades.forEach((upgrade) => {
         upgrade.unlocked = true;
       });
