@@ -1,3 +1,4 @@
+export * from "./perkSlot.model";
 export * from "./perk.model";
 export * from "./beer.model";
 export * from "./consumable.model";

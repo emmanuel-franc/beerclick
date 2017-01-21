@@ -1,15 +1,21 @@
-<div class="perks perks--left">
-  <div *ngFor="let perk of perks; let index = index;">
-    <span class="perks-item" [ngClass]="{'perks-item--locked': !perk.unlocked}" *ngIf="index < 4">
-      <span class="perks-icon" *ngIf="perk.unlocked" (click)="addPerk()">{{perk.name}}</span>
+<div class="perkSlot perkSlot--left">
+  <div *ngFor="let perkSlot of perkSlots; let index = index;">
+    <span class="perkSlot-item" [ngClass]="{'perkSlot-item--locked': !perkSlot.unlocked}" *ngIf="index <= 3">
+      <span class="perkSlot-icon" *ngIf="perkSlot.unlocked" (click)="addPerk(perkSlot.id)">
+        <span *ngIf="perkSlot.assignedPerk">{{perkSlot.assignedPerk.name}}</span>
+      </span>
     </span>
   </div>
 </div>
 
-<div class="perks perks--right">
-  <div *ngFor="let perk of perks; let index = index;">
-    <span class="perks-item" [ngClass]="{'perks-item--locked': !perk.unlocked}" *ngIf="index > 4">
-      <span class="perks-icon" *ngIf="perk.unlocked" (click)="addPerk()">{{perk.name}}</span>
+<div class="perkSlot perkSlot--right">
+  <div *ngFor="let perkSlot of perkSlots; let index = index;">
+    <span class="perkSlot-item" [ngClass]="{'perkSlot-item--locked': !perkSlot.unlocked}" *ngIf="index > 3">
+      <span class="perkSlot-icon" *ngIf="perkSlot.unlocked" (click)="addPerk(perkSlot.id)">
+        <span *ngIf="perkSlot.assignedPerk">{{perkSlot.assignedPerk.name}}</span>
+      </span>
     </span>
   </div>
 </div>
+
+<app-popin [(popinIsVisible)]="popinIsVisible" [(player)]="player" [(perkSlotId)]="perkSlotId"></app-popin>
