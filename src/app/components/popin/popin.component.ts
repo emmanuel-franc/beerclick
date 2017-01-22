@@ -32,4 +32,9 @@ export class PopinComponent implements OnInit {
     this.popinIsVisible = false;
     this.popinIsVisibleChange.emit(this.popinIsVisible);
   }
+
+  closePopin() {
+    this.popinIsVisible = false;
+    this.popinIsVisibleChange.emit(this.popinIsVisible);
+  }
 }

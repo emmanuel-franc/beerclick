@@ -1,5 +1,8 @@
+<!-- TODO: généraliser la popin pour qu'elle soit réutilisable -->
 <div class="popin" [ngClass]="{'popin--visible': popinIsVisible}">
-  <!-- TODO: find a way to *ngIf data = perkList -->
+  <div class="popin-close" (click)="closePopin()">
+    X
+  </div>
   <div class="list">
     <div class="list-item"
          *ngFor="let perk of player.resources.perks"
