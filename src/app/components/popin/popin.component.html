@@ -4,7 +4,9 @@
     <div class="list-item"
          *ngFor="let perk of player.resources.perks"
          (click)="setPerk(perk)">
-      <button [disabled]="!perk.unlocked">{{perk.name}}</button>
+      <button [disabled]="!perk.unlocked">
+        <img src="./assets/images/perks/{{perk.image}}">
+      </button>
     </div>
   </div>
 </div>
