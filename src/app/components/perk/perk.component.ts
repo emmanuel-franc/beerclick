@@ -22,7 +22,7 @@ export class PerkComponent implements OnInit {
     this.perksList = [];
     this.popinIsVisible = false;
 
-    //subscribe to services to detect changes on totalBeers
+    //subscribe to services to detect changes on totalMoneyAllTime
     this.GlobalStatsService.totalMoneyAllTimeOnChange.subscribe(data => {
 
       this.totalMoneyAllTime  = data;

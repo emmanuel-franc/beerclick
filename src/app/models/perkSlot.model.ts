@@ -5,5 +5,5 @@ export class PerkSlot {
   name:string;
   unlocked:boolean;
   limit:number;
-  assignedPerk?:Perk[];
+  assignedPerk?:Perk;
 }

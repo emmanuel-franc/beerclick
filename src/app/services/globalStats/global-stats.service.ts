@@ -34,22 +34,24 @@ export class GlobalStatsService {
     this.totalBeersOnChange.emit(this.totalBeers);
   }
 
-  getIncome(player) {
+  getIncome(player, multiplicator) {
     //check all beers to calculate income
     let income = 0;
     player.resources.beers.forEach((beer) => {
       income += beer.qty * beer.ratio;
+      console.log('ratio', beer.ratio)
+      console.log('beer.qty * beer.ratio', beer.qty * beer.ratio)
     });
 
     //set income of player (this.player)
-    player.resources.income = income;
+    player.resources.income = income * multiplicator;
 
     return income;
   }
 
   //whenever we setIncome, calculate via getIncome() then emit
-  setIncome(player) {
-    this.incomeOnChange.emit(this.getIncome(player));
+  setIncome(player, multiplicator: number = 1) {
+    this.incomeOnChange.emit(this.getIncome(player, multiplicator));
   }
 
   //TODO: check perf for this, not sure if it's the best way to do it since there is a set interval updating this value
