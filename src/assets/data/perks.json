@@ -11,7 +11,10 @@
         }
       ],
       "unlocked": true,
-      "purchased": false
+      "purchased": false,
+      "bonus": 2,
+      "bonusTrigger": "income",
+      "bonusMessage": "Doubles your income"
     },
     {
       "id": 1,
@@ -24,7 +27,10 @@
         }
       ],
       "unlocked": true,
-      "purchased": false
+      "purchased": false,
+      "bonus": 2,
+      "bonusTrigger": "Pilsner",
+      "bonusMessage": "Double your Pilsner production"
     },
     {
       "id": 2,
@@ -63,7 +69,10 @@
         }
       ],
       "unlocked": false,
-      "purchased": false
+      "purchased": false,
+      "bonusType": "double",
+      "bonusTrigger": "Pilsner",
+      "bonusMessage": "Your Pilsner production is doubled"
     }
   ]
 }
