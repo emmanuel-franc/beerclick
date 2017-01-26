@@ -9,6 +9,10 @@
       <span class="perkSlot-icon" *ngIf="!perkSlot.unlocked">
         <img src="./assets/images/perks/locker.jpg">
       </span>
+
+      <span *ngIf="perkSlot.assignedPerk"
+            class="perkSlot-remove"
+            (click)="removePerk(player, perkSlot.id)">x</span>
     </span>
   </div>
 </div>
@@ -24,6 +28,10 @@
       <span class="perkSlot-icon" *ngIf="!perkSlot.unlocked">
         <img src="./assets/images/perks/locker.jpg">
       </span>
+
+      <button *ngIf="perkSlot.assignedPerk"
+            class="perkSlot-remove"
+            (click)="removePerk(player, perkSlot.id)">x</button>
     </span>
   </div>
 </div>

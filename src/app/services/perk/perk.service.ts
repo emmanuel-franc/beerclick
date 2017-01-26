@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
 import { GlobalStatsService } from '../globalStats/global-stats.service'
-import { Beer } from '../../models';
+import { Beer, Perk } from '../../models';
 
 import * as _ from "lodash";
 import {Player} from "../../models/player.model";
@@ -14,9 +14,8 @@ export class PerkService {
   setPerk(item, player, perkSlotId) {
     //empty previous perk
     if(player.resources.perkSlots[perkSlotId].assignedPerk) {
-      this.removeBonus(item, player, perkSlotId);
+      this.removeBonus(player, perkSlotId);
       player.resources.perkSlots[perkSlotId].assignedPerk = {};
-
     }
 
     //set item to purchased
@@ -51,14 +50,22 @@ export class PerkService {
   }
 
   //same as setBonus but in reverse.
+  //also used in view
   //TODO: not sure if it's the best way to do this, should be reworked
-  removeBonus(item, player: Player, perkSlotId) {
-    if(item.bonusTrigger === "income") {
-      //TODO : dans setIncome il faudrait créer un tableau des multiplicateurs d'income. Dans ce if il faudrait
-      //TODO : splice le dit tableau de la valeur de l'actuel bonus
-      console.log('actual income bonus', player.resources.perkSlots[perkSlotId].assignedPerk.bonus)
+  removeBonus(player: Player, perkSlotId) {
+    //empty perk
+    player.resources.perkSlots[perkSlotId].assignedPerk = new Perk;
+
+    console.log('hello', player.resources.perkSlots[perkSlotId].assignedPerk)
+
+    if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "income") {
+      console.log('coucou')
+
+      //get actual income of player and divid it by assignedPerk bonus
+      let newIncome = player.resources.income / player.resources.perkSlots[perkSlotId].assignedPerk.bonus
+
       //set new income of player
-      //this.GlobalStatsService.setIncome(player, item.bonus);
+      this.GlobalStatsService.setIncome(player, newIncome);
     }
 
     if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "Pilsner") {
