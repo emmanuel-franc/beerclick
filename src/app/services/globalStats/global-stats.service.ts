@@ -7,7 +7,7 @@ export class GlobalStatsService {
   public totalBeersOnChange:EventEmitter<any> = new EventEmitter(); //see http://stackoverflow.com/questions/35878160/angular2-how-to-share-data-change-between-components
   public totalMoneyAllTimeOnChange:EventEmitter<any> = new EventEmitter();
   public incomeOnChange:EventEmitter<any> = new EventEmitter();
-  
+
   constructor() {
     this.totalBeers = 0;
     this.totalMoneyAllTime = 0;
@@ -34,7 +34,7 @@ export class GlobalStatsService {
     this.totalBeersOnChange.emit(this.totalBeers);
   }
 
-  getIncome(player) {
+  createIncome(player, multiplicator) {
     //check all beers to calculate income
     let income = 0;
     player.resources.beers.forEach((beer) => {
@@ -44,12 +44,12 @@ export class GlobalStatsService {
     //set income of player (this.player)
     player.resources.income = income;
 
-    return income;
+    return player.resources.income;
   }
 
   //whenever we setIncome, calculate via getIncome() then emit
-  setIncome(player) {
-    this.incomeOnChange.emit(this.getIncome(player));
+  setIncome(player, multiplicator: number = 1) {
+    this.incomeOnChange.emit(this.createIncome(player, multiplicator));
   }
 
   //TODO: check perf for this, not sure if it's the best way to do it since there is a set interval updating this value
