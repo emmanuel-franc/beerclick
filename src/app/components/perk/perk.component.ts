@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import {Player, PerkSlot, Perk, Price} from "../../models";
 
 import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
+import {PerkService} from "../../services/perk/perk.service";
 
 @Component({
   selector: 'app-perk',
@@ -17,7 +18,7 @@ export class PerkComponent implements OnInit {
   popinIsVisible:boolean;
   perkSlotId:number;
 
-  constructor(public GlobalStatsService:GlobalStatsService) {
+  constructor(public GlobalStatsService:GlobalStatsService, public PerkService:PerkService) {
     this.perkSlots = [];
     this.perksList = [];
     this.popinIsVisible = false;
@@ -46,5 +47,9 @@ export class PerkComponent implements OnInit {
   addPerk(id) {
     this.popinIsVisible = true;
     this.perkSlotId = id;
+  }
+
+  removePerk(player, id) {
+    this.PerkService.removeBonus(player, id);
   }
 }
