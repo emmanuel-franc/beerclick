@@ -43,7 +43,10 @@
         }
       ],
       "unlocked": false,
-      "purchased": false
+      "purchased": false,
+      "bonus": 2,
+      "bonusTrigger": "Pilsner",
+      "bonusMessage": "Double your Pilsner production"
     },
     {
       "id": 3,
@@ -56,7 +59,10 @@
         }
       ],
       "unlocked": false,
-      "purchased": false
+      "purchased": false,
+      "bonus": 2,
+      "bonusTrigger": "Pilsner",
+      "bonusMessage": "Double your Pilsner production"
     },
     {
       "id": 4,
