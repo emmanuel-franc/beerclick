@@ -15,7 +15,6 @@ export class PerkService {
     //empty previous perk
     if(player.resources.perkSlots[perkSlotId].assignedPerk) {
       this.removeBonus(player, perkSlotId);
-      player.resources.perkSlots[perkSlotId].assignedPerk = {};
     }
 
     //set item to purchased
@@ -53,14 +52,7 @@ export class PerkService {
   //also used in view
   //TODO: not sure if it's the best way to do this, should be reworked
   removeBonus(player: Player, perkSlotId) {
-    //empty perk
-    player.resources.perkSlots[perkSlotId].assignedPerk = new Perk;
-
-    console.log('hello', player.resources.perkSlots[perkSlotId].assignedPerk)
-
     if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "income") {
-      console.log('coucou')
-
       //get actual income of player and divid it by assignedPerk bonus
       let newIncome = player.resources.income / player.resources.perkSlots[perkSlotId].assignedPerk.bonus
 
@@ -77,5 +69,8 @@ export class PerkService {
       //TODO: create a player service, actually sending setIncome because we must send player
       this.GlobalStatsService.setIncome(player);
     }
+
+    //empty perk
+    player.resources.perkSlots[perkSlotId].assignedPerk = new Perk;
   }
 }
