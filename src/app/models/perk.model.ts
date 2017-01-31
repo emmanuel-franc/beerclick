@@ -7,4 +7,7 @@ export class Perk {
   price?: Price[];
   unlocked: boolean;
   purchased: boolean;
+  bonus: number;
+  bonusTrigger: string;
+  bonusMessage: string;
 }
