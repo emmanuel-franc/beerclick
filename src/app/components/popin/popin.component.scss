@@ -22,7 +22,7 @@
   }
 }
 
-//Todo: externalize list css component
+//Todo: externalize list css component ?
 .list {
   &-item {
     margin-top: 30px;
@@ -32,4 +32,34 @@
       margin-top: 0;
     }
   }
+}
+
+//TODO: externalize perkInfo component ?
+.perkImage,
+.perkInfos {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.perkImage {
+  overflow: hidden;
+  width: 60px;
+  height: 60px;
+  padding: 5px;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  background: none;
+
+  img {
+    width: 100%;
+  }
+}
+
+.perkName {
+  font-size: 18px;
+}
+
+.perkMessage {
+  margin-top: 5px;
+  font-size: 16px;
 }
