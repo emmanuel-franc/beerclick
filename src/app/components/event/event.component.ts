@@ -86,7 +86,6 @@ export class EventComponent implements OnInit {
     }, randomTime)
   }
 
-  //TODO: optimize beerloss() and moneyloss(). Try to refactor both functions into one
   beerLoss(chosenEvent) {
     //get the number of beers to remove
     this.chosenEventQty = Math.round(this.totalBeers / chosenEvent.action.loss);
