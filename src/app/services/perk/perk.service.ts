@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
-import { GlobalStatsService } from '../globalStats/global-stats.service'
+import { GlobalStatsService } from '../globalStats/global-stats.service';
+import { PlayerService} from '../player/player.service';
 import { Beer, Perk } from '../../models';
 
 import * as _ from "lodash";
@@ -8,7 +9,7 @@ import {Player} from "../../models/player.model";
 
 @Injectable()
 export class PerkService {
-  constructor(public GlobalStatsService:GlobalStatsService) {
+  constructor(public GlobalStatsService:GlobalStatsService, public PlayerService:PlayerService) {
   }
 
   setPerk(item, player, perkSlotId) {
@@ -43,8 +44,7 @@ export class PerkService {
       //set new bonus for pilsner
       getbonusTrigger.ratio = getbonusTrigger.ratio * item.bonus;
 
-      //TODO: create a player service, actually sending setIncome because we must send player
-      this.GlobalStatsService.setIncome(player);
+      this.PlayerService.updatePlayer(player);
     }
   }
 
