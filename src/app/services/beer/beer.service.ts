@@ -1,8 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
-import * as _ from "lodash";
-
-
 @Injectable()
 export class BeerService {
   public totalBeers:number;
