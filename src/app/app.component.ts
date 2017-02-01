@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Beer, Consumable, Upgrade, Price, PerkSlot, Perk, Player} from "./models";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
+import {BeerService} from "./services/beer/beer.service";
 
 import * as _ from "lodash";
 
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit{
   totalMoneyAllTime:number;
   appVersion;
 
-  constructor(public GlobalStatsService:GlobalStatsService) {
+  constructor(public GlobalStatsService:GlobalStatsService, public BeerService:BeerService) {
     this.appVersion = appVersion;
     this.perkSlots = [];
     this.perks = [];
@@ -37,7 +38,7 @@ export class AppComponent implements OnInit{
     this.totalMoneyAllTime = 0;
 
     //subscribe to services to detect changes on totalBeers
-    this.GlobalStatsService.totalBeersOnChange.subscribe(data => {
+    this.BeerService.totalBeersOnChange.subscribe(data => {
       this.totalBeers = data;
     });
 
