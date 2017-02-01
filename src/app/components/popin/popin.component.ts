@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Player, Perk} from "../../models";
 import { PerkService} from '../../services/perk/perk.service';
 
@@ -7,7 +7,7 @@ import { PerkService} from '../../services/perk/perk.service';
   templateUrl: './popin.component.html',
   styleUrls: ['./popin.component.scss']
 })
-export class PopinComponent implements OnInit {
+export class PopinComponent {
 
   @Input() player: Player;
   @Input() perkSlotId:number;
@@ -17,14 +17,23 @@ export class PopinComponent implements OnInit {
   constructor(public PerkService:PerkService) {
   }
 
-  ngOnInit() {
+  isBuyable(item): boolean {
+    let buyable = true; // Item is true by default because ALL cost must be buyable
+
+    if(item.price[0].qty > item.price[0].consumable.qty) {
+      buyable = false; // If not buyable, set variable to false
+    }
+
+    return buyable;
   }
 
   setPerk(item) {
-    this.PerkService.setPerk(item, this.player, this.perkSlotId);
+    if(this.isBuyable(item)) {
+      this.PerkService.setPerk(item, this.player, this.perkSlotId);
 
-    this.popinIsVisible = false;
-    this.popinIsVisibleChange.emit(this.popinIsVisible);
+      this.popinIsVisible = false;
+      this.popinIsVisibleChange.emit(this.popinIsVisible);
+    }
   }
 
   closePopin() {
