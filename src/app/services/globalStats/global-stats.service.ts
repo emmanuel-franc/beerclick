@@ -47,7 +47,7 @@ export class GlobalStatsService {
     return player.resources.income;
   }
 
-  //whenever we setIncome, calculate via getIncome() then emit
+  //whenever we setIncome, calculate via createIncome() then emit
   setIncome(player, multiplicator: number = 1) {
     this.incomeOnChange.emit(this.createIncome(player, multiplicator));
   }
