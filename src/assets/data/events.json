@@ -14,11 +14,11 @@
     {
       "id": 1,
       "name": "Government taxes",
-      "message": "Government taxes your beer production by $",
-      "messageEndPart": "",
+      "message": "Government taxes your beers production by taking",
+      "messageEndPart": "of your beers.",
       "action": {
         "loss": 200,
-        "lossType": "money",
+        "lossType": "beers",
         "limit": 1000
       }
     }

@@ -67,7 +67,7 @@ export class ItemComponent {
         }
       });
   
-      //only if beers because we don't mind consumable yet
+      //only if breweries because we don't mind consumable yet
       if(item.category === "Breweries") {
         //send value to service
         this.BreweryService.setSubstractTotalBreweries(multiplicator);

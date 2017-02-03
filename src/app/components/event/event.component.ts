@@ -78,8 +78,8 @@ export class EventComponent implements OnInit {
             this.breweryLoss(this.chosenEvent);
           }
   
-          if(this.chosenEvent.action.lossType === "money") {
-            this.moneyLoss(this.chosenEvent);
+          if(this.chosenEvent.action.lossType === "beers") {
+            this.beersLoss(this.chosenEvent);
           }
         }
       }
@@ -129,13 +129,13 @@ export class EventComponent implements OnInit {
     }
   }
 
-  moneyLoss(chosenEvent) {
-    //check if loss amount exceed money.qty
-    if(chosenEvent.action.loss >= this.player.resources.money.qty) {
-      this.player.resources.money.qty = 0;
+  beersLoss(chosenEvent) {
+    //check if loss amount exceed beers.qty
+    if(chosenEvent.action.loss >= this.player.resources.beers.qty) {
+      this.player.resources.beers.qty = 0;
     } else {
-      //subtract this.chosenEvent.action.loss to money.qty
-      this.player.resources.money.qty -= chosenEvent.action.loss;
+      //subtract this.chosenEvent.action.loss to beers.qty
+      this.player.resources.beers.qty -= chosenEvent.action.loss;
     }
   }
 }

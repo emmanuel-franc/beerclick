@@ -20,7 +20,7 @@ export class PerkService {
 
     //set item to purchased
     item.purchased = true;
-    //set money of player minus item's price
+    //set beers of player minus item's price
     item.price[0].consumable.qty -= item.price[0].qty;
     //set price of item to 0 because it has been bought. We want it to be clickable in the futur to be set to slot without any cost
     item.price[0].qty = 0;

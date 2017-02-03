@@ -32,7 +32,7 @@ export class UpgradeComponent implements OnInit {
   
   buyUpgrade(item) {
     if(this.isBuyable(item.price)) {
-      //forEach get price then substract to player's money qty
+      //forEach get price then substract to player's beers qty
       item.price.forEach((price) => {
         price.consumable.qty -= price.qty;
       });

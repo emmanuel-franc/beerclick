@@ -6,9 +6,9 @@ import { Perk} from "./perk.model";
 
 export class Player {
   resources: {
-    money: Consumable;
+    beers: Consumable;
     income:number,
-    totalMoneyAllTime:number,
+    totalBeersAllTime:number,
     perkSlots: PerkSlot[],
     perks: Perk[],
     consumables: Consumable[],
@@ -16,11 +16,11 @@ export class Player {
     upgrades: Upgrade[]
   };
 
-  constructor(money, income, totalMoneyAllTime, perkSlots ,perks, consumables, breweries, upgrades) {
+  constructor(beers, income, totalBeersAllTime, perkSlots ,perks, consumables, breweries, upgrades) {
     this.resources = {
-      money: money,
+      beers: beers,
       income: income,
-      totalMoneyAllTime: totalMoneyAllTime,
+      totalBeersAllTime: totalBeersAllTime,
       perkSlots: perkSlots,
       perks: perks,
       consumables: consumables,
