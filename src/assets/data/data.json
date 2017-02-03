@@ -115,10 +115,10 @@
       "seasonalEvent": "Christmas"
     }
   ],
-  "beers": [
+  "breweries": [
     {
       "name": "Pilsner",
-      "category": "Beers",
+      "category": "Breweries",
       "qty": 0,
       "ratio": 1.1,
       "price": [
@@ -136,7 +136,7 @@
     },
     {
       "name": "Bitter",
-      "category": "Beers",
+      "category": "Breweries",
       "qty": 0,
       "ratio": 1.2,
       "price": [
@@ -154,7 +154,7 @@
     },
     {
       "name": "Dry Stout",
-      "category": "Beers",
+      "category": "Breweries",
       "qty": 0,
       "ratio": 1.3,
       "price": [
@@ -176,7 +176,7 @@
     },
     {
       "name": "Christmas Beer",
-      "category": "Beers",
+      "category": "Breweries",
       "qty": 0,
       "ratio": 1.4,
       "price": [

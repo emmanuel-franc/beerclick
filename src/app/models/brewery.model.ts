@@ -1,6 +1,6 @@
 import { Price } from "./price.model";
 
-export class Beer {
+export class Brewery {
   name: string;
   category: string;
   qty: number;

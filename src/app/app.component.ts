@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Beer, Consumable, Upgrade, Price, PerkSlot, Perk, Player} from "./models";
+import {Brewery, Consumable, Upgrade, Price, PerkSlot, Perk, Player} from "./models";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 import {BeerService} from "./services/beer/beer.service";
 
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit{
   perkSlots: PerkSlot[];
   perks:Perk[];
   consumables: Consumable[];
-  beers: Beer[];
+  breweries: Brewery[];
   upgrades: Upgrade[];
   totalBeers:number;
   totalBeersAllTime:number;
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit{
     this.perkSlots = [];
     this.perks = [];
     this.consumables = [];
-    this.beers = [];
+    this.breweries = [];
     this.upgrades = [];
     this.totalMoneyAllTime = 0;
 
@@ -75,9 +75,9 @@ export class AppComponent implements OnInit{
       this.consumables.push(consumable);
     });
 
-    // Add all beers
-    data.beers.forEach((beer) => {
-      let price: Price[] = beer.price.map((p) => {
+    // Add all breweries
+    data.breweries.forEach((brewery) => {
+      let price: Price[] = brewery.price.map((p) => {
         let consumable: Consumable;
         if(p.name === "$") {
           consumable = this.money;
@@ -86,8 +86,8 @@ export class AppComponent implements OnInit{
         }
         return new Price(p.qty, consumable);
       });
-      beer.price = price;
-      this.beers.push(beer);
+      brewery.price = price;
+      this.breweries.push(brewery);
     });
 
     // Add all upgrades
@@ -97,7 +97,7 @@ export class AppComponent implements OnInit{
       this.upgrades.push(upgrade);
     });
 
-    this.player = new Player(this.money, this.income, this.totalMoneyAllTime ,this.perkSlots, this.perks, this.consumables, this.beers, this.upgrades);
+    this.player = new Player(this.money, this.income, this.totalMoneyAllTime ,this.perkSlots, this.perks, this.consumables, this.breweries, this.upgrades);
 
     setInterval(() => {
       this.player.resources.money.qty += this.income;

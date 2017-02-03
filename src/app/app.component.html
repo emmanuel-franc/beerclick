@@ -40,10 +40,10 @@
 </div>
 
 <div class="store">
-  <div *ngFor="let beer of player.resources.beers">
-    <div *ngIf="beer.unlocked">
-      <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
-      <app-item [player]="player" [item]="beer" [(totalBeersAllTime)]="totalBeersAllTime"></app-item>
+  <div *ngFor="let brewery of player.resources.breweries">
+    <div *ngIf="brewery.unlocked">
+      <h2>Stock : {{brewery.qty}} {{brewery.name }}</h2>
+      <app-item [player]="player" [item]="brewery" [(totalBeersAllTime)]="totalBeersAllTime"></app-item>
     </div>
   </div>
 </div>

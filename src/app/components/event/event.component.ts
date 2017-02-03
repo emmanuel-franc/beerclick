@@ -94,7 +94,7 @@ export class EventComponent implements OnInit {
     //check if loss amount exceed totalBeers amount
     if(this.chosenEventQty >= this.totalBeers) {
       //set all beers qty to 0
-      _.forEach(this.player.resources.beers, function(beer){
+      _.forEach(this.player.resources.breweries, function(beer){
         beer.qty = 0;
       });
 
@@ -103,7 +103,7 @@ export class EventComponent implements OnInit {
       this.BeerService.resetTotalBeers();
     } else {
       //get all beers with qty > 0. _.filter creates a new array (see lodash documentation for _.filter)
-      let beersWithQty = _.filter(this.player.resources.beers, function(beer){
+      let beersWithQty = _.filter(this.player.resources.breweries, function(beer){
         return beer.qty > 0
       });
 

@@ -11,10 +11,10 @@ export class GlobalStatsService {
   }
 
   createIncome(player, multiplicator) {
-    //check all beers to calculate income
+    //check all breweries to calculate income
     let income = 0;
-    player.resources.beers.forEach((beer) => {
-      income += beer.qty * beer.ratio;
+    player.resources.breweries.forEach((brewery) => {
+      income += brewery.qty * brewery.ratio;
     });
 
     //set income of player (this.player)

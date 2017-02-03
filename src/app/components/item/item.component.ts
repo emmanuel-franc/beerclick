@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Consumable, Beer, Player } from '../../models';
+import { Consumable, Brewery, Player } from '../../models';
 import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
 import {BeerService} from "../../services/beer/beer.service";
 
@@ -10,7 +10,7 @@ import {BeerService} from "../../services/beer/beer.service";
 })
 export class ItemComponent {
 
-  @Input() item: Consumable | Beer;
+  @Input() item: Consumable | Brewery;
   @Input() player:Player;
   @Input() totalBeersAllTime:number;
   @Output() totalBeersAllTimeChange = new EventEmitter<number>();
@@ -39,7 +39,7 @@ export class ItemComponent {
 
       item.qty += multiplicator;
 
-      if(item.category === "Beers") {
+      if(item.category === "Breweries") {
         this.totalBeersAllTime += multiplicator;
 
         //send value to service
@@ -68,7 +68,7 @@ export class ItemComponent {
       });
   
       //only if beers because we don't mind consumable yet
-      if(item.category === "Beers") {
+      if(item.category === "Breweries") {
         //send value to service
         this.BeerService.setSubstractTotalBeers(multiplicator);
   
