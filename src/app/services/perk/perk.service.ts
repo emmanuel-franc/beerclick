@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 
 import { GlobalStatsService } from '../globalStats/global-stats.service';
 import { PlayerService} from '../player/player.service';
-import { Beer, Perk } from '../../models';
+import { Brewery, Perk } from '../../models';
 
 import * as _ from "lodash";
 import {Player} from "../../models/player.model";
@@ -39,7 +39,7 @@ export class PerkService {
     }
 
     if(item.bonusTrigger === "Pilsner") {
-      let getbonusTrigger: Beer = _.find(player.resources.beers, {'name': item.bonusTrigger});
+      let getbonusTrigger: Brewery = _.find(player.resources.breweries, {'name': item.bonusTrigger});
 
       //set new bonus for pilsner
       getbonusTrigger.ratio = getbonusTrigger.ratio * item.bonus;
@@ -61,7 +61,7 @@ export class PerkService {
     }
 
     if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "Pilsner") {
-      let getbonusTrigger: Beer = _.find(player.resources.beers, {'name': "Pilsner"});
+      let getbonusTrigger: Brewery = _.find(player.resources.breweries, {'name': "Pilsner"});
 
       //set new bonus for pilsner by dividing actual assigned perk's bonus
       getbonusTrigger.ratio = getbonusTrigger.ratio / player.resources.perkSlots[perkSlotId].assignedPerk.bonus;

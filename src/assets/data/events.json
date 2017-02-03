@@ -4,10 +4,10 @@
       "id": 0,
       "name": "Arthor the beer breaker",
       "message": "Arthor the beer breaker broke",
-      "messageEndPart": "of your beers!",
+      "messageEndPart": "of your breweries!",
       "action": {
         "loss": 15,
-        "lossType": "beers",
+        "lossType": "breweries",
         "limit": 15
       }
     },

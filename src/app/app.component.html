@@ -31,11 +31,11 @@
     {{totalMoneyAllTime || 0 | currency: 'USD': true}}
     <br>
 
-    totalbeers
-    {{totalBeers || 0}}
+    totalBreweries
+    {{totalBreweries || 0}}
     <br>
-    totalBeersAllTime
-    {{totalBeersAllTime}}
+    totalBreweriesAllTime
+    {{totalBreweriesAllTime}}
   </div>
 </div>
 
@@ -43,7 +43,7 @@
   <div *ngFor="let brewery of player.resources.breweries">
     <div *ngIf="brewery.unlocked">
       <h2>Stock : {{brewery.qty}} {{brewery.name }}</h2>
-      <app-item [player]="player" [item]="brewery" [(totalBeersAllTime)]="totalBeersAllTime"></app-item>
+      <app-item [player]="player" [item]="brewery" [(totalBreweriesAllTime)]="totalBreweriesAllTime"></app-item>
     </div>
   </div>
 </div>

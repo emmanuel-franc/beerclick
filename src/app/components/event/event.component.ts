@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import {Player, Event} from '../../models';
 import {EventService} from "../../services/event/event.service";
 import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
-import {BeerService} from "../../services/beer/beer.service";
+import {BreweryService} from "../../services/brewery/brewery.service";
 
 import * as _ from "lodash";
 
@@ -15,19 +15,19 @@ export class EventComponent implements OnInit {
 
   @Input() player: Player;
   
-  totalBeers: number;
+  totalBreweries: number;
   chosenEvent:any;
   timeOut:any;
   eventList: any[];
   getEventsList:Event[];
-  beersLossEvents:any[];
+  breweriesLossEvents:any[];
   chosenEventQty:number;
   
-  constructor(public EventService:EventService, public GlobalStatsService:GlobalStatsService, public BeerService:BeerService) {
+  constructor(public EventService:EventService, public GlobalStatsService:GlobalStatsService, public BreweryService:BreweryService) {
     this.getEventsList = this.EventService.getEventsList();
-    this.beersLossEvents = [];
+    this.breweriesLossEvents = [];
     this.eventList = [];
-    this.totalBeers = 0;
+    this.totalBreweries = 0;
     this.chosenEventQty = 0;
   
     //subscribe to services to detect changes on eventsUnlocked array
@@ -35,23 +35,23 @@ export class EventComponent implements OnInit {
       return this.eventList = data;
     });
   
-    //create array with all events that make loosing beers
-    this.beersLossEvents = _.filter(this.getEventsList, function(event) {
-      return event.action.lossType === "beers";
+    //create array with all events that make loosing breweries
+    this.breweriesLossEvents = _.filter(this.getEventsList, function(event) {
+      return event.action.lossType === "breweries";
     });
     
-    //subscribe to services to detect changes on totalBeers
-    this.BeerService.totalBeersOnChange.subscribe(data => {
-      this.totalBeers = data;
+    //subscribe to services to detect changes on totalBreweries
+    this.BreweryService.totalBreweriesOnChange.subscribe(data => {
+      this.totalBreweries = data;
 
-      for(let i = 0; i < this.beersLossEvents.length; i++) {
-        //add events with beer loss
-        if(this.totalBeers >= this.beersLossEvents[i].action.limit) {
-          this.EventService.setEventUnlocked(this.beersLossEvents[i].id);
+      for(let i = 0; i < this.breweriesLossEvents.length; i++) {
+        //add events with brewery loss
+        if(this.totalBreweries >= this.breweriesLossEvents[i].action.limit) {
+          this.EventService.setEventUnlocked(this.breweriesLossEvents[i].id);
         }
-        //remove events with beer loss when limit -1 (to prevent event to never stop)
-        if(this.totalBeers < this.beersLossEvents[i].action.limit) {
-          this.EventService.setEventLocked(this.beersLossEvents[i].id);
+        //remove events with brewery loss when limit -1 (to prevent event to never stop)
+        if(this.totalBreweries < this.breweriesLossEvents[i].action.limit) {
+          this.EventService.setEventLocked(this.breweriesLossEvents[i].id);
         }
       }
     });
@@ -74,8 +74,8 @@ export class EventComponent implements OnInit {
         //check if event has a loss amount
         if(this.chosenEvent.action.loss) {
           //check type of loss
-          if(this.chosenEvent.action.lossType === "beers") {
-            this.beerLoss(this.chosenEvent);
+          if(this.chosenEvent.action.lossType === "breweries") {
+            this.breweryLoss(this.chosenEvent);
           }
   
           if(this.chosenEvent.action.lossType === "money") {
@@ -87,43 +87,44 @@ export class EventComponent implements OnInit {
     }, randomTime)
   }
 
-  beerLoss(chosenEvent) {
-    //get the number of beers to remove
-    this.chosenEventQty = Math.round(this.totalBeers / chosenEvent.action.loss);
+  breweryLoss(chosenEvent) {
+    //get the number of breweries to remove
+    this.chosenEventQty = Math.round(this.totalBreweries / chosenEvent.action.loss);
     
-    //check if loss amount exceed totalBeers amount
-    if(this.chosenEventQty >= this.totalBeers) {
-      //set all beers qty to 0
-      _.forEach(this.player.resources.breweries, function(beer){
-        beer.qty = 0;
+    //check if loss amount exceed totalBreweries amount
+    if(this.chosenEventQty >= this.totalBreweries) {
+      //set all Breweries qty to 0
+      _.forEach(this.player.resources.breweries, function(brewery){
+        brewery.qty = 0;
       });
 
-      this.totalBeers = 0;
-      //send value of totalBeers to service
-      this.BeerService.resetTotalBeers();
+      this.totalBreweries = 0;
+      //send value of totalBreweries to service
+      this.BreweryService.resetTotalBreweries();
     } else {
-      //get all beers with qty > 0. _.filter creates a new array (see lodash documentation for _.filter)
-      let beersWithQty = _.filter(this.player.resources.breweries, function(beer){
-        return beer.qty > 0
+      //get all Breweries with qty > 0. _.filter creates a new array (see lodash documentation for _.filter)
+      let breweriesWithQty = _.filter(this.player.resources.breweries, function(brewery){
+        return brewery.qty > 0
       });
 
       for(let i =0; i < this.chosenEventQty; i++) {
-        //get a random beer
-        let randomBrokenBeers = beersWithQty[Math.floor(Math.random()*beersWithQty.length)]
+        //get a random brewery
+        let randomDestroyedBreweries = breweriesWithQty[Math.floor(Math.random()*breweriesWithQty.length)]
 
-        //substract 1 beer (because we are in a for loop)
-        randomBrokenBeers.qty -= 1;
+        //substract 1 brewery (because we are in a for loop)
+        randomDestroyedBreweries.qty -= 1;
 
-        //if current beer quantity drops to 0, we remove it from the array then never loop on it again preventing a negative value
-        if(randomBrokenBeers.qty === 0) {
-          beersWithQty.splice(beersWithQty.indexOf(randomBrokenBeers), 1);
+        //if current brewery quantity drops to 0, we remove it from the array then never loop on it again preventing a
+        // negative value
+        if(randomDestroyedBreweries.qty === 0) {
+          breweriesWithQty.splice(breweriesWithQty.indexOf(randomDestroyedBreweries), 1);
         }
       }
 
-      //subtract chosenEventQty to totalBeers then send value of totalBeers to service
-      this.BeerService.setSubstractTotalBeers(this.chosenEventQty);
+      //subtract chosenEventQty to totalBreweries then send value of totalBreweries to service
+      this.BreweryService.setSubstractTotalBreweries(this.chosenEventQty);
 
-      //everytime we remove a beer, we change income
+      //everytime we remove a brewery, we change income
       this.GlobalStatsService.setIncome(this.player);
     }
   }

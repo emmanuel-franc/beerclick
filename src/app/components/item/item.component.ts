@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Consumable, Brewery, Player } from '../../models';
 import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
-import {BeerService} from "../../services/beer/beer.service";
+import {BreweryService} from "../../services/brewery/brewery.service";
 
 @Component({
   selector: 'app-item',
@@ -12,11 +12,11 @@ export class ItemComponent {
 
   @Input() item: Consumable | Brewery;
   @Input() player:Player;
-  @Input() totalBeersAllTime:number;
-  @Output() totalBeersAllTimeChange = new EventEmitter<number>();
+  @Input() totalBreweriesAllTime:number;
+  @Output() totalBreweriesAllTimeChange = new EventEmitter<number>();
   
-  constructor(public GlobalStatsService:GlobalStatsService, public BeerService:BeerService) {
-    this.totalBeersAllTime = this.totalBeersAllTime || 0;
+  constructor(public GlobalStatsService:GlobalStatsService, public BreweryService:BreweryService) {
+    this.totalBreweriesAllTime = this.totalBreweriesAllTime || 0;
   }
 
   isBuyable(item, multiplicator: number = 1): boolean {
@@ -40,15 +40,15 @@ export class ItemComponent {
       item.qty += multiplicator;
 
       if(item.category === "Breweries") {
-        this.totalBeersAllTime += multiplicator;
+        this.totalBreweriesAllTime += multiplicator;
 
         //send value to service
-        this.BeerService.setTotalBeers(multiplicator);
+        this.BreweryService.setTotalBreweries(multiplicator);
 
         //send value of totalBeersAllTime to parent component (see @Output)
-        this.totalBeersAllTimeChange.emit(this.totalBeersAllTime);
+        this.totalBreweriesAllTimeChange.emit(this.totalBreweriesAllTime);
 
-        //everytime we buy a beer, we change income
+        //everytime we buy a brewery, we change income
         this.GlobalStatsService.setIncome(this.player);
       }
     }
@@ -70,9 +70,9 @@ export class ItemComponent {
       //only if beers because we don't mind consumable yet
       if(item.category === "Breweries") {
         //send value to service
-        this.BeerService.setSubstractTotalBeers(multiplicator);
+        this.BreweryService.setSubstractTotalBreweries(multiplicator);
   
-        //everytime we sell a beer, we change income
+        //everytime we sell a brewery, we change income
         this.GlobalStatsService.setIncome(this.player);
       }
     }
