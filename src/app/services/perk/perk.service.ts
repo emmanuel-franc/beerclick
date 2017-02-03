@@ -38,10 +38,10 @@ export class PerkService {
       this.GlobalStatsService.setIncome(player, item.bonus);
     }
 
-    if(item.bonusTrigger === "Pilsner") {
+    if(item.bonusTrigger === "Pilsner Brewery") {
       let getbonusTrigger: Brewery = _.find(player.resources.breweries, {'name': item.bonusTrigger});
 
-      //set new bonus for pilsner
+      //set new bonus for pilsner  Brewery
       getbonusTrigger.ratio = getbonusTrigger.ratio * item.bonus;
 
       this.PlayerService.updatePlayer(player);
@@ -60,10 +60,10 @@ export class PerkService {
       this.GlobalStatsService.setIncome(player, newIncome);
     }
 
-    if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "Pilsner") {
-      let getbonusTrigger: Brewery = _.find(player.resources.breweries, {'name': "Pilsner"});
+    if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "Pilsner Brewery") {
+      let getbonusTrigger: Brewery = _.find(player.resources.breweries, {'name': "Pilsner Brewery"});
 
-      //set new bonus for pilsner by dividing actual assigned perk's bonus
+      //set new bonus for pilsner Brewery by dividing actual assigned perk's bonus
       getbonusTrigger.ratio = getbonusTrigger.ratio / player.resources.perkSlots[perkSlotId].assignedPerk.bonus;
 
       //TODO: create a player service, actually sending setIncome because we must send player
