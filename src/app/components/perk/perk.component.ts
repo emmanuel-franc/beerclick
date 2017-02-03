@@ -12,7 +12,7 @@ import {PerkService} from "../../services/perk/perk.service";
 })
 export class PerkComponent implements OnInit {
   @Input() player:Player;
-  totalMoneyAllTime:number;
+  totalBeersAllTime:number;
   perkSlots:PerkSlot[];
   perksList:Perk[];
   popinIsVisible:boolean;
@@ -23,15 +23,15 @@ export class PerkComponent implements OnInit {
     this.perksList = [];
     this.popinIsVisible = false;
 
-    //subscribe to services to detect changes on totalMoneyAllTime
-    this.GlobalStatsService.totalMoneyAllTimeOnChange.subscribe(data => {
+    //subscribe to services to detect changes on totalBeersAllTime
+    this.GlobalStatsService.totalBeersAllTimeOnChange.subscribe(data => {
 
-      this.totalMoneyAllTime  = data;
+      this.totalBeersAllTime  = data;
 
       for(let i = 0; i < this.perkSlots.length; i++) {
         //unlock perkslot when limit is reached
         if(!this.player.resources.perkSlots[i].unlocked) {
-          if(this.totalMoneyAllTime >= this.perkSlots[i].limit) {
+          if(this.totalBeersAllTime >= this.perkSlots[i].limit) {
             this.player.resources.perkSlots[i].unlocked = true;
           }
         }
