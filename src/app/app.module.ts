@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ItemComponent } from './components/item/item.component';
 import { EventComponent } from './components/event/event.component';
 
+import { PlayerService } from "./services/player/player.service";
 import { EventService}  from "./services/event/event.service";
 import { GlobalStatsService}  from "./services/globalStats/global-stats.service";
 import { PerkService } from "./services/perk/perk.service";
@@ -34,6 +35,7 @@ import { PopinComponent } from './components/popin/popin.component';
     HttpModule
   ],
   providers: [
+    PlayerService,
     EventService,
     GlobalStatsService,
     PerkService,
