@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import {Player, Event} from '../../models';
 import {EventService} from "../../services/event/event.service";
 import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
+import {BeerService} from "../../services/beer/beer.service";
 
 import * as _ from "lodash";
 
@@ -22,7 +23,7 @@ export class EventComponent implements OnInit {
   beersLossEvents:any[];
   chosenEventQty:number;
   
-  constructor(public EventService:EventService, public GlobalStatsService:GlobalStatsService) {
+  constructor(public EventService:EventService, public GlobalStatsService:GlobalStatsService, public BeerService:BeerService) {
     this.getEventsList = this.EventService.getEventsList();
     this.beersLossEvents = [];
     this.eventList = [];
@@ -40,7 +41,7 @@ export class EventComponent implements OnInit {
     });
     
     //subscribe to services to detect changes on totalBeers
-    this.GlobalStatsService.totalBeersOnChange.subscribe(data => {
+    this.BeerService.totalBeersOnChange.subscribe(data => {
       this.totalBeers = data;
 
       for(let i = 0; i < this.beersLossEvents.length; i++) {
@@ -99,7 +100,7 @@ export class EventComponent implements OnInit {
 
       this.totalBeers = 0;
       //send value of totalBeers to service
-      this.GlobalStatsService.resetTotalBeers();
+      this.BeerService.resetTotalBeers();
     } else {
       //get all beers with qty > 0. _.filter creates a new array (see lodash documentation for _.filter)
       let beersWithQty = _.filter(this.player.resources.beers, function(beer){
@@ -120,7 +121,7 @@ export class EventComponent implements OnInit {
       }
 
       //subtract chosenEventQty to totalBeers then send value of totalBeers to service
-      this.GlobalStatsService.setSubstractTotalBeers(this.chosenEventQty);
+      this.BeerService.setSubstractTotalBeers(this.chosenEventQty);
 
       //everytime we remove a beer, we change income
       this.GlobalStatsService.setIncome(this.player);
