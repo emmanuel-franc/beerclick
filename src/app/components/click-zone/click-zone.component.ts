@@ -25,7 +25,7 @@ export class ClickZoneComponent {
     });
   }
 
-  generatedBeers(){
+  generateBeers(){
     //add to a percentage of players's current income to player's beers
     this.generatedBeers = Math.round((this.player.resources.income * 1) / 100);
     
