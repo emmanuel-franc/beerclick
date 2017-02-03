@@ -1,30 +1,30 @@
 import { Consumable } from "./consumable.model";
-import { Beer } from "./beer.model";
+import { Brewery } from "./brewery.model";
 import { Upgrade } from "./upgrade.model";
 import { PerkSlot} from "./perkSlot.model";
 import { Perk} from "./perk.model";
 
 export class Player {
   resources: {
-    money: Consumable;
+    beers: Consumable;
     income:number,
-    totalMoneyAllTime:number,
+    totalBeersAllTime:number,
     perkSlots: PerkSlot[],
     perks: Perk[],
     consumables: Consumable[],
-    beers: Beer[],
+    breweries: Brewery[],
     upgrades: Upgrade[]
   };
 
-  constructor(money, income, totalMoneyAllTime, perkSlots ,perks, consumables, beers, upgrades) {
+  constructor(beers, income, totalBeersAllTime, perkSlots ,perks, consumables, breweries, upgrades) {
     this.resources = {
-      money: money,
+      beers: beers,
       income: income,
-      totalMoneyAllTime: totalMoneyAllTime,
+      totalBeersAllTime: totalBeersAllTime,
       perkSlots: perkSlots,
       perks: perks,
       consumables: consumables,
-      beers: beers,
+      breweries: breweries,
       upgrades: upgrades
     }
   }

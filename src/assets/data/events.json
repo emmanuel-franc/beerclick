@@ -4,21 +4,21 @@
       "id": 0,
       "name": "Arthor the beer breaker",
       "message": "Arthor the beer breaker broke",
-      "messageEndPart": "of your beers!",
+      "messageEndPart": "of your breweries!",
       "action": {
         "loss": 15,
-        "lossType": "beers",
+        "lossType": "breweries",
         "limit": 15
       }
     },
     {
       "id": 1,
       "name": "Government taxes",
-      "message": "Government taxes your beer production by $",
-      "messageEndPart": "",
+      "message": "Government taxes your beers production by taking",
+      "messageEndPart": "of your beers.",
       "action": {
         "loss": 200,
-        "lossType": "money",
+        "lossType": "beers",
         "limit": 1000
       }
     }

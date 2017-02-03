@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 
 import { GlobalStatsService } from '../globalStats/global-stats.service';
 import { PlayerService} from '../player/player.service';
-import { Beer, Perk } from '../../models';
+import { Brewery, Perk } from '../../models';
 
 import * as _ from "lodash";
 import {Player} from "../../models/player.model";
@@ -20,7 +20,7 @@ export class PerkService {
 
     //set item to purchased
     item.purchased = true;
-    //set money of player minus item's price
+    //set beers of player minus item's price
     item.price[0].consumable.qty -= item.price[0].qty;
     //set price of item to 0 because it has been bought. We want it to be clickable in the futur to be set to slot without any cost
     item.price[0].qty = 0;
@@ -38,10 +38,10 @@ export class PerkService {
       this.GlobalStatsService.setIncome(player, item.bonus);
     }
 
-    if(item.bonusTrigger === "Pilsner") {
-      let getbonusTrigger: Beer = _.find(player.resources.beers, {'name': item.bonusTrigger});
+    if(item.bonusTrigger === "Pilsner Brewery") {
+      let getbonusTrigger: Brewery = _.find(player.resources.breweries, {'name': item.bonusTrigger});
 
-      //set new bonus for pilsner
+      //set new bonus for pilsner  Brewery
       getbonusTrigger.ratio = getbonusTrigger.ratio * item.bonus;
 
       this.PlayerService.updatePlayer(player);
@@ -60,10 +60,10 @@ export class PerkService {
       this.GlobalStatsService.setIncome(player, newIncome);
     }
 
-    if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "Pilsner") {
-      let getbonusTrigger: Beer = _.find(player.resources.beers, {'name': "Pilsner"});
+    if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "Pilsner Brewery") {
+      let getbonusTrigger: Brewery = _.find(player.resources.breweries, {'name': "Pilsner Brewery"});
 
-      //set new bonus for pilsner by dividing actual assigned perk's bonus
+      //set new bonus for pilsner Brewery by dividing actual assigned perk's bonus
       getbonusTrigger.ratio = getbonusTrigger.ratio / player.resources.perkSlots[perkSlotId].assignedPerk.bonus;
 
       //TODO: create a player service, actually sending setIncome because we must send player

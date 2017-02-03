@@ -2,19 +2,19 @@ import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable()
 export class GlobalStatsService {
-  public totalMoneyAllTime:number;
-  public totalMoneyAllTimeOnChange:EventEmitter<any> = new EventEmitter();
+  public totalBeersAllTime:number;
+  public totalBeersAllTimeOnChange:EventEmitter<any> = new EventEmitter();
   public incomeOnChange:EventEmitter<any> = new EventEmitter();
   
   constructor() {
-    this.totalMoneyAllTime = 0;
+    this.totalBeersAllTime = 0;
   }
 
   createIncome(player, multiplicator) {
-    //check all beers to calculate income
+    //check all breweries to calculate income
     let income = 0;
-    player.resources.beers.forEach((beer) => {
-      income += beer.qty * beer.ratio;
+    player.resources.breweries.forEach((brewery) => {
+      income += brewery.qty * brewery.ratio;
     });
 
     //set income of player (this.player)
@@ -29,10 +29,10 @@ export class GlobalStatsService {
   }
 
   //TODO: check perf for this, not sure if it's the best way to do it since there is a set interval updating this value
-  setTotalMoneyAllTime(value) {
+  setTotalBeersAllTime(value) {
     if(value) {
-      this.totalMoneyAllTime += value;
-      this.totalMoneyAllTimeOnChange.emit(this.totalMoneyAllTime);
+      this.totalBeersAllTime += value;
+      this.totalBeersAllTimeOnChange.emit(this.totalBeersAllTime);
     }
   }
 }

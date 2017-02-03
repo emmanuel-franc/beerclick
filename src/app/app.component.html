@@ -21,29 +21,29 @@
   <div class="clickZone">
     <app-perk [(player)]="player"></app-perk>
 
-    <app-click-zone [(player)]="player" [(totalMoneyAllTime)]="totalMoneyAllTime"></app-click-zone>
+    <app-click-zone [(player)]="player" [(totalBeersAllTime)]="totalBeersAllTime"></app-click-zone>
   </div>
 
   <div class="stats">
-    <h2>Player money : {{player.resources.money.qty | currency: 'USD': true}}</h2>
+    <h2>Player beers : {{player.resources.beers.qty | currency: 'USD': true}}</h2>
 
-    totalMoneyAllTime
-    {{totalMoneyAllTime || 0 | currency: 'USD': true}}
-    <br>
-
-    totalbeers
-    {{totalBeers || 0}}
-    <br>
     totalBeersAllTime
-    {{totalBeersAllTime}}
+    {{totalBeersAllTime || 0 | currency: 'USD': true}}
+    <br>
+
+    totalBreweries
+    {{totalBreweries || 0}}
+    <br>
+    totalBreweriesAllTime
+    {{totalBreweriesAllTime}}
   </div>
 </div>
 
 <div class="store">
-  <div *ngFor="let beer of player.resources.beers">
-    <div *ngIf="beer.unlocked">
-      <h2>Stock : {{beer.qty}} {{beer.name }}</h2>
-      <app-item [player]="player" [item]="beer" [(totalBeersAllTime)]="totalBeersAllTime"></app-item>
+  <div *ngFor="let brewery of player.resources.breweries">
+    <div *ngIf="brewery.unlocked">
+      <h2>Stock : {{brewery.qty}} {{brewery.name }}</h2>
+      <app-item [player]="player" [item]="brewery" [(totalBreweriesAllTime)]="totalBreweriesAllTime"></app-item>
     </div>
   </div>
 </div>

@@ -1,14 +1,14 @@
 {
   "player": {
     "resources": {
-      "money": {
-        "name": "$",
+      "beers": {
+        "name": "Beers",
         "category": "bank",
         "qty": 0,
         "unlocked": true
       },
       "income": 0,
-      "totalMoneyAllTime": 0
+      "totalBeersAllTime": 0
     }
   },
   "perkSlot": [
@@ -69,7 +69,7 @@
       "price": [
         {
           "qty": 10,
-          "name": "$"
+          "name": "Beers"
         }
       ],
       "unlocked": true,
@@ -82,7 +82,7 @@
       "price": [
         {
           "qty": 10,
-          "name": "$"
+          "name": "Beers"
         }
       ],
       "unlocked": false,
@@ -95,7 +95,7 @@
       "price": [
         {
           "qty": 10,
-          "name": "$"
+          "name": "Beers"
         }
       ],
       "unlocked": false,
@@ -108,23 +108,23 @@
       "price": [
         {
           "qty": 10,
-          "name": "$"
+          "name": "Beers"
         }
       ],
       "unlocked": false,
       "seasonalEvent": "Christmas"
     }
   ],
-  "beers": [
+  "breweries": [
     {
-      "name": "Pilsner",
-      "category": "Beers",
+      "name": "Pilsner Brewery",
+      "category": "Breweries",
       "qty": 0,
       "ratio": 1.1,
       "price": [
         {
           "qty": 5,
-          "name": "$"
+          "name": "Beers"
         },
         {
           "qty": 1,
@@ -135,14 +135,14 @@
       "seasonalEvent": ""
     },
     {
-      "name": "Bitter",
-      "category": "Beers",
+      "name": "Bitter Brewery",
+      "category": "Breweries",
       "qty": 0,
       "ratio": 1.2,
       "price": [
         {
           "qty": 10,
-          "name": "$"
+          "name": "Beers"
         },
         {
           "qty": 1,
@@ -153,14 +153,14 @@
       "seasonalEvent": ""
     },
     {
-      "name": "Dry Stout",
-      "category": "Beers",
+      "name": "Dry Stout Brewery",
+      "category": "Breweries",
       "qty": 0,
       "ratio": 1.3,
       "price": [
         {
           "qty": 10,
-          "name": "$"
+          "name": "Beers"
         },
         {
           "qty": 1,
@@ -175,14 +175,14 @@
       "seasonalEvent": ""
     },
     {
-      "name": "Christmas Beer",
-      "category": "Beers",
+      "name": "Christmas Beer Brewery",
+      "category": "Breweries",
       "qty": 0,
       "ratio": 1.4,
       "price": [
         {
           "qty": 15,
-          "name": "$"
+          "name": "Beers"
         },
         {
           "qty": 1,
@@ -204,7 +204,7 @@
       "price": [
         {
           "qty": 100,
-          "name": "$"
+          "name": "Beers"
         }
       ],
       "unlocked": true,
@@ -217,7 +217,7 @@
       "price": [
         {
           "qty": 150,
-          "name": "$"
+          "name": "Beers"
         }
       ],
       "unlocked": true,
@@ -230,7 +230,7 @@
       "price": [
         {
           "qty": 100,
-          "name": "$"
+          "name": "Beers"
         }
       ],
       "unlocked": false,
@@ -243,7 +243,7 @@
       "price": [
         {
           "qty": 100,
-          "name": "$"
+          "name": "Beers"
         }
       ],
       "unlocked": true,
@@ -256,7 +256,7 @@
       "price": [
         {
           "qty": 150,
-          "name": "$"
+          "name": "Beers"
         }
       ],
       "unlocked": true,
@@ -269,7 +269,7 @@
       "price": [
         {
           "qty": 150,
-          "name": "$"
+          "name": "Beers"
         }
       ],
       "unlocked": false,

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Beer, Consumable, Upgrade, Price, PerkSlot, Perk, Player} from "./models";
+import {Brewery, Consumable, Upgrade, Price, PerkSlot, Perk, Player} from "./models";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
-import {BeerService} from "./services/beer/beer.service";
+import {BreweryService} from "./services/brewery/brewery.service";
 
 import * as _ from "lodash";
 
@@ -16,38 +16,38 @@ const {version: appVersion} = require("../../package.json"); //http://stackoverf
 })
 export class AppComponent implements OnInit{
   player: Player;
-  money: Consumable;
+  beers: Consumable;
   perkSlots: PerkSlot[];
   perks:Perk[];
   consumables: Consumable[];
-  beers: Beer[];
+  breweries: Brewery[];
   upgrades: Upgrade[];
-  totalBeers:number;
-  totalBeersAllTime:number;
+  totalBreweries:number;
+  totalBreweriesAllTime:number;
   income:number;
-  totalMoneyAllTime:number;
+  totalBeersAllTime:number;
   appVersion;
 
-  constructor(public GlobalStatsService:GlobalStatsService, public BeerService:BeerService) {
+  constructor(public GlobalStatsService:GlobalStatsService, public BreweryService:BreweryService) {
     this.appVersion = appVersion;
     this.perkSlots = [];
     this.perks = [];
     this.consumables = [];
-    this.beers = [];
+    this.breweries = [];
     this.upgrades = [];
-    this.totalMoneyAllTime = 0;
+    this.totalBeersAllTime = 0;
 
-    //subscribe to services to detect changes on totalBeers
-    this.BeerService.totalBeersOnChange.subscribe(data => {
-      this.totalBeers = data;
+    //subscribe to services to detect changes on totalBreweries
+    this.BreweryService.totalBreweriesOnChange.subscribe(data => {
+      this.totalBreweries = data;
     });
 
-    // Add the player money
-    this.money = data.player.resources.money;
+    // Add the player beers
+    this.beers = data.player.resources.beers;
 
-    // Add the player all time money
-    this.GlobalStatsService.totalMoneyAllTimeOnChange.subscribe(data => {
-      this.totalMoneyAllTime = data;
+    // Add the player all time beers
+    this.GlobalStatsService.totalBeersAllTimeOnChange.subscribe(data => {
+      this.totalBeersAllTime = data;
     });
 
     //add the income
@@ -63,46 +63,46 @@ export class AppComponent implements OnInit{
 
     // Add all perks
     perksList.perks.forEach((perk) => {
-      let price: Price[] = perk.price.map((p) => new Price(p.qty, this.money));
+      let price: Price[] = perk.price.map((p) => new Price(p.qty, this.beers));
       perk.price = price;
       this.perks.push(perk);
     });
 
     // Add all consumables
     data.consumables.forEach((consumable) => {
-      let price: Price[] = consumable.price.map((p) => new Price(p.qty, this.money));
+      let price: Price[] = consumable.price.map((p) => new Price(p.qty, this.beers));
       consumable.price = price;
       this.consumables.push(consumable);
     });
 
-    // Add all beers
-    data.beers.forEach((beer) => {
-      let price: Price[] = beer.price.map((p) => {
+    // Add all breweries
+    data.breweries.forEach((brewery) => {
+      let price: Price[] = brewery.price.map((p) => {
         let consumable: Consumable;
-        if(p.name === "$") {
-          consumable = this.money;
+        if(p.name === "Beers") {
+          consumable = this.beers;
         } else {
           consumable = _.find(this.consumables, (consumable) => consumable.name === p.name);
         }
         return new Price(p.qty, consumable);
       });
-      beer.price = price;
-      this.beers.push(beer);
+      brewery.price = price;
+      this.breweries.push(brewery);
     });
 
     // Add all upgrades
     data.upgrades.forEach((upgrade) => {
-      let price: Price[] = upgrade.price.map((p) => new Price(p.qty, this.money));
+      let price: Price[] = upgrade.price.map((p) => new Price(p.qty, this.beers));
       upgrade.price = price;
       this.upgrades.push(upgrade);
     });
 
-    this.player = new Player(this.money, this.income, this.totalMoneyAllTime ,this.perkSlots, this.perks, this.consumables, this.beers, this.upgrades);
+    this.player = new Player(this.beers, this.income, this.totalBeersAllTime ,this.perkSlots, this.perks, this.consumables, this.breweries, this.upgrades);
 
     setInterval(() => {
-      this.player.resources.money.qty += this.income;
+      this.player.resources.beers.qty += this.income;
 
-      this.GlobalStatsService.setTotalMoneyAllTime(this.income);
+      this.GlobalStatsService.setTotalBeersAllTime(this.income);
     }, 1000);
   }
 

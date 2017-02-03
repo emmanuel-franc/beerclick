@@ -10,38 +10,38 @@ import {GlobalStatsService} from '../../services/globalStats/global-stats.servic
 export class ClickZoneComponent {
 
   @Input() player:Player;
-  @Input() totalMoneyAllTime:number;
-  generatedMoney:number;
+  @Input() totalBeersAllTime:number;
+  generatedBeers:number;
   clicks:number[];
   
   constructor(public GlobalStatsService:GlobalStatsService) {
-    //default money generated is equal to 1
-    this.generatedMoney = 1;
+    //default beers generated is equal to 1
+    this.generatedBeers = 1;
     this.clicks = [];
 
 
-    this.GlobalStatsService.totalMoneyAllTimeOnChange.subscribe(data => {
-      this.totalMoneyAllTime = data;
+    this.GlobalStatsService.totalBeersAllTimeOnChange.subscribe(data => {
+      this.totalBeersAllTime = data;
     });
   }
 
-  generateMoney(){
-    //add to a percentage of players's current income to player's money
-    this.generatedMoney = Math.round((this.player.resources.income * 1) / 100);
+  generatedBeers(){
+    //add to a percentage of players's current income to player's beers
+    this.generatedBeers = Math.round((this.player.resources.income * 1) / 100);
     
-    //if money generated is inferior at 1 set money generated to 1
-    if(this.generatedMoney < 1) {
-      this.generatedMoney = 1;
+    //if beers generated is inferior at 1 set beers generated to 1
+    if(this.generatedBeers < 1) {
+      this.generatedBeers = 1;
     }
 
-    //increment money quantity
-    this.player.resources.money.qty +=  this.generatedMoney;
+    //increment beers quantity
+    this.player.resources.beers.qty +=  this.generatedBeers;
 
-    //increment totalMoneyAllTime quantity
-    this.GlobalStatsService.setTotalMoneyAllTime(this.generatedMoney);
+    //increment totalBeersAllTime quantity
+    this.GlobalStatsService.setTotalBeersAllTime(this.generatedBeers);
 
     //show value generated
-    this.clicks.push(this.generatedMoney);
+    this.clicks.push(this.generatedBeers);
 
     //hide value after 1 second
     setTimeout(() => {
