@@ -1,6 +1,7 @@
 export * from "./perkSlot.model";
 export * from "./perk.model";
 export * from "./brewery.model";
+export * from "./farm.model";
 export * from "./consumable.model";
 export * from "./price.model";
 export * from "./player.model";

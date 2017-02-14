@@ -42,7 +42,7 @@ export class UpgradeComponent implements OnInit {
       purchase.purchased = true;
 
       if(item.category === "consumables") {
-        let unlock = _.find(this.player.resources.consumables, {'name': item.name});
+        let unlock = _.find(this.player.resources.farms, {'name': item.name});
         unlock.unlocked = true;
       }
 
