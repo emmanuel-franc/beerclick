@@ -58,7 +58,7 @@ export class AppComponent implements OnInit{
       this.totalBeersAllTime = data;
     });
 
-    //add the income
+    //add the beers income
     this.GlobalStatsService.incomeOnChange.subscribe(data => {
       this.income = data;
     });
@@ -76,23 +76,26 @@ export class AppComponent implements OnInit{
       this.perks.push(perk);
     });
 
-    // Add all famrs
+    // Add all farms
     data.farms.forEach((farm) => {
       let price: Price[] = farm.price.map((p) => new Price(p.qty, this.beers));
       farm.price = price;
+
       this.farms.push(farm);
     });
 
     // Add all breweries
     data.breweries.forEach((brewery) => {
       let price: Price[] = brewery.price.map((p) => {
-        let consumableOrFarm: Consumable | Farm;
+        let consumableOrCereal: Consumable | Farm;
         if(p.name === "Beers") {
-          consumableOrFarm = this.beers;
+          consumableOrCereal = this.beers;
         } else {
-          consumableOrFarm = _.find(this.farms, (item) => item.name === p.name);
+          let selectFarm = _.find(this.farms, (item) => item.name === p.name);
+          selectFarm.bank.name = selectFarm.name;
+          consumableOrCereal = selectFarm.bank;
         }
-        return new Price(p.qty, consumableOrFarm);
+        return new Price(p.qty, consumableOrCereal);
       });
       brewery.price = price;
       this.breweries.push(brewery);
@@ -105,10 +108,15 @@ export class AppComponent implements OnInit{
       this.upgrades.push(upgrade);
     });
 
-    this.player = new Player(this.beers, this.income, this.totalBeersAllTime ,this.perkSlots, this.perks, this.farms, this.breweries, this.upgrades);
+    this.player = new Player(this.beers, this.income, this.totalBeersAllTime,
+                             this.perkSlots, this.perks, this.farms, this.breweries, this.upgrades);
 
     setInterval(() => {
       this.player.resources.beers.qty += this.income;
+
+      this.player.resources.farms.forEach((farm) => {
+        farm.bank.qty += farm.bank.income;
+      });
 
       this.GlobalStatsService.setTotalBeersAllTime(this.income);
     }, 1000);

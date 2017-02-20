@@ -4,6 +4,8 @@ import {GlobalStatsService} from "../../services/globalStats/global-stats.servic
 import {BreweryService} from "../../services/brewery/brewery.service";
 import {FarmService} from "../../services/farm/farm.service";
 
+import * as _ from "lodash";
+
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
@@ -65,8 +67,8 @@ export class ItemComponent {
         //send value of totalFarmsAllTime to parent component (see @Output)
         this.totalFarmsAllTimeChange.emit(this.totalFarmsAllTime);
 
-        //everytime we buy a farm, we change income
-        //this.GlobalStatsService.setIncome(this.player); //TODO : create income for farms
+        //everytime we buy a farm, we change cereals' income
+        this.GlobalStatsService.createCerealsIncome(this.player);
       }
     }
   }

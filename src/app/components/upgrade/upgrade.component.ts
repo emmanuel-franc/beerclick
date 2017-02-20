@@ -46,7 +46,7 @@ export class UpgradeComponent implements OnInit {
         unlock.unlocked = true;
       }
 
-      if(item.category === "Breweries") {
+      if(item.category === "breweries") {
         let unlock = _.find(this.player.resources.breweries, {'name': item.name});
         unlock.unlocked = true;
       }
