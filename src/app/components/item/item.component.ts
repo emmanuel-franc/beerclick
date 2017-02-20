@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Consumable, Brewery, Player } from '../../models';
+import { Farm, Brewery, Player } from '../../models';
 import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
 import {BreweryService} from "../../services/brewery/brewery.service";
+import {FarmService} from "../../services/farm/farm.service";
 
 @Component({
   selector: 'app-item',
@@ -10,13 +11,16 @@ import {BreweryService} from "../../services/brewery/brewery.service";
 })
 export class ItemComponent {
 
-  @Input() item: Consumable | Brewery;
+  @Input() item: Farm | Brewery;
   @Input() player:Player;
   @Input() totalBreweriesAllTime:number;
   @Output() totalBreweriesAllTimeChange = new EventEmitter<number>();
+  @Input() totalFarmsAllTime:number;
+  @Output() totalFarmsAllTimeChange = new EventEmitter<number>();
   
-  constructor(public GlobalStatsService:GlobalStatsService, public BreweryService:BreweryService) {
+  constructor(public GlobalStatsService:GlobalStatsService, public BreweryService:BreweryService, public FarmService:FarmService) {
     this.totalBreweriesAllTime = this.totalBreweriesAllTime || 0;
+    this.totalFarmsAllTime = this.totalFarmsAllTime || 0;
   }
 
   isBuyable(item, multiplicator: number = 1): boolean {
@@ -51,6 +55,19 @@ export class ItemComponent {
         //everytime we buy a brewery, we change income
         this.GlobalStatsService.setIncome(this.player);
       }
+
+      if(item.category === "Farms") {
+        this.totalFarmsAllTime += multiplicator;
+
+        //send value to service
+        this.FarmService.setTotalFarms(multiplicator);
+
+        //send value of totalFarmsAllTime to parent component (see @Output)
+        this.totalFarmsAllTimeChange.emit(this.totalFarmsAllTime);
+
+        //everytime we buy a farm, we change income
+        //this.GlobalStatsService.setIncome(this.player); //TODO : create income for farms
+      }
     }
   }
 
@@ -67,12 +84,19 @@ export class ItemComponent {
         }
       });
   
-      //only if breweries because we don't mind consumable yet
       if(item.category === "Breweries") {
         //send value to service
         this.BreweryService.setSubstractTotalBreweries(multiplicator);
   
         //everytime we sell a brewery, we change income
+        this.GlobalStatsService.setIncome(this.player);
+      }
+
+      if(item.category === "Farms") {
+        //send value to service
+        this.FarmService.setSubstractTotalFarms(multiplicator);
+
+        //everytime we sell a farm, we change income
         this.GlobalStatsService.setIncome(this.player);
       }
     }

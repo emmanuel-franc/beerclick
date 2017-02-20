@@ -12,6 +12,7 @@ import { EventService}  from "./services/event/event.service";
 import { GlobalStatsService}  from "./services/globalStats/global-stats.service";
 import { PerkService } from "./services/perk/perk.service";
 import { BreweryService } from "./services/brewery/brewery.service";
+import { FarmService } from "./services/farm/farm.service";
 
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
 import { ClickZoneComponent } from './components/click-zone/click-zone.component';
@@ -38,7 +39,8 @@ import { PopinComponent } from './components/popin/popin.component';
     EventService,
     GlobalStatsService,
     PerkService,
-    BreweryService
+    BreweryService,
+    FarmService
   ],
   bootstrap: [AppComponent]
 })

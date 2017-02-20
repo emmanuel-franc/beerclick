@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Brewery, Consumable, Upgrade, Price, PerkSlot, Perk, Player} from "./models";
+import {Brewery, Farm, Consumable, Upgrade, Price, PerkSlot, Perk, Player} from "./models";
 import {GlobalStatsService} from "./services/globalStats/global-stats.service";
 import {BreweryService} from "./services/brewery/brewery.service";
+import {FarmService} from "./services/farm/farm.service";
 
 import * as _ from "lodash";
 
@@ -19,20 +20,22 @@ export class AppComponent implements OnInit{
   beers: Consumable;
   perkSlots: PerkSlot[];
   perks:Perk[];
-  consumables: Consumable[];
+  farms: Farm[];
   breweries: Brewery[];
   upgrades: Upgrade[];
   totalBreweries:number;
   totalBreweriesAllTime:number;
+  totalFarms:number;
+  totalFarmsAllTime:number;
   income:number;
   totalBeersAllTime:number;
   appVersion;
 
-  constructor(public GlobalStatsService:GlobalStatsService, public BreweryService:BreweryService) {
+  constructor(public GlobalStatsService:GlobalStatsService, public BreweryService:BreweryService, public FarmService:FarmService) {
     this.appVersion = appVersion;
     this.perkSlots = [];
     this.perks = [];
-    this.consumables = [];
+    this.farms = [];
     this.breweries = [];
     this.upgrades = [];
     this.totalBeersAllTime = 0;
@@ -40,6 +43,11 @@ export class AppComponent implements OnInit{
     //subscribe to services to detect changes on totalBreweries
     this.BreweryService.totalBreweriesOnChange.subscribe(data => {
       this.totalBreweries = data;
+    });
+
+    //subscribe to services to detect changes on totalFarms
+    this.FarmService.totalFarmsOnChange.subscribe(data => {
+      this.totalFarms = data;
     });
 
     // Add the player beers
@@ -68,23 +76,23 @@ export class AppComponent implements OnInit{
       this.perks.push(perk);
     });
 
-    // Add all consumables
-    data.consumables.forEach((consumable) => {
-      let price: Price[] = consumable.price.map((p) => new Price(p.qty, this.beers));
-      consumable.price = price;
-      this.consumables.push(consumable);
+    // Add all famrs
+    data.farms.forEach((farm) => {
+      let price: Price[] = farm.price.map((p) => new Price(p.qty, this.beers));
+      farm.price = price;
+      this.farms.push(farm);
     });
 
     // Add all breweries
     data.breweries.forEach((brewery) => {
       let price: Price[] = brewery.price.map((p) => {
-        let consumable: Consumable;
+        let consumableOrFarm: Consumable | Farm;
         if(p.name === "Beers") {
-          consumable = this.beers;
+          consumableOrFarm = this.beers;
         } else {
-          consumable = _.find(this.consumables, (consumable) => consumable.name === p.name);
+          consumableOrFarm = _.find(this.farms, (item) => item.name === p.name);
         }
-        return new Price(p.qty, consumable);
+        return new Price(p.qty, consumableOrFarm);
       });
       brewery.price = price;
       this.breweries.push(brewery);
@@ -97,7 +105,7 @@ export class AppComponent implements OnInit{
       this.upgrades.push(upgrade);
     });
 
-    this.player = new Player(this.beers, this.income, this.totalBeersAllTime ,this.perkSlots, this.perks, this.consumables, this.breweries, this.upgrades);
+    this.player = new Player(this.beers, this.income, this.totalBeersAllTime ,this.perkSlots, this.perks, this.farms, this.breweries, this.upgrades);
 
     setInterval(() => {
       this.player.resources.beers.qty += this.income;
