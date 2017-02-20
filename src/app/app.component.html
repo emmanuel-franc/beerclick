@@ -1,7 +1,7 @@
 <div class="store">
   <app-upgrade [(player)]="player"></app-upgrade>
 
-  <div *ngFor="let farm of player.resources.farms;"> <!-- TODO : change this for farms -->
+  <div *ngFor="let farm of player.resources.farms;">
     <div *ngIf="farm.unlocked">
       <h2>Stock : {{farm.qty}} {{farm.name }}</h2>
       <app-item [item]="farm"></app-item>

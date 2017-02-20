@@ -77,7 +77,7 @@ export class AppComponent implements OnInit{
     });
 
     // Add all famrs
-    data.farms.forEach((farm) => { //TODO : change this for Farms
+    data.farms.forEach((farm) => {
       let price: Price[] = farm.price.map((p) => new Price(p.qty, this.beers));
       farm.price = price;
       this.farms.push(farm);
@@ -86,13 +86,13 @@ export class AppComponent implements OnInit{
     // Add all breweries
     data.breweries.forEach((brewery) => {
       let price: Price[] = brewery.price.map((p) => {
-        let consumable: Consumable | Farm;
+        let consumableOrFarm: Consumable | Farm;
         if(p.name === "Beers") {
-          consumable = this.beers;
+          consumableOrFarm = this.beers;
         } else {
-          consumable = _.find(this.farms, (consumable) => consumable.name === p.name);
+          consumableOrFarm = _.find(this.farms, (item) => item.name === p.name);
         }
-        return new Price(p.qty, consumable);
+        return new Price(p.qty, consumableOrFarm);
       });
       brewery.price = price;
       this.breweries.push(brewery);
