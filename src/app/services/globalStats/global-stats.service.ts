@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { Farm } from '../../models';
 
 import * as _ from "lodash";
 
@@ -14,15 +15,36 @@ export class GlobalStatsService {
 
   createIncome(player, multiplicator) {
     //check all breweries to calculate income
-    let income = 0;
+    player.resources.income = player.resources.income || 0;
+
+    let productionCostArray = [];
+
     player.resources.breweries.forEach((brewery) => {
-      income += brewery.qty * brewery.ratio;
+
+      if(brewery.qty > 0) {
+        brewery.productionCost.forEach((productionCost) => {
+          //must cast: http://stackoverflow.com/questions/37978528/typescript-type-string-is-not-assignable-to-type
+          let farm = _.find(player.resources.farms, {'name': productionCost.name});
+          let foundFarm:Farm = farm as Farm;
+
+          if (foundFarm.bank.qty > productionCost.qty * brewery.qty) {
+            //push in array to make comparison
+            productionCostArray.push(productionCost);
+
+            foundFarm.bank.qty -= productionCost.qty * brewery.qty;
+          }
+        });
+
+        if(productionCostArray.length === brewery.productionCost.length) {
+          player.resources.income += (brewery.qty * brewery.ratio) * multiplicator;
+        } else {
+          //todo: create messages
+          console.log('your' + brewery + 'has stopped producing beers because of lack of cereals');
+        }
+
+        productionCostArray.length = 0;
+      }
     });
-
-    //set income of player (this.player)
-    player.resources.income = income * multiplicator;
-
-    return player.resources.income;
   }
 
   //whenever we setIncome, calculate via createIncome() then emit
