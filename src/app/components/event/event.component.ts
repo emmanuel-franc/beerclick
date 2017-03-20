@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {Player, Event} from '../../models';
 import {EventService} from "../../services/event/event.service";
-import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
 import {BreweryService} from "../../services/brewery/brewery.service";
 
 import * as _ from "lodash";
@@ -24,7 +23,7 @@ export class EventComponent implements OnInit {
   breweriesLossEvents:any[];
   chosenEventQty:number;
   
-  constructor(public EventService:EventService, public GlobalStatsService:GlobalStatsService, public BreweryService:BreweryService) {
+  constructor(public EventService:EventService, public BreweryService:BreweryService) {
     this.getEventsList = this.EventService.getEventsList();
     this.breweriesLossEvents = [];
     this.eventList = [];
@@ -128,7 +127,7 @@ export class EventComponent implements OnInit {
       this.BreweryService.setSubstractTotalBreweries(this.chosenEventQty);
 
       //everytime we remove a brewery, we change income
-      this.GlobalStatsService.setIncome(this.player);
+      this.BreweryService.setIncome(this.player);
     }
   }
 

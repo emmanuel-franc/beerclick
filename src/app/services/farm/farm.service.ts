@@ -24,4 +24,13 @@ export class FarmService {
       this.totalFarmsOnChange.emit(this.totalFarms);
     }
   }
+
+  createCerealsIncome(player, multiplicator: number = 1) {
+    //check all farms to calculate income
+    player.resources.farms.forEach((farm) => {
+      farm.bank.income += farm.qty * farm.ratio * multiplicator;
+    });
+
+    return player;
+  }
 }

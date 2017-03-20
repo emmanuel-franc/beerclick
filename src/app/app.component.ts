@@ -24,9 +24,7 @@ export class AppComponent implements OnInit{
   breweries: Brewery[];
   upgrades: Upgrade[];
   totalBreweries:number;
-  totalBreweriesAllTime:number;
   totalFarms:number;
-  totalFarmsAllTime:number;
   income:number;
   totalBeersAllTime:number;
   appVersion;
@@ -62,7 +60,7 @@ export class AppComponent implements OnInit{
     });
 
     //add the beers income
-    this.GlobalStatsService.incomeOnChange.subscribe(data => {
+    this.BreweryService.incomeOnChange.subscribe(data => {
       this.income = data;
     });
     if(!this.income) {
@@ -109,7 +107,8 @@ export class AppComponent implements OnInit{
                              this.perkSlots, this.perks, this.farms, this.breweries, this.upgrades);
 
     setInterval(() => {
-      this.GlobalStatsService.setIncome(this.player);
+      this.BreweryService.setIncome(this.player);
+
       this.player.resources.beers.qty += this.income;
 
       this.player.resources.farms.forEach((farm) => {

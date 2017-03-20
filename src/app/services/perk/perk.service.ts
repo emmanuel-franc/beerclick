@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-
-import { GlobalStatsService } from '../globalStats/global-stats.service';
+import { BreweryService } from '../brewery/brewery.service';
 import { PlayerService} from '../player/player.service';
 import { Brewery, Perk } from '../../models';
 
@@ -9,7 +8,7 @@ import {Player} from "../../models/player.model";
 
 @Injectable()
 export class PerkService {
-  constructor(public GlobalStatsService:GlobalStatsService, public PlayerService:PlayerService) {
+  constructor(public BreweryService:BreweryService, public PlayerService:PlayerService) {
   }
 
   setPerk(item, player, perkSlotId) {
@@ -35,7 +34,7 @@ export class PerkService {
   setBonus(item, player: Player) {
     if(item.bonusTrigger === "income") {
       //set new income of player
-      this.GlobalStatsService.setIncome(player, item.bonus);
+      this.BreweryService.setIncome(player, item.bonus);
     }
 
     if(item.bonusTrigger === "Pilsner Brewery") {
@@ -57,7 +56,7 @@ export class PerkService {
       let newIncome = player.resources.income / player.resources.perkSlots[perkSlotId].assignedPerk.bonus
 
       //set new income of player
-      this.GlobalStatsService.setIncome(player, newIncome);
+      this.BreweryService.setIncome(player, newIncome);
     }
 
     if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "Pilsner Brewery") {
@@ -67,7 +66,7 @@ export class PerkService {
       getbonusTrigger.ratio = getbonusTrigger.ratio / player.resources.perkSlots[perkSlotId].assignedPerk.bonus;
 
       //TODO: create a player service, actually sending setIncome because we must send player
-      this.GlobalStatsService.setIncome(player);
+      this.BreweryService.setIncome(player);
     }
 
     //empty perk

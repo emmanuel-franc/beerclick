@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Farm, Brewery, Player } from '../../models';
-import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
 import {BreweryService} from "../../services/brewery/brewery.service";
 import {FarmService} from "../../services/farm/farm.service";
 
@@ -20,7 +19,7 @@ export class ItemComponent {
   @Input() totalFarmsAllTime:number;
   @Output() totalFarmsAllTimeChange = new EventEmitter<number>();
   
-  constructor(public GlobalStatsService:GlobalStatsService, public BreweryService:BreweryService, public FarmService:FarmService) {
+  constructor(public BreweryService:BreweryService, public FarmService:FarmService) {
     this.totalBreweriesAllTime = this.totalBreweriesAllTime || 0;
     this.totalFarmsAllTime = this.totalFarmsAllTime || 0;
   }
@@ -55,7 +54,7 @@ export class ItemComponent {
         this.totalBreweriesAllTimeChange.emit(this.totalBreweriesAllTime);
 
         //everytime we buy a brewery, we change income
-        this.GlobalStatsService.setIncome(this.player);
+        this.BreweryService.setIncome(this.player);
       }
 
       if(item.category === "Farms") {
@@ -68,7 +67,7 @@ export class ItemComponent {
         this.totalFarmsAllTimeChange.emit(this.totalFarmsAllTime);
 
         //everytime we buy a farm, we change cereals' income
-        this.GlobalStatsService.createCerealsIncome(this.player);
+        this.FarmService.createCerealsIncome(this.player);
       }
     }
   }
@@ -91,7 +90,7 @@ export class ItemComponent {
         this.BreweryService.setSubstractTotalBreweries(multiplicator);
   
         //everytime we sell a brewery, we change income
-        this.GlobalStatsService.setIncome(this.player);
+        this.BreweryService.setIncome(this.player);
       }
 
       if(item.category === "Farms") {
@@ -99,7 +98,8 @@ export class ItemComponent {
         this.FarmService.setSubstractTotalFarms(multiplicator);
 
         //everytime we sell a farm, we change income
-        this.GlobalStatsService.setIncome(this.player);
+        //TODO: check this
+        this.BreweryService.setIncome(this.player);
       }
     }
   }

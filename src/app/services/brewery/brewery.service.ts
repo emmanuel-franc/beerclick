@@ -1,9 +1,13 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { Farm } from '../../models';
+
+import * as _ from "lodash";
 
 @Injectable()
 export class BreweryService {
   public totalBreweries:number;
   public totalBreweriesOnChange:EventEmitter<any> = new EventEmitter(); //see http://stackoverflow.com/questions/35878160/angular2-how-to-share-data-change-between-components
+  public incomeOnChange:EventEmitter<any> = new EventEmitter();
 
   constructor() {
     this.totalBreweries = 0;
@@ -28,5 +32,46 @@ export class BreweryService {
   resetTotalBreweries() {
     this.totalBreweries = 0;
     this.totalBreweriesOnChange.emit(this.totalBreweries);
+  }
+
+  createIncome(player, multiplicator) {
+    //check all breweries to calculate income
+    player.resources.income = player.resources.income || 0;
+
+    let productionCostArray = [];
+
+    player.resources.breweries.forEach((brewery) => {
+
+      if(brewery.qty > 0) {
+        brewery.productionCost.forEach((productionCost) => {
+          //must cast: http://stackoverflow.com/questions/37978528/typescript-type-string-is-not-assignable-to-type
+          let farm = _.find(player.resources.farms, {'name': productionCost.name});
+          let foundFarm:Farm = farm as Farm;
+
+          if (foundFarm.bank.qty > productionCost.qty * brewery.qty) {
+            //push in array to make comparison
+            productionCostArray.push(productionCost);
+
+            foundFarm.bank.qty -= productionCost.qty * brewery.qty;
+          }
+        });
+
+        if(productionCostArray.length === brewery.productionCost.length) {
+          player.resources.income += (brewery.qty * brewery.ratio) * multiplicator;
+        } else {
+          //todo: create messages
+          console.log('your' + brewery + 'has stopped producing beers because of lack of cereals');
+        }
+
+        productionCostArray.length = 0;
+      }
+    });
+
+    return player.resources.income;
+  }
+
+  //whenever we setIncome, calculate via createIncome() then emit
+  setIncome(player, multiplicator: number = 1) {
+    this.incomeOnChange.emit(this.createIncome(player, multiplicator));
   }
 }
