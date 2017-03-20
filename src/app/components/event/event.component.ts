@@ -14,7 +14,8 @@ import * as _ from "lodash";
 export class EventComponent implements OnInit {
 
   @Input() player: Player;
-  
+  @Input() standBy: boolean;
+
   totalBreweries: number;
   chosenEvent:any;
   timeOut:any;
@@ -58,7 +59,9 @@ export class EventComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.randomEvent();
+    if(this.standBy){
+      this.randomEvent();
+    }
   }
   
   randomEvent() {

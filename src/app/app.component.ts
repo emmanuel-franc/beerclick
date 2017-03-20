@@ -30,6 +30,7 @@ export class AppComponent implements OnInit{
   income:number;
   totalBeersAllTime:number;
   appVersion;
+  standBy:boolean;
 
   constructor(public GlobalStatsService:GlobalStatsService, public BreweryService:BreweryService, public FarmService:FarmService) {
     this.appVersion = appVersion;
@@ -39,6 +40,8 @@ export class AppComponent implements OnInit{
     this.breweries = [];
     this.upgrades = [];
     this.totalBeersAllTime = 0;
+    //standBy = lock features
+    this.standBy = false;
 
     //subscribe to services to detect changes on totalBreweries
     this.BreweryService.totalBreweriesOnChange.subscribe(data => {
@@ -122,8 +125,9 @@ export class AppComponent implements OnInit{
     let actualDate = new Date();
 
     //if it's <seasonal event> unlock upgrades
-    if(actualDate.getMonth() >= 0 &&
-      actualDate.getDate() >= 15){ //TODO: set a limit in time of Seasonal Events
+    if(this.standBy &&
+       actualDate.getMonth() >= 0 &&
+       actualDate.getDate() >= 15){ //TODO: set a limit in time of Seasonal Events
       let unlockChristmasEventUpgrades = _.filter(this.player.resources.upgrades, {"seasonalEvent": "Christmas"});
 
       unlockChristmasEventUpgrades.forEach((upgrade) => {
