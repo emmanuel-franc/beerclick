@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Player } from '../../models';
-import {GlobalStatsService} from '../../services/globalStats/global-stats.service';
+import {PlayerService} from '../../services/player/player.service';
 
 @Component({
   selector: 'app-click-zone',
@@ -14,13 +14,13 @@ export class ClickZoneComponent {
   generatedBeers:number;
   clicks:number[];
   
-  constructor(public GlobalStatsService:GlobalStatsService) {
+  constructor(public PlayerService:PlayerService) {
     //default beers generated is equal to 1
     this.generatedBeers = 1;
     this.clicks = [];
 
 
-    this.GlobalStatsService.totalBeersAllTimeOnChange.subscribe(data => {
+    this.PlayerService.totalBeersAllTimeOnChange.subscribe(data => {
       this.totalBeersAllTime = data;
     });
   }
@@ -38,7 +38,7 @@ export class ClickZoneComponent {
     this.player.resources.beers.qty +=  this.generatedBeers;
 
     //increment totalBeersAllTime quantity
-    this.GlobalStatsService.setTotalBeersAllTime(this.generatedBeers);
+    this.PlayerService.setTotalBeersAllTime(this.generatedBeers);
 
     //show value generated
     this.clicks.push(this.generatedBeers);

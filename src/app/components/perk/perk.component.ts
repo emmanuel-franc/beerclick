@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import {Player, PerkSlot, Perk, Price} from "../../models";
 
-import {GlobalStatsService} from "../../services/globalStats/global-stats.service";
+import {PlayerService} from "../../services/player/player.service";
 import {PerkService} from "../../services/perk/perk.service";
 
 @Component({
@@ -18,13 +18,13 @@ export class PerkComponent implements OnInit {
   popinIsVisible:boolean;
   perkSlotId:number;
 
-  constructor(public GlobalStatsService:GlobalStatsService, public PerkService:PerkService) {
+  constructor(public PlayerService:PlayerService, public PerkService:PerkService) {
     this.perkSlots = [];
     this.perksList = [];
     this.popinIsVisible = false;
 
     //subscribe to services to detect changes on totalBeersAllTime
-    this.GlobalStatsService.totalBeersAllTimeOnChange.subscribe(data => {
+    this.PlayerService.totalBeersAllTimeOnChange.subscribe(data => {
 
       this.totalBeersAllTime  = data;
 

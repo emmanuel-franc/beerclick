@@ -9,7 +9,6 @@ import { EventComponent } from './components/event/event.component';
 
 import { PlayerService } from "./services/player/player.service";
 import { EventService}  from "./services/event/event.service";
-import { GlobalStatsService}  from "./services/globalStats/global-stats.service";
 import { PerkService } from "./services/perk/perk.service";
 import { BreweryService } from "./services/brewery/brewery.service";
 import { FarmService } from "./services/farm/farm.service";
@@ -37,7 +36,6 @@ import { PopinComponent } from './components/popin/popin.component';
   providers: [
     PlayerService,
     EventService,
-    GlobalStatsService,
     PerkService,
     BreweryService,
     FarmService

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Brewery, Farm, Consumable, Upgrade, Price, PerkSlot, Perk, Player} from "./models";
-import {GlobalStatsService} from "./services/globalStats/global-stats.service";
+import {PlayerService} from "./services/player/player.service";
 import {BreweryService} from "./services/brewery/brewery.service";
 import {FarmService} from "./services/farm/farm.service";
 
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit{
   appVersion;
   standBy:boolean;
 
-  constructor(public GlobalStatsService:GlobalStatsService, public BreweryService:BreweryService, public FarmService:FarmService) {
+  constructor(public PlayerService:PlayerService, public BreweryService:BreweryService, public FarmService:FarmService) {
     this.appVersion = appVersion;
     this.perkSlots = [];
     this.perks = [];
@@ -55,7 +55,7 @@ export class AppComponent implements OnInit{
     this.beers = data.player.resources.beers;
 
     // Add the player all time beers
-    this.GlobalStatsService.totalBeersAllTimeOnChange.subscribe(data => {
+    this.PlayerService.totalBeersAllTimeOnChange.subscribe(data => {
       this.totalBeersAllTime = data;
     });
 
@@ -115,7 +115,7 @@ export class AppComponent implements OnInit{
         farm.bank.qty += farm.bank.income;
       });
 
-      this.GlobalStatsService.setTotalBeersAllTime(this.income);
+      this.PlayerService.setTotalBeersAllTime(this.income);
     }, 1000);
   }
 
