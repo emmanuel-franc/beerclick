@@ -5,6 +5,7 @@ export class Brewery {
   category: string;
   qty: number;
   price: Price[];
+  productionCost: Price[];
   ratio: number;
   unlocked: boolean;
   seasonalEvent: boolean;

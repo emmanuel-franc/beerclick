@@ -87,15 +87,9 @@ export class AppComponent implements OnInit{
     // Add all breweries
     data.breweries.forEach((brewery) => {
       let price: Price[] = brewery.price.map((p) => {
-        let consumableOrCereal: Consumable | Farm;
-        if(p.name === "Beers") {
-          consumableOrCereal = this.beers;
-        } else {
-          let selectFarm = _.find(this.farms, (item) => item.name === p.name);
-          selectFarm.bank.name = selectFarm.name;
-          consumableOrCereal = selectFarm.bank;
-        }
-        return new Price(p.qty, consumableOrCereal);
+        let consumable: Consumable;
+        consumable = this.beers;
+        return new Price(p.qty, consumable);
       });
       brewery.price = price;
       this.breweries.push(brewery);
@@ -112,6 +106,7 @@ export class AppComponent implements OnInit{
                              this.perkSlots, this.perks, this.farms, this.breweries, this.upgrades);
 
     setInterval(() => {
+      this.GlobalStatsService.setIncome(this.player);
       this.player.resources.beers.qty += this.income;
 
       this.player.resources.farms.forEach((farm) => {
