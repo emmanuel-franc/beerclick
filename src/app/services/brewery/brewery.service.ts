@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Farm } from '../../models';
+import { PlayerService } from '../../services/player/player.service';
 
 import * as _ from "lodash";
 
@@ -9,7 +10,7 @@ export class BreweryService {
   public totalBreweriesOnChange:EventEmitter<any> = new EventEmitter(); //see http://stackoverflow.com/questions/35878160/angular2-how-to-share-data-change-between-components
   public incomeOnChange:EventEmitter<any> = new EventEmitter();
 
-  constructor() {
+  constructor(public PlayerService:PlayerService) {
     this.totalBreweries = 0;
   }
 
@@ -57,7 +58,9 @@ export class BreweryService {
         });
 
         if(productionCostArray.length === brewery.productionCost.length) {
-          player.resources.income += (brewery.qty * brewery.ratio) * multiplicator;
+          player.resources.beers.qty += (brewery.qty * brewery.ratio) * multiplicator;
+
+          this.PlayerService.setTotalBeersAllTime((brewery.qty * brewery.ratio) * multiplicator);
         } else {
           //todo: create messages
           console.log('your' + brewery + 'has stopped producing beers because of lack of cereals');
@@ -67,7 +70,7 @@ export class BreweryService {
       }
     });
 
-    return player.resources.income;
+    return player.resources.beers.qty;
   }
 
   //whenever we setIncome, calculate via createIncome() then emit
