@@ -4,7 +4,7 @@
       "beers": {
         "name": "Beers",
         "category": "bank",
-        "qty": 0,
+        "qty": 1000,
         "unlocked": true
       },
       "income": 0,
@@ -66,12 +66,17 @@
       "name": "Hop",
       "category": "Farms",
       "qty": 0,
+      "ratio": 1.1,
       "price": [
         {
           "qty": 10,
           "name": "Beers"
         }
       ],
+      "bank": {
+        "income": 0,
+        "qty": 0
+      },
       "unlocked": true,
       "seasonalEvent": ""
     },
@@ -79,12 +84,17 @@
       "name": "Wheat",
       "category": "Farms",
       "qty": 0,
+      "ratio": 1.1,
       "price": [
         {
           "qty": 10,
           "name": "Beers"
         }
       ],
+      "bank": {
+        "income": 0,
+        "qty": 0
+      },
       "unlocked": false,
       "seasonalEvent": ""
     },
@@ -92,12 +102,17 @@
       "name": "Barley",
       "category": "Farms",
       "qty": 0,
+      "ratio": 1.1,
       "price": [
         {
           "qty": 10,
           "name": "Beers"
         }
       ],
+      "bank": {
+        "income": 0,
+        "qty": 0
+      },
       "unlocked": false,
       "seasonalEvent": ""
     },
@@ -105,12 +120,17 @@
       "name": "Gingerbread",
       "category": "Farms",
       "qty": 0,
+      "ratio": 1.1,
       "price": [
         {
           "qty": 10,
           "name": "Beers"
         }
       ],
+      "bank": {
+        "income": 0,
+        "qty": 0
+      },
       "unlocked": false,
       "seasonalEvent": "Christmas"
     }
@@ -199,7 +219,7 @@
   ],
   "upgrades": [
     {
-      "name": "wheat",
+      "name": "Wheat",
       "category": "consumables",
       "price": [
         {
@@ -212,7 +232,7 @@
       "seasonalEvent": ""
     },
     {
-      "name": "barley",
+      "name": "Barley",
       "category": "consumables",
       "price": [
         {
@@ -225,7 +245,7 @@
       "seasonalEvent": ""
     },
     {
-      "name": "gingerbread",
+      "name": "Gingerbread",
       "category": "consumables",
       "price": [
         {
@@ -238,8 +258,8 @@
       "seasonalEvent": "Christmas"
     },
     {
-      "name": "Bitter",
-      "category": "beers",
+      "name": "Bitter Brewery",
+      "category": "breweries",
       "price": [
         {
           "qty": 100,
@@ -251,8 +271,8 @@
       "seasonalEvent": ""
     },
     {
-      "name": "Dry Stout",
-      "category": "beers",
+      "name": "Dry Stout Brewery",
+      "category": "breweries",
       "price": [
         {
           "qty": 150,
@@ -264,8 +284,8 @@
       "seasonalEvent": ""
     },
     {
-      "name": "Christmas Beer",
-      "category": "beers",
+      "name": "Christmas Beer Brewery",
+      "category": "breweries",
       "price": [
         {
           "qty": 150,

@@ -1,5 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
+import * as _ from "lodash";
+
 @Injectable()
 export class GlobalStatsService {
   public totalBeersAllTime:number;
@@ -26,6 +28,15 @@ export class GlobalStatsService {
   //whenever we setIncome, calculate via createIncome() then emit
   setIncome(player, multiplicator: number = 1) {
     this.incomeOnChange.emit(this.createIncome(player, multiplicator));
+  }
+
+  createCerealsIncome(player, multiplicator: number = 1) {
+    //check all farms to calculate income
+    player.resources.farms.forEach((farm) => {
+      farm.bank.income += farm.qty * farm.ratio * multiplicator;
+    });
+
+    return player;
   }
 
   //TODO: check perf for this, not sure if it's the best way to do it since there is a set interval updating this value

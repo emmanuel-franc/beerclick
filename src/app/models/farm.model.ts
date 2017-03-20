@@ -5,6 +5,7 @@ export class Farm {
   category: string;
   qty: number;
   price?: Price[];
+  bank: any;
   unlocked: boolean;
   seasonalEvent: boolean;
 }

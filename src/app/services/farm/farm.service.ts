@@ -24,9 +24,4 @@ export class FarmService {
       this.totalFarmsOnChange.emit(this.totalFarms);
     }
   }
-
-  resetTotalFarms() {
-    this.totalFarms = 0;
-    this.totalFarmsOnChange.emit(this.totalFarms);
-  }
 }

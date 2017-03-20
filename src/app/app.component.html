@@ -1,10 +1,10 @@
 <div class="store">
   <app-upgrade [(player)]="player"></app-upgrade>
 
-  <div *ngFor="let farm of player.resources.farms;">
+  <div *ngFor="let farm of player.resources.farms">
     <div *ngIf="farm.unlocked">
-      <h2>Stock : {{farm.qty}} {{farm.name }}</h2>
-      <app-item [item]="farm"></app-item>
+      <h2>Stock : {{farm.qty}} {{farm.name }} Farm</h2>
+      <app-item [player]="player" [item]="farm" [(totalFarmsAllTime)]="totalFarmsAllTime"></app-item>
     </div>
   </div>
 
@@ -25,7 +25,8 @@
   </div>
 
   <div class="stats">
-    <h2>Player's Breweries produced : {{player.resources.beers.qty}} Beers</h2>
+    <h2>Player's Beers : {{player.resources.beers.qty}} Beers</h2>
+
 
     totalBeersAllTime
     {{totalBeersAllTime || 0}}
