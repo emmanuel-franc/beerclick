@@ -60,6 +60,8 @@ export class BreweryService {
         if(productionCostArray.length === brewery.productionCost.length) {
           player.resources.beers.qty += (brewery.qty * brewery.ratio) * multiplicator;
 
+          player.resources.beers.qty = Math.round((player.resources.beers.qty * 100) / 100);
+
           this.PlayerService.setTotalBeersAllTime((brewery.qty * brewery.ratio) * multiplicator);
         } else {
           //todo: create messages
