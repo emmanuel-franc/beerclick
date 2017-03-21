@@ -1,4 +1,4 @@
-import { Consumable } from "./consumable.model";
+import { Beers } from "./beers.model";
 import { Farm } from "./farm.model";
 import { Brewery } from "./brewery.model";
 import { Upgrade } from "./upgrade.model";
@@ -7,7 +7,7 @@ import { Perk} from "./perk.model";
 
 export class Player {
   resources: {
-    beers: Consumable;
+    beers: Beers;
     totalBeersAllTime:number,
     perkSlots: PerkSlot[],
     perks: Perk[],

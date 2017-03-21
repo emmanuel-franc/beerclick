@@ -21,27 +21,23 @@ export class UpgradeComponent implements OnInit {
   isBuyable(item): boolean {
     let buyable = true;
 
-    item.forEach((price)=> {
-      if(price.qty > price.consumable.qty) {
-        buyable = false;
-      }
-    });
+    if(item.price > this.player.resources.beers.qty) {
+      buyable = false;
+    }
 
     return buyable;
   }
   
   buyUpgrade(item) {
-    if(this.isBuyable(item.price)) {
-      //forEach get price then substract to player's beers qty
-      item.price.forEach((price) => {
-        price.consumable.qty -= price.qty;
-      });
-      
+    if(this.isBuyable(item)) {
+      //substract to player's beers qty the price
+      this.player.resources.beers.qty -= item.price;
+
       //set unlock on this upgrade
       let purchase = _.find(this.player.resources.upgrades, {'name': item.name});
       purchase.purchased = true;
 
-      if(item.category === "consumables") {
+      if(item.category === "farms") {
         let unlock = _.find(this.player.resources.farms, {'name': item.name});
         unlock.unlocked = true;
       }
