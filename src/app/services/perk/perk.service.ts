@@ -52,11 +52,8 @@ export class PerkService {
   //TODO: not sure if it's the best way to do this, should be reworked
   removeBonus(player: Player, perkSlotId) {
     if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "income") {
-      //get actual income of player and divid it by assignedPerk bonus
-      let newIncome = player.resources.income / player.resources.perkSlots[perkSlotId].assignedPerk.bonus
-
       //set new income of player
-      this.BreweryService.setIncome(player, newIncome);
+      this.BreweryService.setIncome(player, 1);
     }
 
     if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "Pilsner Brewery") {
@@ -65,7 +62,6 @@ export class PerkService {
       //set new bonus for pilsner Brewery by dividing actual assigned perk's bonus
       getbonusTrigger.ratio = getbonusTrigger.ratio / player.resources.perkSlots[perkSlotId].assignedPerk.bonus;
 
-      //TODO: create a player service, actually sending setIncome because we must send player
       this.BreweryService.setIncome(player);
     }
 
