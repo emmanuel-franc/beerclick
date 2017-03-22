@@ -1,10 +1,9 @@
-import { Price } from "./price.model";
-
 export class Farm {
   name: string;
   category: string;
   qty: number;
-  price?: Price[];
+  price: number;
+  baseCost: number;
   bank: any;
   unlocked: boolean;
   seasonalEvent: boolean;

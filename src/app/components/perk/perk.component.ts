@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import {Player, PerkSlot, Perk, Price} from "../../models";
+import {Player, PerkSlot, Perk} from "../../models";
 
 import {PlayerService} from "../../services/player/player.service";
 import {PerkService} from "../../services/perk/perk.service";

@@ -1,6 +1,5 @@
 <h3>{{item.name}} <span *ngIf="item.category === 'Farms'">Farm</span> cost :
-  <span *ngFor="let c of item.price; let last = last;">{{c.qty}} {{c.consumable.name}}
-    <span *ngIf="!last">and </span>
+  <span>{{item.price}} Beers
   </span>
 
   <span *ngIf="item.ratio">

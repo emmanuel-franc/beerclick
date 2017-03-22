@@ -4,12 +4,7 @@
       "id": 0,
       "name": "magical perk",
       "image": "perkBeer.jpg",
-      "price": [
-        {
-          "qty": 10,
-          "name": "$"
-        }
-      ],
+      "price": 10,
       "unlocked": true,
       "purchased": false,
       "bonus": 2,
@@ -20,12 +15,7 @@
       "id": 1,
       "name": "Forever St Patrick's day",
       "image": "perkBeer2.jpg",
-      "price": [
-        {
-          "qty": 10,
-          "name": "$"
-        }
-      ],
+      "price": 10,
       "unlocked": true,
       "purchased": false,
       "bonus": 2,
@@ -36,12 +26,7 @@
       "id": 2,
       "name": "Farmer",
       "image": "crop.jpg",
-      "price": [
-        {
-          "qty": 1000,
-          "name": "$"
-        }
-      ],
+      "price": 10,
       "unlocked": false,
       "purchased": false,
       "bonus": 2,
@@ -52,12 +37,7 @@
       "id": 3,
       "name": "Collector",
       "image": "perkBeer2.jpg",
-      "price": [
-        {
-          "qty": 1000,
-          "name": "$"
-        }
-      ],
+      "price": 10,
       "unlocked": false,
       "purchased": false,
       "bonus": 2,
@@ -68,12 +48,7 @@
       "id": 4,
       "name": "Capitalist",
       "image": "dollar.jpg",
-      "price": [
-        {
-          "qty": 1000,
-          "name": "$"
-        }
-      ],
+      "price": 1000,
       "unlocked": false,
       "purchased": false,
       "bonusType": "double",

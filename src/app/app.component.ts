@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Brewery, Farm, Consumable, Upgrade, Price, PerkSlot, Perk, Player} from "./models";
+import {Brewery, Farm, Beers, Upgrade, PerkSlot, Perk, Player} from "./models";
 import {PlayerService} from "./services/player/player.service";
 import {BreweryService} from "./services/brewery/brewery.service";
 import {FarmService} from "./services/farm/farm.service";
@@ -17,7 +17,7 @@ const {version: appVersion} = require("../../package.json"); //http://stackoverf
 })
 export class AppComponent implements OnInit{
   player: Player;
-  beers: Consumable;
+  beers: Beers;
   perkSlots: PerkSlot[];
   perks:Perk[];
   farms: Farm[];
@@ -62,37 +62,16 @@ export class AppComponent implements OnInit{
     this.perkSlots = data.perkSlot;
 
     // Add all perks
-    perksList.perks.forEach((perk) => {
-      let price: Price[] = perk.price.map((p) => new Price(p.qty, this.beers));
-      perk.price = price;
-      this.perks.push(perk);
-    });
+    this.perks = perksList.perks;
 
     // Add all farms
-    data.farms.forEach((farm) => {
-      let price: Price[] = farm.price.map((p) => new Price(p.qty, this.beers));
-      farm.price = price;
-
-      this.farms.push(farm);
-    });
+    this.farms = data.farms;
 
     // Add all breweries
-    data.breweries.forEach((brewery) => {
-      let price: Price[] = brewery.price.map((p) => {
-        let consumable: Consumable;
-        consumable = this.beers;
-        return new Price(p.qty, consumable);
-      });
-      brewery.price = price;
-      this.breweries.push(brewery);
-    });
+    this.breweries = data.breweries;
 
     // Add all upgrades
-    data.upgrades.forEach((upgrade) => {
-      let price: Price[] = upgrade.price.map((p) => new Price(p.qty, this.beers));
-      upgrade.price = price;
-      this.upgrades.push(upgrade);
-    });
+    this.upgrades = data.upgrades;
 
     this.player = new Player(this.beers, this.totalBeersAllTime,
                              this.perkSlots, this.perks, this.farms, this.breweries, this.upgrades);

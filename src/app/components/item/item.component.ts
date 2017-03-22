@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Farm, Brewery, Player } from '../../models';
+import {PlayerService} from "../../services/player/player.service";
 import {BreweryService} from "../../services/brewery/brewery.service";
 import {FarmService} from "../../services/farm/farm.service";
 
@@ -19,28 +20,24 @@ export class ItemComponent {
   @Input() totalFarmsAllTime:number;
   @Output() totalFarmsAllTimeChange = new EventEmitter<number>();
   
-  constructor(public BreweryService:BreweryService, public FarmService:FarmService) {
+  constructor(public PlayerService:PlayerService, public BreweryService:BreweryService, public FarmService:FarmService) {
     this.totalBreweriesAllTime = this.totalBreweriesAllTime || 0;
     this.totalFarmsAllTime = this.totalFarmsAllTime || 0;
   }
 
-  isBuyable(item, multiplicator: number = 1): boolean {
+  isBuyable(price, multiplicator: number = 1): boolean {
     let buyable = true; // Item is true by default because ALL cost must be buyable
 
-    item.forEach((price)=> {
-      if((price.qty * multiplicator) > price.consumable.qty) {
-        buyable = false; // If not buyable, set variable to false
-      }
-    });
+    if((price * multiplicator) > this.player.resources.beers.qty) {
+      buyable = false; // If not buyable, set variable to false
+    }
 
     return buyable;
   }
 
   buy(item, multiplicator: number = 1): void { // multiplicator default value = 1 (same as if statement)
     if(this.isBuyable(item.price, multiplicator)) {
-      item.price.forEach((price) => {
-        price.consumable.qty -= (price.qty * multiplicator);
-      });
+      this.player.resources.beers.qty -= (item.price * multiplicator);
 
       item.qty += multiplicator;
 
@@ -69,6 +66,8 @@ export class ItemComponent {
         //everytime we buy a farm, we change cereals' income
         this.FarmService.createCerealsIncome(this.player);
       }
+
+      this.setNewPrice(item);
     }
   }
 
@@ -79,12 +78,8 @@ export class ItemComponent {
       item.qty -= multiplicator;
 
       // Add X% of the item cost, to the stock
-      item.price.forEach((price) => {
-        if(price.consumable.category  === "bank") {
-          price.consumable.qty += (price.qty * multiplicator) / 2;
-        }
-      });
-  
+      this.player.resources.beers.qty += (item.price * multiplicator) / 2;
+
       if(item.category === "Breweries") {
         //send value to service
         this.BreweryService.setSubstractTotalBreweries(multiplicator);
@@ -101,6 +96,19 @@ export class ItemComponent {
         //TODO: check this
         this.BreweryService.setIncome(this.player);
       }
+
+      this.setNewPrice(item);
     }
+  }
+
+  setNewPrice(item) : void {
+    //formula is : Price = baseCost * multiplier(^itemQuantity).
+    item.price = item.baseCost * Math.pow(1.07, item.qty);
+
+    if (item.price < item.baseCost) {
+      item.price = item.baseCost;
+    }
+
+    this.PlayerService.updatePlayer(this.player);
   }
 }
