@@ -3,6 +3,6 @@
 <div class="upgrade "*ngFor="let upgrade of player.resources.upgrades;" (click)="buyUpgrade(upgrade);">
   <div *ngIf="!upgrade.purchased && upgrade.unlocked" class="upgrade-item">
     <p>Name: {{upgrade.name}}</p>
-    <p>Price: {{upgrade.qty}} Beers</p>
+    <p>Price: {{upgrade.price}} Beers</p>
   </div>
 </div>
