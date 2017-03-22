@@ -81,6 +81,8 @@ export class AppComponent implements OnInit{
 
       this.player.resources.farms.forEach((farm) => {
         farm.bank.qty += farm.bank.income;
+
+        farm.bank.qty = Math.round((farm.bank.qty * 100) / 100);
       });
     }, 1000);
   }

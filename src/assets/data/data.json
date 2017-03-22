@@ -4,7 +4,7 @@
       "beers": {
         "name": "Beers",
         "category": "bank",
-        "qty": 100000,
+        "qty": 0,
         "unlocked": true
       },
       "totalBeersAllTime": 0

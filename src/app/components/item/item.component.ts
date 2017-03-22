@@ -109,6 +109,8 @@ export class ItemComponent {
       item.price = item.baseCost;
     }
 
+    item.price = Math.round((item.price * 100) / 100);
+
     this.PlayerService.updatePlayer(this.player);
   }
 }

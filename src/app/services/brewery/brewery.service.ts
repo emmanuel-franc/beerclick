@@ -37,12 +37,9 @@ export class BreweryService {
 
   createIncome(player, multiplicator) {
     //check all breweries to calculate income
-    player.resources.income = player.resources.income || 0;
-
     let productionCostArray = [];
 
     player.resources.breweries.forEach((brewery) => {
-
       if(brewery.qty > 0) {
         brewery.productionCost.forEach((productionCost) => {
           //must cast: http://stackoverflow.com/questions/37978528/typescript-type-string-is-not-assignable-to-type
