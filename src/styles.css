@@ -9,6 +9,20 @@ body {
   padding: 0;
 }
 
+body {
+  background: url("assets/images/background.jpg") no-repeat;
+  background-size: cover;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
 p {
   margin: 0;
 }

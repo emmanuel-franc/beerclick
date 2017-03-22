@@ -1,8 +1,15 @@
-<h2>Upgrades:</h2>
+<div class="upgradesContainer">
+  <h2>Upgrades:</h2>
 
-<div class="upgrade "*ngFor="let upgrade of player.resources.upgrades;" (click)="buyUpgrade(upgrade);">
-  <div *ngIf="!upgrade.purchased && upgrade.unlocked" class="upgrade-item">
-    <p>Name: {{upgrade.name}}</p>
-    <p>Price: {{upgrade.price}} Beers</p>
-  </div>
+  <ul class="upgrades">
+    <li class="upgrades-item"
+        *ngFor="let upgrade of player.resources.upgrades;"
+        (click)="buyUpgrade(upgrade);"
+        title="{{upgrade.name}}, Price: {{upgrade.price}} Beers">
+      <img class="upgrades-img"
+           *ngIf="!upgrade.purchased && upgrade.unlocked"
+           src=""
+           alt="">
+    </li>
+  </ul>
 </div>

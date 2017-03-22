@@ -1,9 +1,36 @@
-.upgrade {
-  display: inline-block;
-  vertical-align: middle;
-  cursor: pointer;
+.upgradesContainer {
+  padding: 10px;
+  background: url("../../../assets/images/img-noise-150x150.png");
 }
 
-.upgrade-item {
-  border: 1px solid black;
+h2 {
+  margin-top: 0;
+  color: #ffffff;
 }
+
+.upgrades {
+  margin-bottom: 40px;
+
+  &-item {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    cursor: pointer;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    background-color: #717171;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+
+  &-img {
+
+  }
+}
+

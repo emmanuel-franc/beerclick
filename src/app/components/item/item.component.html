@@ -1,17 +1,45 @@
-<h3>{{item.name}} <span *ngIf="item.category === 'Farms'">Farm</span> cost :
-  <span>{{item.price}} Beers
-  </span>
+<div class="item">
+  <div class="item-infos">
+    <h3 class="item-title"
+        title="each {{item.name}} add {{ 1*item.ratio }} Beers/second">{{item.name}} ({{item.qty}})
+      <span *ngIf="item.category === 'Farms'">Farm</span>
+    </h3>
 
-  <span *ngIf="item.ratio">
-  - each {{item.name}} add {{ 1*item.ratio }} Beers/second
-  </span>
+    <p class="stats">
+      Price: {{item.price}} Beers.
+    </p>
 
-  <span *ngIf="item.category === 'Farms'">
-    <br>
-    Bank : {{item.bank.qty}}
-  </span>
-</h3>
-<button type="button" (click)="buy(item, 10)">buy 10 {{item.name}}</button>
-<button type="button" (click)="buy(item)">buy {{item.name}}</button>
-<button type="button" (click)="sell(item)">sell {{item.name}}</button>
-<button type="button" (click)="sell(item, 10)">sell 10 {{item.name}}</button>
+    <p class="item-stats"
+       *ngIf="item.category === 'Farms'">
+      Bank: {{item.bank.qty}}
+    </p>
+  </div>
+
+
+  <div class="item-buttons">
+    <button type="button"
+            class="item-button item-button--buy"
+            (click)="buy(item)"
+            [disabled]="!isBuyable(item.price)"
+            title="Buy 1 item">x1
+    </button>
+    <button type="button"
+            class="item-button item-button--sell"
+            (click)="sell(item)"
+            [disabled]="item.qty < 1"
+            title="Sell 1 item">x1
+    </button>
+    <button type="button"
+            class="item-button item-button--buy"
+            (click)="buy(item, 10)"
+            [disabled]="!isBuyable(item.price, 10)"
+            title="Buy 10 of this item">x10
+    </button>
+    <button type="button"
+            class="item-button item-button--sell"
+            (click)="sell(item, 10)"
+            [disabled]="item.qty < 10"
+            title="Sell 10 of this item">x10
+    </button>
+  </div>
+</div>

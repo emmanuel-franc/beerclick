@@ -1,0 +1,73 @@
+.item {
+  overflow: hidden;
+  margin-bottom: 1px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
+
+  &-title {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+  }
+
+  &-infos {
+    width: calc(100% - 100px);
+    float: left;
+  }
+
+  &-stats {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+  }
+
+  &-buttons {
+    width: 100px;
+    float: left;
+  }
+
+  &-button {
+    display: block;
+    float: left;
+    width: 50px;
+    margin-bottom: 1px;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #ffffff;
+    border: none;
+    border-bottom: 1px solid #717171;
+    outline: none;
+    cursor: pointer;
+
+    &--buy {
+      background-color: #00a4e2;
+
+      &:hover {
+        background-color: darken(#00a4e2, 4);
+      }
+
+      &:active {
+        background-color: darken(#00a4e2, 8);
+      }
+    }
+
+    &--sell {
+      background-color: #ff5b5b;
+
+      &:hover {
+        background-color: darken(#ff5b5b, 4);
+      }
+
+      &:active {
+        background-color: darken(#ff5b5b, 8);
+      }
+    }
+
+    &[disabled] {
+      background-color: #808080;
+
+      &:hover,
+      &:active {
+        background-color: #808080;
+      }
+    }
+  }
+}
