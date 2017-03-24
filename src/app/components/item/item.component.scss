@@ -4,6 +4,10 @@
   padding: 10px;
   background: rgba(255, 255, 255, 0.8);
 
+  &--overload {
+    box-shadow: inset 0px 0px 0px 2px rgba(255,0,0,1);
+  }
+
   &-title {
     margin: 0 0 10px 0;
     font-size: 18px;
@@ -68,6 +72,22 @@
       &:active {
         background-color: #808080;
       }
+    }
+  }
+
+  &-overloadInfos {
+    height: 0px;
+    margin-top: 0;
+    float: left;
+    opacity: 0;
+    cursor: pointer;
+    transition: height 0.4s, margin-top 0.4s, opacity 0.4s, line-height 0.4s;
+
+    &--active {
+      height: 20px;
+      margin-top: 10px;
+      //line-height: 20px;
+      opacity: 1;
     }
   }
 }
