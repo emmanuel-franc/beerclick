@@ -1,4 +1,6 @@
-<div class="item">
+<div class="item"
+     [ngClass]="{'item--overload': item.overload && item.qty > 0}">
+  {{overload}}
   <div class="item-infos">
     <h3 class="item-title"
         title="each {{item.name}} add {{ 1*item.ratio }} Beers/second">{{item.name}} ({{item.qty}})
@@ -41,5 +43,11 @@
             [disabled]="item.qty < 10"
             title="Sell 10 of this item">x10
     </button>
+  </div>
+
+  <div class="item-overloadInfos"
+       [ngClass]="{'item-overloadInfos--active': item.overload && item.qty > 0}"
+       title="Your brewery needs more cereals than you can actually produce">
+       Not enough cereal to continue production !
   </div>
 </div>

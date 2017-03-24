@@ -9,6 +9,7 @@ export class BreweryService {
   public totalBreweries:number;
   public totalBreweriesOnChange:EventEmitter<any> = new EventEmitter(); //see http://stackoverflow.com/questions/35878160/angular2-how-to-share-data-change-between-components
   public incomeOnChange:EventEmitter<any> = new EventEmitter();
+  public overloadProduction:EventEmitter<any> = new EventEmitter();
 
   constructor(public PlayerService:PlayerService) {
     this.totalBreweries = 0;
@@ -60,9 +61,12 @@ export class BreweryService {
           player.resources.beers.qty = Math.round((player.resources.beers.qty * 100) / 100);
 
           this.PlayerService.setTotalBeersAllTime((brewery.qty * brewery.ratio) * multiplicator);
+
+          brewery.overload = false;
+          this.overloadProduction.emit(brewery);
         } else {
-          //todo: create messages
-          console.log('your' + brewery + 'has stopped producing beers because of lack of cereals');
+          brewery.overload = true;
+          this.overloadProduction.emit(brewery);
         }
 
         productionCostArray.length = 0;
