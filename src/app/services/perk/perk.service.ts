@@ -1,5 +1,4 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { BreweryService } from '../brewery/brewery.service';
 import { PlayerService} from '../player/player.service';
 import { Brewery, Perk } from '../../models';
 
@@ -8,7 +7,7 @@ import {Player} from "../../models/player.model";
 
 @Injectable()
 export class PerkService {
-  constructor(public BreweryService:BreweryService, public PlayerService:PlayerService) {
+  constructor(public PlayerService:PlayerService) {
   }
 
   setPerk(item, player, perkSlotId) {
@@ -33,39 +32,44 @@ export class PerkService {
   //TODO: not sure if it's the best way to do this, should be reworked
   setBonus(item, player: Player) {
     if(item.bonusTrigger === "income") {
-      //set new income of player
-      this.BreweryService.setIncome(player, item.bonus);
+      //set new income of each brewery
+      player.resources.breweries.forEach((brewery) => {
+        brewery.bonus.push(item.bonus);
+      });
     }
 
     if(item.bonusTrigger === "Pilsner Brewery") {
-      let getbonusTrigger: Brewery = _.find(player.resources.breweries, {'name': item.bonusTrigger});
-
-      //set new bonus for pilsner  Brewery
-      getbonusTrigger.ratio = getbonusTrigger.ratio * item.bonus;
-
-      this.PlayerService.updatePlayer(player);
+      let getBonusTrigger: Brewery = _.find(player.resources.breweries, {'name': item.bonusTrigger});
+      getBonusTrigger.bonus.push(item.bonus);
     }
+
+    this.PlayerService.updatePlayer(player);
   }
 
   //same as setBonus but in reverse.
   //also used in view
   //TODO: not sure if it's the best way to do this, should be reworked
   removeBonus(player: Player, perkSlotId) {
-    if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "income") {
-      //set new income of player
-      this.BreweryService.setIncome(player, 1);
+    let assignedPerk: Perk = player.resources.perkSlots[perkSlotId].assignedPerk;
+
+    if(assignedPerk.bonusTrigger === "income") {
+      //set new income of each brewery
+      player.resources.breweries.forEach((brewery) => {
+        let indexOfFirstBonus = _.indexOf(brewery.bonus, assignedPerk.bonus);
+        brewery.bonus.splice(1, indexOfFirstBonus);
+      });
     }
 
-    if(player.resources.perkSlots[perkSlotId].assignedPerk.bonusTrigger === "Pilsner Brewery") {
-      let getbonusTrigger: Brewery = _.find(player.resources.breweries, {'name': "Pilsner Brewery"});
+    if(assignedPerk.bonusTrigger === "Pilsner Brewery") {
+      let getBonusTrigger: Brewery = _.find(player.resources.breweries, {'name': "Pilsner Brewery"});
+      let indexOfFirstBonus = _.indexOf(getBonusTrigger.bonus, assignedPerk.bonus);
 
-      //set new bonus for pilsner Brewery by dividing actual assigned perk's bonus
-      getbonusTrigger.ratio = getbonusTrigger.ratio / player.resources.perkSlots[perkSlotId].assignedPerk.bonus;
-
-      this.BreweryService.setIncome(player);
+      getBonusTrigger.bonus.splice(1, indexOfFirstBonus);
     }
 
     //empty perk
     player.resources.perkSlots[perkSlotId].assignedPerk = new Perk;
+
+    this.PlayerService.updatePlayer(player);
   }
 }

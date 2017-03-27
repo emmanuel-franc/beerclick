@@ -19,7 +19,7 @@
       "unlocked": true,
       "purchased": false,
       "bonus": 2,
-      "bonusTrigger": "Pilsner",
+      "bonusTrigger": "Pilsner Brewery",
       "bonusMessage": "Double your Pilsner production"
     },
     {
@@ -30,7 +30,7 @@
       "unlocked": false,
       "purchased": false,
       "bonus": 2,
-      "bonusTrigger": "Pilsner",
+      "bonusTrigger": "Pilsner Brewery",
       "bonusMessage": "Double your Pilsner production"
     },
     {
@@ -41,7 +41,7 @@
       "unlocked": false,
       "purchased": false,
       "bonus": 2,
-      "bonusTrigger": "Pilsner",
+      "bonusTrigger": "Pilsner Brewery",
       "bonusMessage": "Double your Pilsner production"
     },
     {
