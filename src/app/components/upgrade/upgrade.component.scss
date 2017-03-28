@@ -11,9 +11,12 @@ h2 {
 .upgrades {
   margin-bottom: 40px;
 
-  &-item {
+  &-listItem {
     display: inline-block;
     vertical-align: middle;
+  }
+
+  &-item {
     overflow: hidden;
     width: 30px;
     height: 30px;
@@ -27,7 +30,6 @@ h2 {
       margin-left: 0;
     }
   }
-
 
   &-img {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {Player} from "../../models/player.model";
 
 import * as _ from "lodash";
@@ -8,14 +8,11 @@ import * as _ from "lodash";
   templateUrl: './upgrade.component.html',
   styleUrls: ['./upgrade.component.scss']
 })
-export class UpgradeComponent implements OnInit {
+export class UpgradeComponent {
 
   @Input() player: Player;
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 
   isBuyable(item): boolean {

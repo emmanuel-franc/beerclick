@@ -2,14 +2,14 @@
   <h2>Upgrades:</h2>
 
   <ul class="upgrades">
-    <li class="upgrades-item"
+    <li class="upgrades-listItem"
         *ngFor="let upgrade of player.resources.upgrades;"
         (click)="buyUpgrade(upgrade);"
         title="{{upgrade.name}}, Price: {{upgrade.price}} Beers">
-      <img class="upgrades-img"
-           *ngIf="!upgrade.purchased && upgrade.unlocked"
-           src=""
-           alt="">
+      <div class="upgrades-item"
+           *ngIf="!upgrade.purchased && upgrade.unlocked">
+        <img class="upgrades-img" src="" alt="">
+      </div>
     </li>
   </ul>
 </div>
