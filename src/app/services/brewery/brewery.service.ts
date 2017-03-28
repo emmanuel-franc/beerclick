@@ -41,6 +41,10 @@ export class BreweryService {
     let productionCostArray = [];
 
     player.resources.breweries.forEach((brewery) => {
+      let bonusArray = brewery.bonus;
+      let sum = bonusArray.reduce((a, b) => a + b, 0);
+      let bonus = bonusArray.length ? multiplicator + sum : multiplicator;
+
       if(brewery.qty > 0) {
         brewery.productionCost.forEach((productionCost) => {
           //must cast: http://stackoverflow.com/questions/37978528/typescript-type-string-is-not-assignable-to-type
@@ -56,11 +60,11 @@ export class BreweryService {
         });
 
         if(productionCostArray.length === brewery.productionCost.length) {
-          player.resources.beers.qty += (brewery.qty * brewery.ratio) * multiplicator;
+          player.resources.beers.qty += (brewery.qty * brewery.ratio) * bonus;
 
           player.resources.beers.qty = Math.round((player.resources.beers.qty * 100) / 100);
 
-          this.PlayerService.setTotalBeersAllTime((brewery.qty * brewery.ratio) * multiplicator);
+          this.PlayerService.setTotalBeersAllTime((brewery.qty * brewery.ratio) * bonus);
 
           brewery.overload = false;
           this.overloadProduction.emit(brewery);

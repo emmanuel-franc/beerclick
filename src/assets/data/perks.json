@@ -9,7 +9,7 @@
       "purchased": false,
       "bonus": 2,
       "bonusTrigger": "income",
-      "bonusMessage": "Doubles your income"
+      "bonusMessage": "Double all your breweries' base production"
     },
     {
       "id": 1,
@@ -19,8 +19,8 @@
       "unlocked": true,
       "purchased": false,
       "bonus": 2,
-      "bonusTrigger": "Pilsner",
-      "bonusMessage": "Double your Pilsner production"
+      "bonusTrigger": "Pilsner Brewery",
+      "bonusMessage": "Double your Pilsner breweries' base production"
     },
     {
       "id": 2,
@@ -30,8 +30,8 @@
       "unlocked": false,
       "purchased": false,
       "bonus": 2,
-      "bonusTrigger": "Pilsner",
-      "bonusMessage": "Double your Pilsner production"
+      "bonusTrigger": "Pilsner Brewery",
+      "bonusMessage": "Double your Pilsner breweries' base production"
     },
     {
       "id": 3,
@@ -41,8 +41,8 @@
       "unlocked": false,
       "purchased": false,
       "bonus": 2,
-      "bonusTrigger": "Pilsner",
-      "bonusMessage": "Double your Pilsner production"
+      "bonusTrigger": "Pilsner Brewery",
+      "bonusMessage": "Double your Pilsner breweries' base production"
     },
     {
       "id": 4,
@@ -53,7 +53,7 @@
       "purchased": false,
       "bonusType": "double",
       "bonusTrigger": "Pilsner",
-      "bonusMessage": "Your Pilsner production is doubled"
+      "bonusMessage": "Your Pilsner breweries' base production is doubled"
     }
   ]
 }

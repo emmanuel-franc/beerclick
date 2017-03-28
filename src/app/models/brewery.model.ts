@@ -8,6 +8,7 @@ export class Brewery {
   baseCost: number;
   productionCost: ProductionCost;
   ratio: number;
+  bonus: [number];
   unlocked: boolean;
   seasonalEvent: boolean;
 }
