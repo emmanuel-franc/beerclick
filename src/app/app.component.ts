@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Brewery, Farm, Beers, Upgrade, PerkSlot, Perk, Player} from './models";
+import {Brewery, Farm, Beers, Upgrade, PerkSlot, Perk, Player} from './models';
 import {PlayerService} from './services/player/player.service';
 import {BreweryService} from './services/brewery/brewery.service';
 import {FarmService} from './services/farm/farm.service';
@@ -42,21 +42,21 @@ export class AppComponent implements OnInit {
     this.standBy = false;
 
     // subscribe to services to detect changes on totalBreweries
-    this.BreweryService.totalBreweriesOnChange.subscribe(data => {
-      this.totalBreweries = data;
+    this.BreweryService.totalBreweriesOnChange.subscribe(breweries => {
+      this.totalBreweries = breweries;
     });
 
     // subscribe to services to detect changes on totalFarms
-    this.FarmService.totalFarmsOnChange.subscribe(data => {
-      this.totalFarms = data;
+    this.FarmService.totalFarmsOnChange.subscribe(farms => {
+      this.totalFarms = farms;
     });
 
     // Add the player beers
     this.beers = data.player.resources.beers;
 
     // Add the player all time beers
-    this.PlayerService.totalBeersAllTimeOnChange.subscribe(data => {
-      this.totalBeersAllTime = data;
+    this.PlayerService.totalBeersAllTimeOnChange.subscribe(beers => {
+      this.totalBeersAllTime = beers;
     });
 
     // Add all perkSlots
