@@ -27,6 +27,8 @@ export class AppComponent implements OnInit {
   totalBreweries: number;
   totalFarms: number;
   totalBeersAllTime: number;
+  totalBreweriesAllTime: number;
+  totalFarmsAllTime: number;
   appVersion;
   standBy: boolean;
 
