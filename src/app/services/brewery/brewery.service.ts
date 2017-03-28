@@ -45,8 +45,6 @@ export class BreweryService {
       let sum = bonusArray.reduce((a, b) => a + b, 0);
       let bonus = bonusArray.length ? multiplicator + sum : multiplicator;
 
-      console.log('bonus',bonus)
-
       if(brewery.qty > 0) {
         brewery.productionCost.forEach((productionCost) => {
           //must cast: http://stackoverflow.com/questions/37978528/typescript-type-string-is-not-assignable-to-type
