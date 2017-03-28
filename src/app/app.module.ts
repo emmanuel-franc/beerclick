@@ -7,11 +7,11 @@ import { AppComponent } from './app.component';
 import { ItemComponent } from './components/item/item.component';
 import { EventComponent } from './components/event/event.component';
 
-import { PlayerService } from "./services/player/player.service";
-import { EventService}  from "./services/event/event.service";
-import { PerkService } from "./services/perk/perk.service";
-import { BreweryService } from "./services/brewery/brewery.service";
-import { FarmService } from "./services/farm/farm.service";
+import { PlayerService } from './services/player/player.service';
+import { EventService}  from './services/event/event.service';
+import { PerkService } from './services/perk/perk.service';
+import { BreweryService } from './services/brewery/brewery.service';
+import { FarmService } from './services/farm/farm.service';
 
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
 import { ClickZoneComponent } from './components/click-zone/click-zone.component';

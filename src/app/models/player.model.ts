@@ -1,14 +1,14 @@
-import { Beers } from "./beers.model";
-import { Farm } from "./farm.model";
-import { Brewery } from "./brewery.model";
-import { Upgrade } from "./upgrade.model";
-import { PerkSlot} from "./perkSlot.model";
-import { Perk} from "./perk.model";
+import {Beers} from './beers.model';
+import {Farm} from './farm.model';
+import {Brewery} from './brewery.model';
+import {Upgrade} from './upgrade.model';
+import {PerkSlot} from './perkSlot.model';
+import {Perk} from './perk.model';
 
 export class Player {
   resources: {
     beers: Beers;
-    totalBeersAllTime:number,
+    totalBeersAllTime: number,
     perkSlots: PerkSlot[],
     perks: Perk[],
     farms: Farm[],
@@ -16,7 +16,7 @@ export class Player {
     upgrades: Upgrade[]
   };
 
-  constructor(beers, totalBeersAllTime, perkSlots ,perks, farms, breweries, upgrades) {
+  constructor(beers, totalBeersAllTime, perkSlots, perks, farms, breweries, upgrades) {
     this.resources = {
       beers: beers,
       totalBeersAllTime: totalBeersAllTime,
@@ -25,6 +25,6 @@ export class Player {
       farms: farms,
       breweries: breweries,
       upgrades: upgrades
-    }
+    };
   }
 }

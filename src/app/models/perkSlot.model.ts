@@ -1,9 +1,9 @@
-import { Perk } from "./perk.model";
+import {Perk} from './perk.model';
 
 export class PerkSlot {
-  id:number;
-  name:string;
-  unlocked:boolean;
-  limit:number;
-  assignedPerk?:Perk;
+  id: number;
+  name: string;
+  unlocked: boolean;
+  limit: number;
+  assignedPerk?: Perk;
 }

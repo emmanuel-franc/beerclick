@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Player } from '../../models';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Player} from '../../models';
 import {PlayerService} from '../../services/player/player.service';
 
 @Component({
@@ -9,13 +9,13 @@ import {PlayerService} from '../../services/player/player.service';
 })
 export class ClickZoneComponent {
 
-  @Input() player:Player;
-  @Input() totalBeersAllTime:number;
-  generatedBeers:number;
-  clicks:number[];
-  
-  constructor(public PlayerService:PlayerService) {
-    //default beers generated is equal to 1
+  @Input() player: Player;
+  @Input() totalBeersAllTime: number;
+  generatedBeers: number;
+  clicks: number[];
+
+  constructor(public PlayerService: PlayerService) {
+    // default beers generated is equal to 1
     this.generatedBeers = 1;
     this.clicks = [];
 
@@ -25,25 +25,25 @@ export class ClickZoneComponent {
     });
   }
 
-  generateBeers(){
-    //add to a percentage of players's current income to player's beers
+  generateBeers() {
+    // add to a percentage of players's current income to player's beers
     this.generatedBeers = Math.round((this.player.resources.beers.qty * 1) / 100);
-    
-    //if beers generated is inferior at 1 set beers generated to 1
-    if(this.generatedBeers < 1) {
+
+    // if beers generated is inferior at 1 set beers generated to 1
+    if (this.generatedBeers < 1) {
       this.generatedBeers = 1;
     }
 
-    //increment beers quantity
-    this.player.resources.beers.qty +=  this.generatedBeers;
+    // increment beers quantity
+    this.player.resources.beers.qty += this.generatedBeers;
 
-    //increment totalBeersAllTime quantity
+    // increment totalBeersAllTime quantity
     this.PlayerService.setTotalBeersAllTime(this.generatedBeers);
 
-    //show value generated
+    // show value generated
     this.clicks.push(this.generatedBeers);
 
-    //hide value after 1 second
+    // hide value after 1 second
     setTimeout(() => {
       this.clicks.splice(0, 1);
     }, 1000);
