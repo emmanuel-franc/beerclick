@@ -27,7 +27,7 @@ export class FarmService {
     }
   }
 
-  createCerealsIncome(player, multiplicator: 1) {
+  createCerealsIncome(player, multiplicator = 1) {
     // check all farms to calculate income
     player.resources.farms.forEach((farm) => {
       farm.bank.income += farm.qty * farm.ratio * multiplicator;
