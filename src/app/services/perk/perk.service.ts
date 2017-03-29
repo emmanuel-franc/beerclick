@@ -1,44 +1,44 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { PlayerService} from '../player/player.service';
-import { Brewery, Perk } from '../../models';
+import {Injectable, EventEmitter} from '@angular/core';
+import {PlayerService} from '../player/player.service';
+import {Brewery, Perk} from '../../models';
 
-import * as _ from "lodash";
-import {Player} from "../../models/player.model";
+import * as _ from 'lodash';
+import {Player} from '../../models/player.model';
 
 @Injectable()
 export class PerkService {
-  constructor(public PlayerService:PlayerService) {
+  constructor(public PlayerService: PlayerService) {
   }
 
   setPerk(item, player, perkSlotId) {
-    //empty previous perk
-    if(player.resources.perkSlots[perkSlotId].assignedPerk) {
+    // empty previous perk
+    if (player.resources.perkSlots[perkSlotId].assignedPerk) {
       this.removeBonus(player, perkSlotId);
     }
 
-    //set item to purchased
+    // set item to purchased
     item.purchased = true;
-    //set beers of player minus item's price
+    // set beers of player minus item's price
     player.resources.beers.qty -= item.price;
-    //set price of item to 0 because it has been bought. We want it to be clickable in the futur to be set to slot without any cost
+    // set price of item to 0 because it has been bought. We want it to be clickable in the futur to be set to slot without any cost
     item.price = 0;
-    //add item to perkSlot with id returned by perkSlotId
+    // add item to perkSlot with id returned by perkSlotId
     player.resources.perkSlots[perkSlotId].assignedPerk = item;
 
-    //set bonus on player
+    // set bonus on player
     this.setBonus(item, player);
   }
 
-  //TODO: not sure if it's the best way to do this, should be reworked
+  // TODO: not sure if it's the best way to do this, should be reworked
   setBonus(item, player: Player) {
-    if(item.bonusTrigger === "income") {
-      //set new income of each brewery
+    if (item.bonusTrigger === 'income') {
+      // set new income of each brewery
       player.resources.breweries.forEach((brewery) => {
         brewery.bonus.push(item.bonus);
       });
     }
 
-    if(item.bonusTrigger === "Pilsner Brewery") {
+    if (item.bonusTrigger === 'Pilsner Brewery') {
       let getBonusTrigger: Brewery = _.find(player.resources.breweries, {'name': item.bonusTrigger});
       getBonusTrigger.bonus.push(item.bonus);
     }
@@ -46,28 +46,28 @@ export class PerkService {
     this.PlayerService.updatePlayer(player);
   }
 
-  //same as setBonus but in reverse.
-  //also used in view
-  //TODO: not sure if it's the best way to do this, should be reworked
+  // same as setBonus but in reverse.
+  // also used in view
+  // TODO: not sure if it's the best way to do this, should be reworked
   removeBonus(player: Player, perkSlotId) {
     let assignedPerk: Perk = player.resources.perkSlots[perkSlotId].assignedPerk;
 
-    if(assignedPerk.bonusTrigger === "income") {
-      //set new income of each brewery
+    if (assignedPerk.bonusTrigger === 'income') {
+      // set new income of each brewery
       player.resources.breweries.forEach((brewery) => {
         let indexOfFirstBonus = _.indexOf(brewery.bonus, assignedPerk.bonus);
         brewery.bonus.splice(1, indexOfFirstBonus);
       });
     }
 
-    if(assignedPerk.bonusTrigger === "Pilsner Brewery") {
-      let getBonusTrigger: Brewery = _.find(player.resources.breweries, {'name': "Pilsner Brewery"});
+    if (assignedPerk.bonusTrigger === 'Pilsner Brewery') {
+      let getBonusTrigger: Brewery = _.find(player.resources.breweries, {'name': 'Pilsner Brewery'});
       let indexOfFirstBonus = _.indexOf(getBonusTrigger.bonus, assignedPerk.bonus);
 
       getBonusTrigger.bonus.splice(1, indexOfFirstBonus);
     }
 
-    //empty perk
+    // empty perk
     player.resources.perkSlots[perkSlotId].assignedPerk = new Perk;
 
     this.PlayerService.updatePlayer(player);

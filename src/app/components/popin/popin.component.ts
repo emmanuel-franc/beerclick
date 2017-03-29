@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Player, Perk} from "../../models";
-import { PerkService} from '../../services/perk/perk.service';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Player, Perk} from '../../models';
+import {PerkService} from '../../services/perk/perk.service';
 
 @Component({
   selector: 'app-popin',
@@ -10,18 +10,18 @@ import { PerkService} from '../../services/perk/perk.service';
 export class PopinComponent {
 
   @Input() player: Player;
-  @Input() perkSlotId:number;
+  @Input() perkSlotId: number;
   @Input() popinIsVisible: boolean;
   @Output() popinIsVisibleChange = new EventEmitter<boolean>();
 
-  constructor(public PerkService:PerkService) {
+  constructor(public PerkService: PerkService) {
   }
 
   isBuyable(item): boolean {
     // Item is true by default because ALL cost must be buyable
     let buyable = true;
 
-    if(item.price > this.player.resources.beers.qty) {
+    if (item.price > this.player.resources.beers.qty) {
       // If not buyable, set variable to false
       buyable = false;
     }
@@ -30,7 +30,7 @@ export class PopinComponent {
   }
 
   setPerk(item) {
-    if(this.isBuyable(item)) {
+    if (this.isBuyable(item)) {
       this.PerkService.setPerk(item, this.player, this.perkSlotId);
 
       this.popinIsVisible = false;

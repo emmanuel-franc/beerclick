@@ -1,4 +1,4 @@
-import { ProductionCost } from "./productionCost.model";
+import { ProductionCost } from './productionCost.model';
 
 export class Brewery {
   name: string;

@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
-import {Player, PerkSlot, Perk} from "../../models";
+import {Player, PerkSlot, Perk} from '../../models';
 
-import {PlayerService} from "../../services/player/player.service";
-import {PerkService} from "../../services/perk/perk.service";
+import {PlayerService} from '../../services/player/player.service';
+import {PerkService} from '../../services/perk/perk.service';
 
 @Component({
   selector: 'app-perk',
@@ -11,27 +11,27 @@ import {PerkService} from "../../services/perk/perk.service";
   styleUrls: ['./perk.component.scss']
 })
 export class PerkComponent implements OnInit {
-  @Input() player:Player;
-  totalBeersAllTime:number;
-  perkSlots:PerkSlot[];
-  perksList:Perk[];
-  popinIsVisible:boolean;
-  perkSlotId:number;
+  @Input() player: Player;
+  totalBeersAllTime: number;
+  perkSlots: PerkSlot[];
+  perksList: Perk[];
+  popinIsVisible: boolean;
+  perkSlotId: number;
 
-  constructor(public PlayerService:PlayerService, public PerkService:PerkService) {
+  constructor(public PlayerService: PlayerService, public PerkService: PerkService) {
     this.perkSlots = [];
     this.perksList = [];
     this.popinIsVisible = false;
 
-    //subscribe to services to detect changes on totalBeersAllTime
+    // subscribe to services to detect changes on totalBeersAllTime
     this.PlayerService.totalBeersAllTimeOnChange.subscribe(data => {
 
-      this.totalBeersAllTime  = data;
+      this.totalBeersAllTime = data;
 
-      for(let i = 0; i < this.perkSlots.length; i++) {
-        //unlock perkslot when limit is reached
-        if(!this.player.resources.perkSlots[i].unlocked) {
-          if(this.totalBeersAllTime >= this.perkSlots[i].limit) {
+      for (let i = 0; i < this.perkSlots.length; i++) {
+        // unlock perkslot when limit is reached
+        if (!this.player.resources.perkSlots[i].unlocked) {
+          if (this.totalBeersAllTime >= this.perkSlots[i].limit) {
             this.player.resources.perkSlots[i].unlocked = true;
           }
         }

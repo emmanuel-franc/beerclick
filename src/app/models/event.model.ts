@@ -1,14 +1,14 @@
 export class Event {
-  id:number;
-  name:string;
-  message:string;
-  messageEndPart:string;
+  id: number;
+  name: string;
+  message: string;
+  messageEndPart: string;
   action: {
-    loss:number,
-    lossType:string,
-    limit:number
+    loss: number,
+    lossType: string,
+    limit: number
   };
-  
+
   constructor(id, name, message, messageEndPart, loss, lossType, limit) {
     this.id = id;
     this.name = name;
