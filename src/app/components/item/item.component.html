@@ -6,8 +6,15 @@
       <span *ngIf="item.category === 'Farms'">Farm</span>
     </h3>
 
-    <p class="stats">
+    <p class="item-stats">
       Price: {{item.price}} Beers.
+    </p>
+
+    <p class="item-stats">
+      Production cost: <span class="item-productionCost" *ngFor="let cost of item.productionCost">- {{cost.qty *
+      item.qty}}
+      {{cost.name}}
+      per second</span>
     </p>
 
     <p class="item-stats"
