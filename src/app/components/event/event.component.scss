@@ -1,3 +1,29 @@
-.app-event { //todo debug scss
-  text-align: center;
+.event {
+  &-item {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: -100%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: left 0.6s, opacity 0.6s;
+
+    &--active {
+      left: 50%;
+      opacity: 1;
+      animation-name: disappear;
+      animation-duration: 10s;
+      animation-fill-mode: forwards;
+    }
+  }
 }
+
+@keyframes disappear {
+  0%,90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+

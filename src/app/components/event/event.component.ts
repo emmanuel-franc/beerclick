@@ -13,7 +13,6 @@ import * as _ from 'lodash';
 export class EventComponent implements OnInit {
 
   @Input() player: Player;
-  @Input() standBy: boolean;
 
   totalBreweries: number;
   chosenEvent: any;
@@ -21,14 +20,18 @@ export class EventComponent implements OnInit {
   eventList: any[];
   getEventsList: Event[];
   breweriesLossEvents: any[];
+  beersLossEvents: any[];
   chosenEventQty: number;
+  showEvent: boolean;
 
   constructor(public EventService: EventService, public BreweryService: BreweryService) {
     this.getEventsList = this.EventService.getEventsList();
     this.breweriesLossEvents = [];
+    this.beersLossEvents = [];
     this.eventList = [];
     this.totalBreweries = 0;
     this.chosenEventQty = 0;
+    this.showEvent = false;
 
     // subscribe to services to detect changes on eventsUnlocked array
     this.EventService.eventsUnlockedOnChange.subscribe(data => {
@@ -38,6 +41,11 @@ export class EventComponent implements OnInit {
     // create array with all events that make loosing breweries
     this.breweriesLossEvents = _.filter(this.getEventsList, function (event) {
       return event.action.lossType === 'breweries';
+    });
+
+    // create array with all events that make loosing beers
+    this.beersLossEvents = _.filter(this.getEventsList, function (event) {
+      return event.action.lossType === 'beers';
     });
 
     // subscribe to services to detect changes on totalBreweries
@@ -55,12 +63,23 @@ export class EventComponent implements OnInit {
         }
       }
     });
+
+    this.BreweryService.incomeOnChange.subscribe(data => {
+      for (let i = 0; i < this.beersLossEvents.length; i++) {
+        // add events with brewery loss
+        if (data >= this.beersLossEvents[i].action.limit) {
+          this.EventService.setEventUnlocked(this.beersLossEvents[i].id);
+        }
+        // remove events with brewery loss when limit -1 (to prevent event to never stop)
+        if (data < this.beersLossEvents[i].action.limit) {
+          this.EventService.setEventLocked(this.beersLossEvents[i].id);
+        }
+      }
+    });
   }
 
   ngOnInit() {
-    if (this.standBy) {
-      this.randomEvent();
-    }
+    this.randomEvent();
   }
 
   randomEvent() {
@@ -84,6 +103,14 @@ export class EventComponent implements OnInit {
             this.beersLoss(this.chosenEvent);
           }
         }
+
+        // show event's text
+        this.showEvent = true;
+
+        // hide event's text after 10 second
+        setTimeout(() => {
+          this.showEvent = false;
+        }, 10000);
       }
       this.randomEvent();
     }, randomTime);
@@ -134,8 +161,10 @@ export class EventComponent implements OnInit {
   beersLoss(chosenEvent) {
     // check if loss amount exceed beers.qty
     if (chosenEvent.action.loss >= this.player.resources.beers.qty) {
+      this.chosenEventQty = this.player.resources.beers.qty;
       this.player.resources.beers.qty = 0;
     } else {
+      this.chosenEventQty = chosenEvent.action.loss;
       // subtract this.chosenEvent.action.loss to beers.qty
       this.player.resources.beers.qty -= chosenEvent.action.loss;
     }

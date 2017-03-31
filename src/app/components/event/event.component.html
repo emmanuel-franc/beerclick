@@ -1,4 +1,8 @@
-<div class="appEvent">
-  <p *ngIf="chosenEvent">{{chosenEvent.message}} {{chosenEventQty}} {{chosenEvent.messageEndPart}}</p>
-  <p *ngIf="!chosenEvent">No event</p>
+<div class="event">
+  <p class="event-item" [ngClass]="{'event-item--active': showEvent}">
+    <span *ngIf="chosenEvent">
+      {{chosenEvent.message}} {{chosenEventQty}}
+      {{chosenEvent.messageEndPart}}
+    </span>
+  </p>
 </div>

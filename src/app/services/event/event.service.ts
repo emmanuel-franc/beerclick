@@ -22,7 +22,7 @@ export class EventService {
   getEventsList() {
     // todo: initialize local storage here
 
-    // Deserialize JSON (create object)
+    // Serialize JSON
     json.events.forEach((event) => {
       let newEvent = new Event(
         event.id,

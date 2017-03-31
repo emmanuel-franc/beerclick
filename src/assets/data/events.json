@@ -4,11 +4,11 @@
       "id": 0,
       "name": "Arthor the beer breaker",
       "message": "Arthor the beer breaker broke",
-      "messageEndPart": "of your breweries!",
+      "messageEndPart": "of your beers!",
       "action": {
-        "loss": 15,
-        "lossType": "breweries",
-        "limit": 15
+        "loss": 100,
+        "lossType": "beers",
+        "limit": 200
       }
     },
     {
@@ -20,6 +20,17 @@
         "loss": 200,
         "lossType": "beers",
         "limit": 1000
+      }
+    },
+    {
+      "id": 2,
+      "name": "Anti alcohol association",
+      "message": "An anti alcohol association burnt down",
+      "messageEndPart": " breweries",
+      "action": {
+        "loss": 1,
+        "lossType": "breweries",
+        "limit": 15
       }
     }
   ]
