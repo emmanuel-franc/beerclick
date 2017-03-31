@@ -4,7 +4,7 @@
       "beers": {
         "name": "Beers",
         "category": "bank",
-        "qty": 100000,
+        "qty": 999,
         "unlocked": true
       },
       "totalBeersAllTime": 0
@@ -209,7 +209,7 @@
       "name": "Barley",
       "category": "farms",
       "price": 150,
-      "unlocked": true,
+      "unlocked": false,
       "purchased": false,
       "seasonalEvent": ""
     },
@@ -225,7 +225,7 @@
       "name": "Bitter Brewery",
       "category": "breweries",
       "price": 100,
-      "unlocked": true,
+      "unlocked": false,
       "purchased": false,
       "seasonalEvent": ""
     },
@@ -233,7 +233,7 @@
       "name": "Dry Stout Brewery",
       "category": "breweries",
       "price": 150,
-      "unlocked": true,
+      "unlocked": false,
       "purchased": false,
       "seasonalEvent": ""
     },
