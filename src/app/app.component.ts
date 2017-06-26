@@ -4,8 +4,6 @@ import {PlayerService} from './services/player/player.service';
 import {BreweryService} from './services/brewery/brewery.service';
 import {FarmService} from './services/farm/farm.service';
 
-import * as _ from 'lodash';
-
 const data = require('../assets/data/data.json');
 const perksList = require('../assets/data/perks.json');
 // http://stackoverflow.com/questions/34907682/how-to-display-app-version-in-angular2/35494456
@@ -98,7 +96,9 @@ export class AppComponent implements OnInit {
     if (this.standBy &&
       actualDate.getMonth() >= 0 &&
       actualDate.getDate() >= 15) { // TODO: set a limit in time of Seasonal Events
-      let unlockChristmasEventUpgrades = _.filter(this.player.resources.upgrades, {'seasonalEvent': 'Christmas'});
+      let unlockChristmasEventUpgrades = this.player.resources.upgrades.filter(function(upgrade) {
+        return upgrade.seasonalEvent === 'Christmas';
+      });
 
       unlockChristmasEventUpgrades.forEach((upgrade) => {
         upgrade.unlocked = true;

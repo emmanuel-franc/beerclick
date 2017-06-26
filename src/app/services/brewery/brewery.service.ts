@@ -2,8 +2,6 @@ import {Injectable, EventEmitter} from '@angular/core';
 import {Farm} from '../../models';
 import {PlayerService} from '../../services/player/player.service';
 
-import * as _ from 'lodash';
-
 @Injectable()
 export class BreweryService {
   public totalBreweries: number;
@@ -49,7 +47,10 @@ export class BreweryService {
       if (brewery.qty > 0) {
         brewery.productionCost.forEach((productionCost) => {
           // must cast: http://stackoverflow.com/questions/37978528/typescript-type-string-is-not-assignable-to-type
-          let farm = _.find(player.resources.farms, {'name': productionCost.name});
+          let farm = player.resources.farms.find(function(farm){
+            return farm.name === productionCost.name;
+          });
+
           let foundFarm: Farm = farm as Farm;
 
           if (foundFarm.bank.qty > productionCost.qty * brewery.qty) {

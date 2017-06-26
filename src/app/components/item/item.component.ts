@@ -4,8 +4,6 @@ import {PlayerService} from '../../services/player/player.service';
 import {BreweryService} from '../../services/brewery/brewery.service';
 import {FarmService} from '../../services/farm/farm.service';
 
-import * as _ from 'lodash';
-
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',

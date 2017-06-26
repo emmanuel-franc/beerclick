@@ -1,14 +1,12 @@
 import {Injectable, EventEmitter} from '@angular/core';
 import {Event} from '../../models';
 
-import * as _ from 'lodash';
-
 const json = require('../../../assets/data/events.json');
 
 @Injectable()
 export class EventService {
   public data: Event[];
-  public eventsUnlocked: any[];
+  public eventsUnlocked: any;
   public eventsList: any;
   // see http://stackoverflow.com/questions/35878160/angular2-how-to-share-data-change-between-components
   public eventsUnlockedOnChange: EventEmitter<any> = new EventEmitter();
@@ -40,10 +38,12 @@ export class EventService {
   }
 
   setEventUnlocked(eventId) {
-    let eventFound = _.find(this.eventsList.events, ['id', eventId]);
+    let eventFound = this.eventsList.events.find(function(event){
+      return event.id === eventId;
+    });
 
     // check if eventFound isn't already in the array
-    if (!_.includes(this.eventsUnlocked, eventFound)) {
+    if (!this.eventsUnlocked.includes(eventFound)) {
       // push eventFound in new array then emit
       this.eventsUnlocked.push(eventFound);
       this.eventsUnlockedOnChange.emit(this.eventsUnlocked);
@@ -51,10 +51,12 @@ export class EventService {
   }
 
   setEventLocked(eventId) {
-    let eventFound = _.find(this.eventsList.events, ['id', eventId]);
+    let eventFound = this.eventsList.events.find(function(event){
+      return event.id === eventId;
+    });
 
     // check if eventFound is in the array
-    if (_.includes(this.eventsUnlocked, eventFound)) {
+    if (!this.eventsUnlocked.includes(eventFound)) {
       // remove eventFound from it then emit
       this.eventsUnlocked.splice(this.eventsUnlocked.indexOf(eventFound), 1);
       this.eventsUnlockedOnChange.emit(this.eventsUnlocked);

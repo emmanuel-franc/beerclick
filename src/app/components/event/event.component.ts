@@ -3,8 +3,6 @@ import {Player, Event} from '../../models';
 import {EventService} from '../../services/event/event.service';
 import {BreweryService} from '../../services/brewery/brewery.service';
 
-import * as _ from 'lodash';
-
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
@@ -39,12 +37,12 @@ export class EventComponent implements OnInit {
     });
 
     // create array with all events that make loosing breweries
-    this.breweriesLossEvents = _.filter(this.getEventsList, function (event) {
-      return event.action.lossType === 'breweries';
+    this.breweriesLossEvents = this.getEventsList.filter(function(event){
+        return event.action.lossType === 'breweries';
     });
 
     // create array with all events that make loosing beers
-    this.beersLossEvents = _.filter(this.getEventsList, function (event) {
+    this.beersLossEvents = this.getEventsList.filter(function(event){
       return event.action.lossType === 'beers';
     });
 
@@ -123,7 +121,7 @@ export class EventComponent implements OnInit {
     // check if loss amount exceed totalBreweries amount
     if (this.chosenEventQty >= this.totalBreweries) {
       // set all Breweries qty to 0
-      _.forEach(this.player.resources.breweries, function (brewery) {
+      this.player.resources.breweries.forEach(function(brewery) {
         brewery.qty = 0;
       });
 
@@ -131,8 +129,8 @@ export class EventComponent implements OnInit {
       // send value of totalBreweries to service
       this.BreweryService.resetTotalBreweries();
     } else {
-      // get all Breweries with qty > 0. _.filter creates a new array (see lodash documentation for _.filter)
-      let breweriesWithQty = _.filter(this.player.resources.breweries, function (brewery) {
+      // get all Breweries with qty > 0.
+      let breweriesWithQty = this.player.resources.breweries.filter(function(brewery){
         return brewery.qty > 0;
       });
 

@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { PerkService } from './event.service';
+import { PerkService } from './perk.service';
 
 describe('PerkService', () => {
   beforeEach(() => {

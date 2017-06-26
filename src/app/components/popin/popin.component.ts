@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {Player, Perk} from '../../models';
+import {Player} from '../../models';
 import {PerkService} from '../../services/perk/perk.service';
 
 @Component({

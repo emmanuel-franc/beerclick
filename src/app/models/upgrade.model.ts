@@ -5,5 +5,5 @@ export class Upgrade {
   price: number;
   unlocked: boolean;
   purchased: boolean;
-  seasonalEvent: boolean;
+  seasonalEvent: string;
 }

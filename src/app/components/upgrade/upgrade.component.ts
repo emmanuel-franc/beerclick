@@ -3,8 +3,6 @@ import {Player} from '../../models/player.model';
 import {PlayerService} from '../../services/player/player.service';
 import {BreweryService} from '../../services/brewery/brewery.service';
 
-import * as _ from 'lodash';
-
 @Component({
   selector: 'app-upgrade',
   templateUrl: './upgrade.component.html',
@@ -19,7 +17,9 @@ export class UpgradeComponent {
   constructor(public PlayerService:PlayerService, public BreweryService:BreweryService) {
     this.bitter = this.BreweryService.incomeOnChange.subscribe(data => {
       if(data >= 1000) {
-        let brewery = _.find(this.player.resources.upgrades, ['name',  'Bitter Brewery']);
+        let brewery = this.player.resources.upgrades.find(function(brewery){
+          return brewery.name === 'Bitter Brewery';
+        });
 
         if(!brewery.unlocked) {
           this.unlockUpgrade(brewery);
@@ -32,8 +32,13 @@ export class UpgradeComponent {
     this.stout = this.BreweryService.incomeOnChange.subscribe(data => {
       // Unlock brewery
       if(data > 10000) {
-        let brewery = _.find(this.player.resources.upgrades, ['name',  'Dry Stout Brewery']);
-        let farm =_.find(this.player.resources.upgrades, ['name',  'Barley']);
+        let brewery = this.player.resources.upgrades.find(function(brewery){
+          return brewery.name === 'Dry Stout Brewery';
+        });
+
+        let farm = this.player.resources.upgrades.find(function(brewery){
+          return brewery.name === 'Barley';
+        });
 
         if(!brewery.unlocked) {
           this.unlockUpgrade(brewery);
@@ -69,16 +74,25 @@ export class UpgradeComponent {
       this.player.resources.beers.qty -= item.price;
 
       // set unlock on this upgrade
-      let purchase = _.find(this.player.resources.upgrades, {'name': item.name});
+      let purchase = this.player.resources.upgrades.find(function(element){
+        return element.name === item.name;
+      });
+
       purchase.purchased = true;
 
       if (item.category === 'farms') {
-        let unlock = _.find(this.player.resources.farms, {'name': item.name});
+        let unlock = this.player.resources.farms.find(function(element){
+          return element.name === item.name;
+        });
+
         unlock.unlocked = true;
       }
 
       if (item.category === 'breweries') {
-        let unlock = _.find(this.player.resources.breweries, {'name': item.name});
+        let unlock = this.player.resources.breweries.find(function(element){
+          return element.name === item.name;
+        });
+
         unlock.unlocked = true;
       }
     }

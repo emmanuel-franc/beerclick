@@ -1,8 +1,7 @@
-import {Injectable, EventEmitter} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {PlayerService} from '../player/player.service';
 import {Brewery, Perk} from '../../models';
 
-import * as _ from 'lodash';
 import {Player} from '../../models/player.model';
 
 @Injectable()
@@ -39,7 +38,9 @@ export class PerkService {
     }
 
     if (item.bonusTrigger === 'Pilsner Brewery') {
-      let getBonusTrigger: Brewery = _.find(player.resources.breweries, {'name': item.bonusTrigger});
+      let getBonusTrigger: Brewery = player.resources.breweries.find(function(element) {
+        return element.name === item.bonusTrigger;
+      });
       getBonusTrigger.bonus.push(item.bonus);
     }
 
@@ -55,14 +56,17 @@ export class PerkService {
     if (assignedPerk.bonusTrigger === 'income') {
       // set new income of each brewery
       player.resources.breweries.forEach((brewery) => {
-        let indexOfFirstBonus = _.indexOf(brewery.bonus, assignedPerk.bonus);
+        let indexOfFirstBonus = brewery.bonus.indexOf(assignedPerk.bonus);
         brewery.bonus.splice(1, indexOfFirstBonus);
       });
     }
 
     if (assignedPerk.bonusTrigger === 'Pilsner Brewery') {
-      let getBonusTrigger: Brewery = _.find(player.resources.breweries, {'name': 'Pilsner Brewery'});
-      let indexOfFirstBonus = _.indexOf(getBonusTrigger.bonus, assignedPerk.bonus);
+      let getBonusTrigger: Brewery = player.resources.breweries.find(function(element) {
+        return element.name === 'Pilsner Brewery';
+      });
+
+      let indexOfFirstBonus = getBonusTrigger.bonus.indexOf(assignedPerk.bonus);
 
       getBonusTrigger.bonus.splice(1, indexOfFirstBonus);
     }

@@ -1,5 +1,4 @@
 import {Injectable, EventEmitter} from '@angular/core';
-import {Player} from '../../models';
 
 @Injectable()
 export class FarmService {
