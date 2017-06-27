@@ -3,6 +3,8 @@ import {Player, Event} from '../../models';
 import {EventService} from '../../services/event/event.service';
 import {BreweryService} from '../../services/brewery/brewery.service';
 
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
@@ -81,8 +83,8 @@ export class EventComponent implements OnInit {
   }
 
   randomEvent() {
-    let maxTime = 1000; // 5 minutes
-    let minTime = 800; // 1 minute
+    let maxTime = environment.production ? 900000 : 300000; // 15 minutes or 5 min
+    let minTime = environment.production ? 600000 : 120000; // 10 minutes or 2 min
     let randomTime = Math.random() * (maxTime - minTime) + minTime;
 
     this.timeOut = setTimeout(() => {
