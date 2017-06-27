@@ -4,7 +4,7 @@ import {EventService} from '../../services/event/event.service';
 import {BreweryService} from '../../services/brewery/brewery.service';
 
 @Component({
-  selector: 'ng-event',
+  selector: 'app-event',
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.scss']
 })

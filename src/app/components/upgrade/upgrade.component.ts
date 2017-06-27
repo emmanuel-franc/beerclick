@@ -4,7 +4,7 @@ import {PlayerService} from '../../services/player/player.service';
 import {BreweryService} from '../../services/brewery/brewery.service';
 
 @Component({
-  selector: 'ng-upgrade',
+  selector: 'app-upgrade',
   templateUrl: './upgrade.component.html',
   styleUrls: ['./upgrade.component.scss']
 })

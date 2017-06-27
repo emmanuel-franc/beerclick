@@ -10,7 +10,7 @@ const perksList = require('../assets/data/perks.json');
 const {version: appVersion} = require('../../package.json');
 
 @Component({
-  selector: 'ng-root',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

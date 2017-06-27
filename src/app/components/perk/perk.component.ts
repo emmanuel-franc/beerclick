@@ -6,7 +6,7 @@ import {PlayerService} from '../../services/player/player.service';
 import {PerkService} from '../../services/perk/perk.service';
 
 @Component({
-  selector: 'ng-perk',
+  selector: 'app-perk',
   templateUrl: './perk.component.html',
   styleUrls: ['./perk.component.scss']
 })
