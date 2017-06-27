@@ -3,7 +3,7 @@ import {Player} from '../../models';
 import {PerkService} from '../../services/perk/perk.service';
 
 @Component({
-  selector: 'app-popin',
+  selector: 'ng-popin',
   templateUrl: './popin.component.html',
   styleUrls: ['./popin.component.scss']
 })

@@ -3,7 +3,7 @@ import {Player} from '../../models';
 import {PlayerService} from '../../services/player/player.service';
 
 @Component({
-  selector: 'app-click-zone',
+  selector: 'ng-click-zone',
   templateUrl: './click-zone.component.html',
   styleUrls: ['./click-zone.component.scss']
 })

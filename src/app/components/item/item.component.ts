@@ -5,7 +5,7 @@ import {BreweryService} from '../../services/brewery/brewery.service';
 import {FarmService} from '../../services/farm/farm.service';
 
 @Component({
-  selector: 'app-item',
+  selector: 'ng-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss']
 })
