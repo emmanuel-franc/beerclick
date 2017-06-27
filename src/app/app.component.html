@@ -1,9 +1,9 @@
 <div class="store store--left">
-  <ng-upgrade [(player)]="player"><ng-upgrade>
+  <ng-upgrade [(player)]="player"></ng-upgrade>
 
   <div *ngFor="let farm of player.resources.farms">
     <div *ngIf="farm.unlocked">
-      <ng-item [player]="player" [item]="farm" [(totalFarmsAllTime)]="totalFarmsAllTime"><ng-item>
+      <ng-item [player]="player" [item]="farm" [(totalFarmsAllTime)]="totalFarmsAllTime"></ng-item>
     </div>
   </div>
 
@@ -14,13 +14,13 @@
 
 <div class="main">
   <div class="event">
-    <ng-event [(player)]="player"><ng-event>
+    <ng-event [(player)]="player"></ng-event>
   </div>
 
   <div class="clickZone">
-    <ng-perk [(player)]="player"><ng-perk>
+    <ng-perk [(player)]="player"></ng-perk>
 
-    <ng-click-zone [(player)]="player" [(totalBeersAllTime)]="totalBeersAllTime"><ng-click-zone>
+    <ng-click-zone [(player)]="player" [(totalBeersAllTime)]="totalBeersAllTime"></ng-click-zone>
   </div>
 
   <h2 class="money">{{player.resources.beers.qty}} Beers</h2>
@@ -38,7 +38,7 @@
 <div class="store store--right">
   <div *ngFor="let brewery of player.resources.breweries">
     <div *ngIf="brewery.unlocked">
-      <ng-item [player]="player" [item]="brewery" [(totalBreweriesAllTime)]="totalBreweriesAllTime"><ng-item>
+      <ng-item [player]="player" [item]="brewery" [(totalBreweriesAllTime)]="totalBreweriesAllTime"></ng-item>
     </div>
   </div>
 </div>
