@@ -18,20 +18,23 @@ export class AppConfig {
   farms: string;
 }
 
-export const APP_DI_CONFIG: AppConfig = {
-  maxTime: environment.maxTime || 900000,
-  minTime: environment.minTime || 600000,
-  paths: {
-    img: '/assets/images/',
-    perksImg: '/assets/images/perks/',
-    upgradesImg: '/assets/images/upgrades/'
-  },
-  beers: 'Beers',
-  brewery: 'Brewery',
-  breweries: 'Breweries',
-  farm: 'Farm',
-  farms: 'Farms'
-};
+export const APP_DI_CONFIG: AppConfig = (() => {
+  const imgPath = '/assets/images/';
+  return {
+    maxTime: environment.maxTime || 900000,
+    minTime: environment.minTime || 600000,
+    paths: {
+      img: imgPath,
+      perksImg: imgPath + 'perks/',
+      upgradesImg: imgPath + 'upgrades/'
+    },
+    beers: 'Beers',
+    brewery: 'Brewery',
+    breweries: 'Breweries',
+    farm: 'Farm',
+    farms: 'Farms'
+  };
+})();
 
 @NgModule({
   providers: [{
