@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Player, Event} from '../../models';
 import {EventService} from '../../services/event/event.service';
 import {BreweryService} from '../../services/brewery/brewery.service';
 
-import { environment } from '../../../environments/environment';
+import { APP_CONFIG, AppConfig } from '../../app-config.module';
 
 @Component({
   selector: 'app-event',
@@ -24,7 +24,9 @@ export class EventComponent implements OnInit {
   chosenEventQty: number;
   showEvent: boolean;
 
-  constructor(public EventService: EventService, public BreweryService: BreweryService) {
+  constructor(public EventService: EventService,
+              public BreweryService: BreweryService,
+              @Inject(APP_CONFIG) private config: AppConfig) {
     this.getEventsList = this.EventService.getEventsList();
     this.breweriesLossEvents = [];
     this.beersLossEvents = [];
@@ -83,8 +85,8 @@ export class EventComponent implements OnInit {
   }
 
   randomEvent() {
-    let maxTime = environment.production ? 900000 : 300000; // 15 minutes or 5 min
-    let minTime = environment.production ? 600000 : 120000; // 10 minutes or 2 min
+    let maxTime = this.config.maxTime; // 15 minutes or 5 min
+    let minTime = this.config.minTime; // 10 minutes or 2 min
     let randomTime = Math.random() * (maxTime - minTime) + minTime;
 
     this.timeOut = setTimeout(() => {
