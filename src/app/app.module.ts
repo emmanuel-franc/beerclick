@@ -16,6 +16,7 @@ import { UpgradeComponent } from './components/upgrade/upgrade.component';
 import { ClickZoneComponent } from './components/click-zone/click-zone.component';
 import { PerkComponent } from './components/perk/perk.component';
 import { PopinComponent } from './components/popin/popin.component';
+import { ToLocalePipe } from './pipes/to-locale.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PopinComponent } from './components/popin/popin.component';
     UpgradeComponent,
     ClickZoneComponent,
     PerkComponent,
-    PopinComponent
+    PopinComponent,
+    ToLocalePipe
   ],
   imports: [
     AppConfigModule,

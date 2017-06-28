@@ -23,14 +23,14 @@
     <app-click-zone [(player)]="player" [(totalBeersAllTime)]="totalBeersAllTime"></app-click-zone>
   </div>
 
-  <h2 class="money">{{player.resources.beers.qty}} Beers</h2>
+  <h2 class="money">{{player.resources.beers.qty | toLocale}} Beers</h2>
 
   <div class="stats">
     <h3>Stats</h3>
     <ul>
-      <li>Total of {{config.beers}} {{totalBeersAllTime || 0}}</li>
-      <li>Total of {{config.breweries}} {{totalBreweries || 0}}</li>
-      <li>Total of {{config.farms}} {{totalFarms || 0}}</li>
+      <li>Total of {{config.beers}} {{totalBeersAllTime || 0 | toLocale}}</li>
+      <li>Total of {{config.breweries}} {{totalBreweries || 0 | toLocale}}</li>
+      <li>Total of {{config.farms}} {{totalFarms || 0 | toLocale}}</li>
     </ul>
   </div>
 </div>

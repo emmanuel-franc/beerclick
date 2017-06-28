@@ -5,7 +5,7 @@
     <li class="upgrades-listItem"
         *ngFor="let upgrade of player.resources.upgrades;"
         (click)="buyUpgrade(upgrade);"
-        title="{{upgrade.name}}, Price: {{upgrade.price}} {{config.beers}}">
+        title="{{upgrade.name}}, Price: {{upgrade.price | toLocale}} {{config.beers}}">
       <div class="upgrades-item"
            *ngIf="!upgrade.purchased && upgrade.unlocked">
         <img class="upgrades-img" [src]="config.paths.upgradesImg" alt="">

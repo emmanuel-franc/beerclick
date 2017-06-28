@@ -2,6 +2,6 @@
 
 <div class="generatedBeers">
   <div class="generatedBeers-item" *ngFor="let click of clicks">
-    + {{click}}  {{config.beers | lowercase}} !
+    + {{click | toLocale}}  {{config.beers | lowercase}} !
   </div>
 </div>
