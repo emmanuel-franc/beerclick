@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppConfigModule } from './app-config.module';
+import { AppConfigModule } from './app-config/app-config.module';
 import { AppComponent } from './app.component';
 import { ItemComponent } from './components/item/item.component';
 import { EventComponent } from './components/event/event.component';
@@ -16,6 +16,7 @@ import { UpgradeComponent } from './components/upgrade/upgrade.component';
 import { ClickZoneComponent } from './components/click-zone/click-zone.component';
 import { PerkComponent } from './components/perk/perk.component';
 import { PopinComponent } from './components/popin/popin.component';
+import { ToLocalePipe } from './pipes/to-locale.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PopinComponent } from './components/popin/popin.component';
     UpgradeComponent,
     ClickZoneComponent,
     PerkComponent,
-    PopinComponent
+    PopinComponent,
+    ToLocalePipe
   ],
   imports: [
     AppConfigModule,

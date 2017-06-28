@@ -5,7 +5,7 @@
         title="each {{item.name}} add {{ 1*item.ratio }} Beers/second">
       {{item.name}}
       <span *ngIf="item.category === config.farms">{{config.farm}}</span>
-      ({{item.qty}})
+      ({{item.qty | toLocale}})
     </h3>
 
     <p class="item-stats">
@@ -14,14 +14,14 @@
 
     <p class="item-stats" *ngIf="item.category !== config.farms">
       Production cost: <span class="item-productionCost" *ngFor="let cost of item.productionCost">- {{cost.qty *
-      item.qty}}
+      item.qty | toLocale}}
       {{cost.name}}
       per second</span>
     </p>
 
     <p class="item-stats"
        *ngIf="item.category === config.farms">
-      Bank: {{item.bank.qty}}
+      Bank: {{item.bank.qty | toLocale}}
     </p>
   </div>
 

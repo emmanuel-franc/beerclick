@@ -1,6 +1,6 @@
 import {Component, Inject, Input, Output, EventEmitter} from '@angular/core';
 
-import { APP_CONFIG, AppConfig } from '../../app-config.module';
+import { APP_CONFIG, AppConfig } from '../../app-config/app-config.module';
 
 import {Player} from '../../models';
 import {PerkService} from '../../services/perk/perk.service';

@@ -1,5 +1,5 @@
 import { NgModule, InjectionToken } from '@angular/core';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
 export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 

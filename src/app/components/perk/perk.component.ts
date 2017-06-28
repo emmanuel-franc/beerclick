@@ -1,6 +1,6 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 
-import { APP_CONFIG, AppConfig } from '../../app-config.module';
+import { APP_CONFIG, AppConfig } from '../../app-config/app-config.module';
 
 import {Player, PerkSlot, Perk} from '../../models';
 

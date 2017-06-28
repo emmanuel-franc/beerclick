@@ -1,7 +1,7 @@
 <div class="event">
   <p class="event-item" [ngClass]="{'event-item--active': showEvent}">
     <span *ngIf="chosenEvent">
-      {{chosenEvent.message}} {{chosenEventQty}}
+      {{chosenEvent.message}} {{chosenEventQty | toLocale}}
       {{chosenEvent.messageEndPart}}
     </span>
   </p>
