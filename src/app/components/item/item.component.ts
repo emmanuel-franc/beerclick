@@ -1,4 +1,7 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Inject, Input, Output, EventEmitter} from '@angular/core';
+
+import { APP_CONFIG, AppConfig } from '../../app-config.module';
+
 import {Farm, Brewery, Player} from '../../models';
 import {PlayerService} from '../../services/player/player.service';
 import {BreweryService} from '../../services/brewery/brewery.service';
@@ -18,7 +21,10 @@ export class ItemComponent {
   @Input() totalFarmsAllTime: number;
   @Output() totalFarmsAllTimeChange = new EventEmitter<number>();
 
-  constructor(public PlayerService: PlayerService, public BreweryService: BreweryService, public FarmService: FarmService) {
+  constructor(public PlayerService: PlayerService,
+              public BreweryService: BreweryService,
+              public FarmService: FarmService,
+              @Inject(APP_CONFIG) private config: AppConfig) {
     this.totalBreweriesAllTime = this.totalBreweriesAllTime || 0;
     this.totalFarmsAllTime = this.totalFarmsAllTime || 0;
   }
@@ -39,7 +45,7 @@ export class ItemComponent {
 
       item.qty += multiplicator;
 
-      if (item.category === 'Breweries') {
+      if (item.category === this.config.breweries) {
         this.totalBreweriesAllTime += multiplicator;
 
         // send value to service
@@ -52,7 +58,7 @@ export class ItemComponent {
         this.BreweryService.setIncome(this.player);
       }
 
-      if (item.category === 'Farms') {
+      if (item.category === this.config.farms) {
         this.totalFarmsAllTime += multiplicator;
 
         // send value to service
@@ -78,7 +84,7 @@ export class ItemComponent {
       // Add X% of the item cost, to the stock
       this.player.resources.beers.qty += (item.price * multiplicator) / 2;
 
-      if (item.category === 'Breweries') {
+      if (item.category === this.config.breweries) {
         // send value to service
         this.BreweryService.setSubstractTotalBreweries(multiplicator);
 
@@ -86,7 +92,7 @@ export class ItemComponent {
         this.BreweryService.setIncome(this.player);
       }
 
-      if (item.category === 'Farms') {
+      if (item.category === this.config.farms) {
         // send value to service
         this.FarmService.setSubstractTotalFarms(multiplicator);
 

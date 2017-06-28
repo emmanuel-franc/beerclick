@@ -1,4 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
+
+import { APP_CONFIG, AppConfig } from '../../app-config.module';
+
 import {Player} from '../../models/player.model';
 import {PlayerService} from '../../services/player/player.service';
 import {BreweryService} from '../../services/brewery/brewery.service';
@@ -14,7 +17,9 @@ export class UpgradeComponent {
   private bitter;
   private stout;
 
-  constructor(public PlayerService:PlayerService, public BreweryService:BreweryService) {
+  constructor(public PlayerService:PlayerService,
+              public BreweryService:BreweryService,
+              @Inject(APP_CONFIG) private config: AppConfig) {
     this.bitter = this.BreweryService.incomeOnChange.subscribe(data => {
       if(data >= 1000) {
         let brewery = this.player.resources.upgrades.find(function(brewery){
@@ -80,7 +85,7 @@ export class UpgradeComponent {
 
       purchase.purchased = true;
 
-      if (item.category === 'farms') {
+      if (item.category === this.config.farms) {
         let unlock = this.player.resources.farms.find(function(element){
           return element.name === item.name;
         });
@@ -88,7 +93,7 @@ export class UpgradeComponent {
         unlock.unlocked = true;
       }
 
-      if (item.category === 'breweries') {
+      if (item.category === this.config.breweries) {
         let unlock = this.player.resources.breweries.find(function(element){
           return element.name === item.name;
         });

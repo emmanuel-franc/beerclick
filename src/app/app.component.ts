@@ -1,4 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
+
+import { APP_CONFIG, AppConfig } from './app-config.module';
+
 import {Brewery, Farm, Beers, Upgrade, PerkSlot, Perk, Player} from './models';
 import {PlayerService} from './services/player/player.service';
 import {BreweryService} from './services/brewery/brewery.service';
@@ -30,7 +33,10 @@ export class AppComponent implements OnInit {
   appVersion;
   standBy: boolean;
 
-  constructor(public PlayerService: PlayerService, public BreweryService: BreweryService, public FarmService: FarmService) {
+  constructor(public PlayerService: PlayerService,
+              public BreweryService: BreweryService,
+              public FarmService: FarmService,
+              @Inject(APP_CONFIG) private config: AppConfig) {
     this.appVersion = appVersion;
     this.perkSlots = [];
     this.perks = [];

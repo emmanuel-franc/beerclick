@@ -8,7 +8,7 @@
          *ngFor="let perk of player.resources.perks"
          (click)="setPerk(perk)">
       <button class="perkImage" [disabled]="!perk.unlocked">
-        <img [src]="'./assets/images/perks/' + perk.image">
+        <img [src]="config.paths.perksImg + perk.image">
       </button>
 
       <div class="perkInfos">

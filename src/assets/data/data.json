@@ -199,7 +199,7 @@
   "upgrades": [
     {
       "name": "Wheat",
-      "category": "farms",
+      "category": "Farms",
       "price": 100,
       "unlocked": true,
       "purchased": false,
@@ -207,7 +207,7 @@
     },
     {
       "name": "Barley",
-      "category": "farms",
+      "category": "Farms",
       "price": 150,
       "unlocked": false,
       "purchased": false,
@@ -215,7 +215,7 @@
     },
     {
       "name": "Gingerbread",
-      "category": "farms",
+      "category": "Farms",
       "price": 100,
       "unlocked": false,
       "purchased": false,
@@ -223,7 +223,7 @@
     },
     {
       "name": "Bitter Brewery",
-      "category": "breweries",
+      "category": "Breweries",
       "price": 100,
       "unlocked": false,
       "purchased": false,
@@ -231,7 +231,7 @@
     },
     {
       "name": "Dry Stout Brewery",
-      "category": "breweries",
+      "category": "Breweries",
       "price": 150,
       "unlocked": false,
       "purchased": false,
@@ -239,7 +239,7 @@
     },
     {
       "name": "Christmas Beer Brewery",
-      "category": "breweries",
+      "category": "Breweries",
       "price": 150,
       "unlocked": false,
       "purchased": false,
