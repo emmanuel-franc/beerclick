@@ -1,6 +1,6 @@
 import {Component, OnInit, Inject} from '@angular/core';
 
-import { APP_CONFIG, AppConfig } from './app-config.module';
+import { APP_CONFIG, AppConfig } from './app-config/app-config.module';
 
 import {Brewery, Farm, Beers, Upgrade, PerkSlot, Perk, Player} from './models';
 import {PlayerService} from './services/player/player.service';

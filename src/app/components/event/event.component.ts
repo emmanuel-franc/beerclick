@@ -3,7 +3,7 @@ import {Player, Event} from '../../models';
 import {EventService} from '../../services/event/event.service';
 import {BreweryService} from '../../services/brewery/brewery.service';
 
-import { APP_CONFIG, AppConfig } from '../../app-config.module';
+import { APP_CONFIG, AppConfig } from '../../app-config/app-config.module';
 
 @Component({
   selector: 'app-event',
