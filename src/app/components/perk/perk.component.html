@@ -3,7 +3,7 @@
     <span class="perkSlot-item" *ngIf="index <= 3">
       <span class="perkSlot-icon" *ngIf="perkSlot.unlocked" (click)="addPerk(perkSlot.id)">
         <img src="./assets/images/perks/addPerk.png" *ngIf="!perkSlot.assignedPerk">
-        <img src="./assets/images/perks/{{perkSlot.assignedPerk.image}}" *ngIf="perkSlot.assignedPerk">
+        <img [src]="'./assets/images/perks/' + perkSlot.assignedPerk.image" *ngIf="perkSlot.assignedPerk">
       </span>
 
       <span class="perkSlot-icon" *ngIf="!perkSlot.unlocked">
@@ -22,7 +22,7 @@
     <span class="perkSlot-item" [ngClass]="{'perkSlot-item--locked': !perkSlot.unlocked}" *ngIf="index > 3">
       <span class="perkSlot-icon" *ngIf="perkSlot.unlocked" (click)="addPerk(perkSlot.id)">
         <img src="./assets/images/perks/addPerk.png" *ngIf="!perkSlot.assignedPerk">
-        <img src="./assets/images/perks/{{perkSlot.assignedPerk.image}}" *ngIf="perkSlot.assignedPerk">
+        <img [src]="'./assets/images/perks/' + perkSlot.assignedPerk.image" *ngIf="perkSlot.assignedPerk">
       </span>
 
       <span class="perkSlot-icon" *ngIf="!perkSlot.unlocked">

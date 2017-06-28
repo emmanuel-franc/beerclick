@@ -8,7 +8,7 @@
         title="{{upgrade.name}}, Price: {{upgrade.price}} Beers">
       <div class="upgrades-item"
            *ngIf="!upgrade.purchased && upgrade.unlocked">
-        <img class="upgrades-img" src="" alt="">
+        <img class="upgrades-img" [src]="" alt="">
       </div>
     </li>
   </ul>
