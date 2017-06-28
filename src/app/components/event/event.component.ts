@@ -42,12 +42,12 @@ export class EventComponent implements OnInit {
 
     // create array with all events that make loosing breweries
     this.breweriesLossEvents = this.getEventsList.filter(function(event){
-        return event.action.lossType === 'breweries';
+        return event.action.lossType === config.breweries;
     });
 
     // create array with all events that make loosing beers
     this.beersLossEvents = this.getEventsList.filter(function(event){
-      return event.action.lossType === 'beers';
+      return event.action.lossType === config.beers;
     });
 
     // subscribe to services to detect changes on totalBreweries
@@ -97,11 +97,11 @@ export class EventComponent implements OnInit {
         // check if event has a loss amount
         if (this.chosenEvent.action.loss) {
           // check type of loss
-          if (this.chosenEvent.action.lossType === 'breweries') {
+          if (this.chosenEvent.action.lossType === this.config.breweries) {
             this.breweryLoss(this.chosenEvent);
           }
 
-          if (this.chosenEvent.action.lossType === 'beers') {
+          if (this.chosenEvent.action.lossType === this.config.beers) {
             this.beersLoss(this.chosenEvent);
           }
         }

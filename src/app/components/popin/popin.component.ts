@@ -1,4 +1,7 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Inject, Input, Output, EventEmitter} from '@angular/core';
+
+import { APP_CONFIG, AppConfig } from '../../app-config.module';
+
 import {Player} from '../../models';
 import {PerkService} from '../../services/perk/perk.service';
 
@@ -14,7 +17,8 @@ export class PopinComponent {
   @Input() popinIsVisible: boolean;
   @Output() popinIsVisibleChange = new EventEmitter<boolean>();
 
-  constructor(public PerkService: PerkService) {
+  constructor(public PerkService: PerkService,
+              @Inject(APP_CONFIG) private config: AppConfig) {
   }
 
   isBuyable(item): boolean {

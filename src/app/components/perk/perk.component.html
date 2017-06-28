@@ -2,12 +2,12 @@
   <div *ngFor="let perkSlot of perkSlots; let index = index;">
     <span class="perkSlot-item" *ngIf="index <= 3">
       <span class="perkSlot-icon" *ngIf="perkSlot.unlocked" (click)="addPerk(perkSlot.id)">
-        <img src="./assets/images/perks/addPerk.png" *ngIf="!perkSlot.assignedPerk">
-        <img [src]="'./assets/images/perks/' + perkSlot.assignedPerk.image" *ngIf="perkSlot.assignedPerk">
+        <img [src]="config.paths.perksImg + 'addPerk.png'" *ngIf="!perkSlot.assignedPerk">
+        <img [src]="config.paths.perksImg + perkSlot.assignedPerk.image" *ngIf="perkSlot.assignedPerk">
       </span>
 
       <span class="perkSlot-icon" *ngIf="!perkSlot.unlocked">
-        <img src="./assets/images/perks/locker.jpg">
+        <img [src]="config.paths.perksImg + 'locker.jpg'">
       </span>
 
       <span *ngIf="perkSlot.assignedPerk"
@@ -21,12 +21,12 @@
   <div *ngFor="let perkSlot of perkSlots; let index = index;">
     <span class="perkSlot-item" [ngClass]="{'perkSlot-item--locked': !perkSlot.unlocked}" *ngIf="index > 3">
       <span class="perkSlot-icon" *ngIf="perkSlot.unlocked" (click)="addPerk(perkSlot.id)">
-        <img src="./assets/images/perks/addPerk.png" *ngIf="!perkSlot.assignedPerk">
-        <img [src]="'./assets/images/perks/' + perkSlot.assignedPerk.image" *ngIf="perkSlot.assignedPerk">
+        <img [src]="config.paths.perksImg + 'addPerk.png'" *ngIf="!perkSlot.assignedPerk">
+        <img [src]="config.paths.perksImg + perkSlot.assignedPerk.image" *ngIf="perkSlot.assignedPerk">
       </span>
 
       <span class="perkSlot-icon" *ngIf="!perkSlot.unlocked">
-        <img src="./assets/images/perks/locker.jpg">
+        <img [src]="config.paths.perksImg + 'locker.jpg'">
       </span>
 
       <button *ngIf="perkSlot.assignedPerk"

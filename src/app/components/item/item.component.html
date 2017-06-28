@@ -3,11 +3,11 @@
   <div class="item-infos">
     <h3 class="item-title"
         title="each {{item.name}} add {{ 1*item.ratio }} Beers/second">{{item.name}} ({{item.qty}})
-      <span *ngIf="item.category === 'Farms'">Farm</span>
+      <span *ngIf="item.category === config.farms">{{config.farm}}</span>
     </h3>
 
     <p class="item-stats">
-      Price: {{item.price}} Beers.
+      Price: {{item.price}} {{config.beers}}.
     </p>
 
     <p class="item-stats">
@@ -18,7 +18,7 @@
     </p>
 
     <p class="item-stats"
-       *ngIf="item.category === 'Farms'">
+       *ngIf="item.category === config.farms">
       Bank: {{item.bank.qty}}
     </p>
   </div>

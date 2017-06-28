@@ -4,15 +4,33 @@ import { environment } from '../environments/environment';
 export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
 export class AppConfig {
-  apiEndpoint: string;
   maxTime: number;
   minTime: number;
+  paths: {
+    img: string;
+    perksImg: string;
+    upgradesImg: string;
+  };
+  beers: string;
+  brewery: string;
+  breweries: string;
+  farm: string;
+  farms: string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
-  apiEndpoint: 'http://localhost:8000/api/v1',
   maxTime: environment.maxTime || 900000,
   minTime: environment.minTime || 600000,
+  paths: {
+    img: '/assets/images/',
+    perksImg: '/assets/images/perks/',
+    upgradesImg: '/assets/images/upgrades/'
+  },
+  beers: 'Beers',
+  brewery: 'Brewery',
+  breweries: 'Breweries',
+  farm: 'Farm',
+  farms: 'Farms'
 };
 
 @NgModule({

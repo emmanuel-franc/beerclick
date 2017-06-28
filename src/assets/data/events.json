@@ -7,7 +7,7 @@
       "messageEndPart": "of your beers!",
       "action": {
         "loss": 100,
-        "lossType": "beers",
+        "lossType": "Beers",
         "limit": 200
       }
     },
@@ -18,7 +18,7 @@
       "messageEndPart": "of your beers.",
       "action": {
         "loss": 200,
-        "lossType": "beers",
+        "lossType": "Beers",
         "limit": 1000
       }
     },
@@ -29,7 +29,7 @@
       "messageEndPart": " breweries",
       "action": {
         "loss": 1,
-        "lossType": "breweries",
+        "lossType": "Breweries",
         "limit": 15
       }
     }

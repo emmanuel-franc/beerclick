@@ -1,4 +1,7 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
+
+import { APP_CONFIG, AppConfig } from '../../app-config.module';
+
 import {Player} from '../../models';
 import {PlayerService} from '../../services/player/player.service';
 
@@ -14,7 +17,8 @@ export class ClickZoneComponent {
   generatedBeers: number;
   clicks: number[];
 
-  constructor(public PlayerService: PlayerService) {
+  constructor(public PlayerService: PlayerService,
+              @Inject(APP_CONFIG) private config: AppConfig) {
     // default beers generated is equal to 1
     this.generatedBeers = 1;
     this.clicks = [];

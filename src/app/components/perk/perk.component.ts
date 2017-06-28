@@ -1,4 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
+
+import { APP_CONFIG, AppConfig } from '../../app-config.module';
 
 import {Player, PerkSlot, Perk} from '../../models';
 
@@ -18,7 +20,9 @@ export class PerkComponent implements OnInit {
   popinIsVisible: boolean;
   perkSlotId: number;
 
-  constructor(public PlayerService: PlayerService, public PerkService: PerkService) {
+  constructor(public PlayerService: PlayerService,
+              public PerkService: PerkService,
+              @Inject(APP_CONFIG) private config: AppConfig) {
     this.perkSlots = [];
     this.perksList = [];
     this.popinIsVisible = false;
