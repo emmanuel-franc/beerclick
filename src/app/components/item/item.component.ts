@@ -40,39 +40,37 @@ export class ItemComponent {
   }
 
   buy(item, multiplicator = 1): void { // multiplicator default value = 1 (same as if statement)
-    if (this.isBuyable(item.price, multiplicator)) {
-      this.player.resources.beers.qty -= (item.price * multiplicator);
+    this.player.resources.beers.qty -= (item.price * multiplicator);
 
-      item.qty += multiplicator;
+    item.qty += multiplicator;
 
-      if (item.category === this.config.breweries) {
-        this.totalBreweriesAllTime += multiplicator;
+    if (item.category === this.config.breweries) {
+      this.totalBreweriesAllTime += multiplicator;
 
-        // send value to service
-        this.BreweryService.setTotalBreweries(multiplicator);
+      // send value to service
+      this.BreweryService.setTotalBreweries(multiplicator);
 
-        // send value of totalBeersAllTime to parent component (see @Output)
-        this.totalBreweriesAllTimeChange.emit(this.totalBreweriesAllTime);
+      // send value of totalBeersAllTime to parent component (see @Output)
+      this.totalBreweriesAllTimeChange.emit(this.totalBreweriesAllTime);
 
-        // everytime we buy a brewery, we change income
-        this.BreweryService.setIncome(this.player);
-      }
-
-      if (item.category === this.config.farms) {
-        this.totalFarmsAllTime += multiplicator;
-
-        // send value to service
-        this.FarmService.setTotalFarms(multiplicator);
-
-        // send value of totalFarmsAllTime to parent component (see @Output)
-        this.totalFarmsAllTimeChange.emit(this.totalFarmsAllTime);
-
-        // everytime we buy a farm, we change cereals' income
-        this.FarmService.createCerealsIncome(this.player);
-      }
-
-      this.setNewPrice(item);
+      // everytime we buy a brewery, we change income
+      this.BreweryService.setIncome(this.player);
     }
+
+    if (item.category === this.config.farms) {
+      this.totalFarmsAllTime += multiplicator;
+
+      // send value to service
+      this.FarmService.setTotalFarms(multiplicator);
+
+      // send value of totalFarmsAllTime to parent component (see @Output)
+      this.totalFarmsAllTimeChange.emit(this.totalFarmsAllTime);
+
+      // everytime we buy a farm, we change cereals' income
+      this.FarmService.createCerealsIncome(this.player);
+    }
+
+    this.setNewPrice(item);
   }
 
   sell(item, multiplicator = 1): void {
