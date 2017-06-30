@@ -28,11 +28,6 @@ export class BreweryService {
     }
   }
 
-  resetTotalBreweries(player) {
-    player.resources.totalBreweries = 0;
-    this.totalBreweriesOnChange.emit(player.resources.totalBreweries);
-  }
-  
   createBeersIncome(player, multiplicator = 1) {
     // check all breweries to calculate income
     let productionCostArray = [];

@@ -124,17 +124,7 @@ export class EventComponent implements OnInit {
     // get the number of breweries to remove
     this.chosenEventQty = Math.round(this.totalBreweries / chosenEvent.action.loss);
 
-    // check if loss amount exceed totalBreweries amount
-    if (this.chosenEventQty >= this.totalBreweries) {
-      // set all Breweries qty to 0
-      this.player.resources.breweries.forEach(function(brewery) {
-        brewery.qty = 0;
-      });
-
-      this.totalBreweries = 0;
-      // send value of totalBreweries to service
-      this.BreweryService.resetTotalBreweries(this.player);
-    } else {
+    if (this.chosenEventQty !== 0) {
       // get all Breweries with qty > 0.
       let breweriesWithQty = this.player.resources.breweries.filter(function(brewery){
         return brewery.qty > 0;
@@ -161,6 +151,8 @@ export class EventComponent implements OnInit {
 
       // everytime we remove a brewery, we change income
       this.BreweryService.createBeersIncome(this.player);
+  
+      this.PlayerService.updatePlayer(this.player);
     }
   }
 
@@ -174,5 +166,7 @@ export class EventComponent implements OnInit {
       // subtract this.chosenEvent.action.loss to beers.qty
       this.player.resources.beers.qty -= chosenEvent.action.loss;
     }
+  
+    this.BreweryService.createBeersIncome(this.player);
   }
 }
