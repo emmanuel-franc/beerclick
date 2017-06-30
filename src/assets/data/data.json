@@ -6,9 +6,13 @@
         "category": "bank",
         "qty": 999,
         "unlocked": true
-      },
-      "totalBeersAllTime": 0
-    }
+      }
+    },
+    "totalBeersAllTime": 0,
+    "totalBreweries": 0,
+    "totalBreweriesAllTime": 0,
+    "totalFarms": 0,
+    "totalFarmsAllTime": 0
   },
   "perkSlot": [
     {

@@ -20,8 +20,8 @@ export class UpgradeComponent {
   constructor(public PlayerService:PlayerService,
               public BreweryService:BreweryService,
               @Inject(APP_CONFIG) private config: AppConfig) {
-    this.bitter = this.BreweryService.incomeOnChange.subscribe(data => {
-      if(data >= 1000) {
+    this.bitter = this.PlayerService.playerOnChange.subscribe(data => {
+      if(data.resources.beers.qty >= 1000) {
         let brewery = this.player.resources.upgrades.find(function(brewery){
           return brewery.name === 'Bitter Brewery';
         });
@@ -34,9 +34,9 @@ export class UpgradeComponent {
       }
     });
 
-    this.stout = this.BreweryService.incomeOnChange.subscribe(data => {
+    this.stout = this.PlayerService.playerOnChange.subscribe(data => {
       // Unlock brewery
-      if(data > 10000) {
+      if(data.resources.beers.qty > 10000) {
         let brewery = this.player.resources.upgrades.find(function(brewery){
           return brewery.name === 'Dry Stout Brewery';
         });
@@ -60,7 +60,6 @@ export class UpgradeComponent {
 
   unlockUpgrade(upgrade): void {
     upgrade.unlocked = true;
-    this.PlayerService.updatePlayer(this.player);
   }
 
   isBuyable(item): boolean {

@@ -28,9 +28,8 @@ export class PerkComponent implements OnInit {
     this.popinIsVisible = false;
 
     // subscribe to services to detect changes on totalBeersAllTime
-    this.PlayerService.totalBeersAllTimeOnChange.subscribe(data => {
-
-      this.totalBeersAllTime = data;
+    this.PlayerService.playerOnChange.subscribe(data => {
+      this.totalBeersAllTime = data.resources.totalBeersAllTime;
 
       for (let i = 0; i < this.perkSlots.length; i++) {
         // unlock perkslot when limit is reached

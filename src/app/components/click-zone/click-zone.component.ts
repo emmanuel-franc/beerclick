@@ -13,7 +13,6 @@ import {PlayerService} from '../../services/player/player.service';
 export class ClickZoneComponent {
 
   @Input() player: Player;
-  @Input() totalBeersAllTime: number;
   generatedBeers: number;
   clicks: number[];
 
@@ -22,11 +21,6 @@ export class ClickZoneComponent {
     // default beers generated is equal to 1
     this.generatedBeers = 1;
     this.clicks = [];
-
-
-    this.PlayerService.totalBeersAllTimeOnChange.subscribe(data => {
-      this.totalBeersAllTime = data;
-    });
   }
 
   generateBeers() {
@@ -42,7 +36,7 @@ export class ClickZoneComponent {
     this.player.resources.beers.qty += this.generatedBeers;
 
     // increment totalBeersAllTime quantity
-    this.PlayerService.setTotalBeersAllTime(this.generatedBeers);
+    this.PlayerService.setTotalBeersAllTime(this.player, this.generatedBeers);
 
     // show value generated
     this.clicks.push(this.generatedBeers);

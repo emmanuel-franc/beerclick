@@ -43,8 +43,6 @@ export class PerkService {
       });
       getBonusTrigger.bonus.push(item.bonus);
     }
-
-    this.PlayerService.updatePlayer(player);
   }
 
   // same as setBonus but in reverse.
@@ -73,7 +71,5 @@ export class PerkService {
 
     // empty perk
     player.resources.perkSlots[perkSlotId].assignedPerk = new Perk;
-
-    this.PlayerService.updatePlayer(player);
   }
 }
