@@ -29,6 +29,8 @@ export class AppComponent implements OnInit {
     this.appVersion = appVersion;
     // standBy = lock features
     this.standBy = false;
+    
+    let localStoragePlayer = localStorage.getItem('BeerClickPlayer');
   
     //Initialisation of datas
     let breweries: Brewery[] = data.breweries;
@@ -48,24 +50,26 @@ export class AppComponent implements OnInit {
     let upgrades: Upgrade[] = data.upgrades;
 
     //Initialisation of object player
-    this.player = new Player(beers, totalBeersAllTime, perkSlots,
-                             perks, farms, totalFarms,
-                             totalFarmsAllTime, breweries, totalBreweries,
-                             totalBreweriesAllTime, upgrades);
+    if(!!localStoragePlayer) {
+      this.player = JSON.parse(localStoragePlayer);
+    } else {
+      this.player = new Player(beers, totalBeersAllTime, perkSlots,
+        perks, farms, totalFarms,
+        totalFarmsAllTime, breweries, totalBreweries,
+        totalBreweriesAllTime, upgrades);
+    }
 
     this.PlayerService.playerOnChange.subscribe(data => {
-      console.log('coucou', data)
       this.player = data;
+      localStorage.setItem('BeerClickPlayer', JSON.stringify(data));
     });
     
     setInterval(() => {
       this.BreweryService.createBeersIncome(this.player);
 
-      this.player.resources.farms.forEach((farm) => {
-        farm.bank.qty += farm.bank.income;
-
-        farm.bank.qty = Math.round((farm.bank.qty * 100) / 100);
-      });
+      this.FarmService.createCerealsIncome(this.player);
+  
+      localStorage.setItem('BeerClickPlayer', JSON.stringify(this.player));
     }, 1000);
   }
 
