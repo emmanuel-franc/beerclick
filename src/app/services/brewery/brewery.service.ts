@@ -5,7 +5,6 @@ import {PlayerService} from '../../services/player/player.service';
 @Injectable()
 export class BreweryService {
   public totalBreweriesOnChange: EventEmitter<any> = new EventEmitter();
-  public incomeOnChange: EventEmitter<any> = new EventEmitter();
   public overloadProduction: EventEmitter<any> = new EventEmitter();
 
   constructor(public PlayerService: PlayerService) {
@@ -74,7 +73,6 @@ export class BreweryService {
         }
 
         productionCostArray.length = 0;
-        this.incomeOnChange.emit(player.resources.beers.qty);
       }
     });
   }

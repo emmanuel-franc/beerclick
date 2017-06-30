@@ -68,14 +68,14 @@ export class EventComponent implements OnInit {
       }
     });
 
-    this.BreweryService.incomeOnChange.subscribe(data => {
+    this.PlayerService.playerOnChange.subscribe(data => {
       for (let i = 0; i < this.beersLossEvents.length; i++) {
         // add events with brewery loss
-        if (data >= this.beersLossEvents[i].action.limit) {
+        if (data.resources.beers.qty >= this.beersLossEvents[i].action.limit) {
           this.EventService.setEventUnlocked(this.beersLossEvents[i].id);
         }
         // remove events with brewery loss when limit -1 (to prevent event to never stop)
-        if (data < this.beersLossEvents[i].action.limit) {
+        if (data.resources.beers.qty < this.beersLossEvents[i].action.limit) {
           this.EventService.setEventLocked(this.beersLossEvents[i].id);
         }
       }

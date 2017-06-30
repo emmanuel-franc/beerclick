@@ -9,6 +9,7 @@ export class PlayerService {
 
   updatePlayer(player) {
     this.playerOnChange.emit(player);
+    localStorage.setItem('BeerClickPlayer', JSON.stringify(player));
   }
 
   // TODO: check perf for this, not sure if it's the best way to do it since there is a set interval updating this value

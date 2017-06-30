@@ -24,13 +24,20 @@ export class FarmService {
     }
   }
 
-  createCerealsIncome(player, multiplicator = 1) {
+  createCerealsIncome(player, add, multiplicator = 1) {
     // check all farms to calculate income
     player.resources.farms.forEach((farm) => {
-      farm.bank.income += farm.qty * farm.ratio * multiplicator;
+      if(!!add) {
+        farm.bank.income += multiplicator * farm.ratio;
+      } else {
+        farm.bank.income -= multiplicator * farm.ratio;
+      }
+    });
+  }
   
+  calculateFarmsProduction(player) {
+    player.resources.farms.forEach((farm) => {
       farm.bank.qty += farm.bank.income;
-  
       farm.bank.qty = Math.round((farm.bank.qty * 100) / 100);
     });
   }

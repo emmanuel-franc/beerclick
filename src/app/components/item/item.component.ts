@@ -51,11 +51,10 @@ export class ItemComponent {
       this.FarmService.setTotalFarms(this.player, multiplicator);
 
       // everytime we buy a farm, we change cereals' income
-      this.FarmService.createCerealsIncome(this.player);
+      this.FarmService.createCerealsIncome(this.player, true, multiplicator);
     }
   
     this.PlayerService.setNewPrice(item);
-    this.PlayerService.updatePlayer(this.player);
   }
 
   sell(item, multiplicator = 1): void {
@@ -80,12 +79,10 @@ export class ItemComponent {
         this.FarmService.setSubstractTotalFarms(this.player, multiplicator);
 
         // everytime we sell a farm, we change income
-        // TODO: check this
-        this.BreweryService.createBeersIncome(this.player);
+        this.FarmService.createCerealsIncome(this.player, false, multiplicator);
       }
   
       this.PlayerService.setNewPrice(item);
-      this.PlayerService.updatePlayer(this.player);
     }
   }
 }

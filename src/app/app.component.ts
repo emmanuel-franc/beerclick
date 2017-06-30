@@ -59,17 +59,12 @@ export class AppComponent implements OnInit {
         totalBreweriesAllTime, upgrades);
     }
 
-    this.PlayerService.playerOnChange.subscribe(data => {
-      this.player = data;
-      localStorage.setItem('BeerClickPlayer', JSON.stringify(data));
-    });
-    
     setInterval(() => {
       this.BreweryService.createBeersIncome(this.player);
 
-      this.FarmService.createCerealsIncome(this.player);
-  
-      localStorage.setItem('BeerClickPlayer', JSON.stringify(this.player));
+      this.FarmService.calculateFarmsProduction(this.player);
+      
+      this.PlayerService.updatePlayer(this.player);
     }, 1000);
   }
 
