@@ -4,38 +4,36 @@ import {PlayerService} from '../../services/player/player.service';
 
 @Injectable()
 export class BreweryService {
-  public totalBreweries: number;
-  // see http://stackoverflow.com/questions/35878160/angular2-how-to-share-data-change-between-components
   public totalBreweriesOnChange: EventEmitter<any> = new EventEmitter();
   public incomeOnChange: EventEmitter<any> = new EventEmitter();
   public overloadProduction: EventEmitter<any> = new EventEmitter();
 
   constructor(public PlayerService: PlayerService) {
-    this.totalBreweries = 0;
   }
 
-  setTotalBreweries(value) {
+  setTotalBreweries(player, value) {
     // check if value is defined
     if (value) {
-      this.totalBreweries += value;
-      this.totalBreweriesOnChange.emit(this.totalBreweries);
+      player.resources.totalBreweries += value;
+      player.resources.totalBreweriesAllTime += value;
+      this.totalBreweriesOnChange.emit(player.resources.totalBreweries);
     }
   }
 
-  setSubstractTotalBreweries(value) {
+  setSubstractTotalBreweries(player, value) {
     // check if value is defined
     if (value) {
-      this.totalBreweries -= value;
-      this.totalBreweriesOnChange.emit(this.totalBreweries);
+      player.resources.totalBreweries -= value;
+      this.totalBreweriesOnChange.emit(player.resources.totalBreweries);
     }
   }
 
-  resetTotalBreweries() {
-    this.totalBreweries = 0;
-    this.totalBreweriesOnChange.emit(this.totalBreweries);
+  resetTotalBreweries(player) {
+    player.resources.totalBreweries = 0;
+    this.totalBreweriesOnChange.emit(player.resources.totalBreweries);
   }
-
-  createIncome(player, multiplicator: number) {
+  
+  createBeersIncome(player, multiplicator = 1) {
     // check all breweries to calculate income
     let productionCostArray = [];
 
@@ -66,7 +64,7 @@ export class BreweryService {
 
           player.resources.beers.qty = Math.round((player.resources.beers.qty * 100) / 100);
 
-          this.PlayerService.setTotalBeersAllTime((brewery.qty * brewery.ratio) * bonus);
+          this.PlayerService.setTotalBeersAllTime(player, (brewery.qty * brewery.ratio) * bonus);
 
           brewery.overload = false;
           this.overloadProduction.emit(brewery);
@@ -76,14 +74,8 @@ export class BreweryService {
         }
 
         productionCostArray.length = 0;
+        this.incomeOnChange.emit(player.resources.beers.qty);
       }
     });
-
-    return player.resources.beers.qty;
-  }
-
-  // whenever we setIncome, calculate via createIncome() then emit
-  setIncome(player, multiplicator = 1) {
-    this.incomeOnChange.emit(this.createIncome(player, multiplicator));
   }
 }

@@ -19,17 +19,6 @@ const {version: appVersion} = require('../../package.json');
 })
 export class AppComponent implements OnInit {
   player: Player;
-  beers: Beers;
-  perkSlots: PerkSlot[];
-  perks: Perk[];
-  farms: Farm[];
-  breweries: Brewery[];
-  upgrades: Upgrade[];
-  totalBreweries: number;
-  totalFarms: number;
-  totalBeersAllTime: number;
-  totalBreweriesAllTime: number;
-  totalFarmsAllTime: number;
   appVersion;
   standBy: boolean;
 
@@ -38,59 +27,49 @@ export class AppComponent implements OnInit {
               public FarmService: FarmService,
               @Inject(APP_CONFIG) private config: AppConfig) {
     this.appVersion = appVersion;
-    this.perkSlots = [];
-    this.perks = [];
-    this.farms = [];
-    this.breweries = [];
-    this.upgrades = [];
-    this.totalBeersAllTime = 0;
     // standBy = lock features
     this.standBy = false;
+    
+    let localStoragePlayer = localStorage.getItem('BeerClickPlayer');
+  
+    //Initialisation of datas
+    let breweries: Brewery[] = data.breweries;
+    let totalBreweries: number = data.player.totalBreweries;
+    let totalBreweriesAllTime: number = data.player.totalBreweriesAllTime;
 
-    // subscribe to services to detect changes on totalBreweries
-    this.BreweryService.totalBreweriesOnChange.subscribe(breweries => {
-      this.totalBreweries = breweries;
+    let farms: Farm[] = data.farms;
+    let totalFarms: number = data.player.totalFarms;
+    let totalFarmsAllTime: number = data.player.totalFarmsAllTime;
+
+    let beers: Beers = data.player.resources.beers;
+    let totalBeersAllTime: number = data.player.totalBeersAllTime;
+  
+    let perks: Perk[] = perksList.perks;
+    let perkSlots: PerkSlot[] = data.perkSlot;
+
+    let upgrades: Upgrade[] = data.upgrades;
+
+    //Initialisation of object player
+    if(!!localStoragePlayer) {
+      this.player = JSON.parse(localStoragePlayer);
+    } else {
+      this.player = new Player(beers, totalBeersAllTime, perkSlots,
+        perks, farms, totalFarms,
+        totalFarmsAllTime, breweries, totalBreweries,
+        totalBreweriesAllTime, upgrades);
+    }
+
+    this.PlayerService.playerOnChange.subscribe(data => {
+      this.player = data;
+      localStorage.setItem('BeerClickPlayer', JSON.stringify(data));
     });
-
-    // subscribe to services to detect changes on totalFarms
-    this.FarmService.totalFarmsOnChange.subscribe(farms => {
-      this.totalFarms = farms;
-    });
-
-    // Add the player beers
-    this.beers = data.player.resources.beers;
-
-    // Add the player all time beers
-    this.PlayerService.totalBeersAllTimeOnChange.subscribe(beers => {
-      this.totalBeersAllTime = beers;
-    });
-
-    // Add all perkSlots
-    this.perkSlots = data.perkSlot;
-
-    // Add all perks
-    this.perks = perksList.perks;
-
-    // Add all farms
-    this.farms = data.farms;
-
-    // Add all breweries
-    this.breweries = data.breweries;
-
-    // Add all upgrades
-    this.upgrades = data.upgrades;
-
-    this.player = new Player(this.beers, this.totalBeersAllTime,
-      this.perkSlots, this.perks, this.farms, this.breweries, this.upgrades);
-
+    
     setInterval(() => {
-      this.BreweryService.setIncome(this.player);
+      this.BreweryService.createBeersIncome(this.player);
 
-      this.player.resources.farms.forEach((farm) => {
-        farm.bank.qty += farm.bank.income;
-
-        farm.bank.qty = Math.round((farm.bank.qty * 100) / 100);
-      });
+      this.FarmService.createCerealsIncome(this.player);
+  
+      localStorage.setItem('BeerClickPlayer', JSON.stringify(this.player));
     }, 1000);
   }
 

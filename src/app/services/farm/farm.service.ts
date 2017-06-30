@@ -1,28 +1,26 @@
 import {Injectable, EventEmitter} from '@angular/core';
+import {PlayerService} from '../../services/player/player.service';
 
 @Injectable()
 export class FarmService {
-  public totalFarms: number;
   // see http://stackoverflow.com/questions/35878160/angular2-how-to-share-data-change-between-components
-  public totalFarmsOnChange: EventEmitter<any> = new EventEmitter();
 
-  constructor() {
-    this.totalFarms = 0;
+  constructor(public PlayerService: PlayerService) {
   }
 
-  setTotalFarms(value) {
+  setTotalFarms(player, value) {
     // check if value is defined
     if (value) {
-      this.totalFarms += value;
-      this.totalFarmsOnChange.emit(this.totalFarms);
+      player.resources.totalFarms += value;
+      player.resources.totalFarmsAllTime += value;
     }
   }
 
-  setSubstractTotalFarms(value) {
+  setSubstractTotalFarms(player, value) {
     // check if value is defined
     if (value) {
-      this.totalFarms -= value;
-      this.totalFarmsOnChange.emit(this.totalFarms);
+      player.resources.totalFarms -= value;
+      player.resources.totalFarmsAllTime -= value;
     }
   }
 
@@ -30,8 +28,10 @@ export class FarmService {
     // check all farms to calculate income
     player.resources.farms.forEach((farm) => {
       farm.bank.income += farm.qty * farm.ratio * multiplicator;
+  
+      farm.bank.qty += farm.bank.income;
+  
+      farm.bank.qty = Math.round((farm.bank.qty * 100) / 100);
     });
-
-    return player;
   }
 }
