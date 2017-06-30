@@ -28,7 +28,7 @@
       "message": "An anti alcohol association burnt down",
       "messageEndPart": " breweries",
       "action": {
-        "loss": 1,
+        "loss": 10,
         "lossType": "Breweries",
         "limit": 15
       }

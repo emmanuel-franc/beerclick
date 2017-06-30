@@ -1,4 +1,4 @@
-import {Component, Inject, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
 
 import { APP_CONFIG, AppConfig } from '../../app-config/app-config.module';
 
@@ -16,17 +16,11 @@ export class ItemComponent {
 
   @Input() item: Farm | Brewery;
   @Input() player: Player;
-  @Input() totalBreweriesAllTime: number;
-  @Output() totalBreweriesAllTimeChange = new EventEmitter<number>();
-  @Input() totalFarmsAllTime: number;
-  @Output() totalFarmsAllTimeChange = new EventEmitter<number>();
 
   constructor(public PlayerService: PlayerService,
               public BreweryService: BreweryService,
               public FarmService: FarmService,
               @Inject(APP_CONFIG) private config: AppConfig) {
-    this.totalBreweriesAllTime = this.totalBreweriesAllTime || 0;
-    this.totalFarmsAllTime = this.totalFarmsAllTime || 0;
   }
 
   isBuyable(price, multiplicator = 1): boolean {
@@ -40,39 +34,28 @@ export class ItemComponent {
   }
 
   buy(item, multiplicator = 1): void { // multiplicator default value = 1 (same as if statement)
-    if (this.isBuyable(item.price, multiplicator)) {
-      this.player.resources.beers.qty -= (item.price * multiplicator);
+    this.player.resources.beers.qty -= (item.price * multiplicator);
 
-      item.qty += multiplicator;
+    item.qty += multiplicator;
 
-      if (item.category === this.config.breweries) {
-        this.totalBreweriesAllTime += multiplicator;
+    if (item.category === this.config.breweries) {
+      // send value to service
+      this.BreweryService.setTotalBreweries(this.player, multiplicator);
 
-        // send value to service
-        this.BreweryService.setTotalBreweries(multiplicator);
-
-        // send value of totalBeersAllTime to parent component (see @Output)
-        this.totalBreweriesAllTimeChange.emit(this.totalBreweriesAllTime);
-
-        // everytime we buy a brewery, we change income
-        this.BreweryService.setIncome(this.player);
-      }
-
-      if (item.category === this.config.farms) {
-        this.totalFarmsAllTime += multiplicator;
-
-        // send value to service
-        this.FarmService.setTotalFarms(multiplicator);
-
-        // send value of totalFarmsAllTime to parent component (see @Output)
-        this.totalFarmsAllTimeChange.emit(this.totalFarmsAllTime);
-
-        // everytime we buy a farm, we change cereals' income
-        this.FarmService.createCerealsIncome(this.player);
-      }
-
-      this.setNewPrice(item);
+      // everytime we buy a brewery, we change income
+      this.BreweryService.createBeersIncome(this.player);
     }
+
+    if (item.category === this.config.farms) {
+      // send value to service
+      this.FarmService.setTotalFarms(this.player, multiplicator);
+
+      // everytime we buy a farm, we change cereals' income
+      this.FarmService.createCerealsIncome(this.player);
+    }
+  
+    this.PlayerService.setNewPrice(item);
+    this.PlayerService.updatePlayer(this.player);
   }
 
   sell(item, multiplicator = 1): void {
@@ -86,35 +69,23 @@ export class ItemComponent {
 
       if (item.category === this.config.breweries) {
         // send value to service
-        this.BreweryService.setSubstractTotalBreweries(multiplicator);
+        this.BreweryService.setSubstractTotalBreweries(this.player, multiplicator);
 
         // everytime we sell a brewery, we change income
-        this.BreweryService.setIncome(this.player);
+        this.BreweryService.createBeersIncome(this.player);
       }
 
       if (item.category === this.config.farms) {
         // send value to service
-        this.FarmService.setSubstractTotalFarms(multiplicator);
+        this.FarmService.setSubstractTotalFarms(this.player, multiplicator);
 
         // everytime we sell a farm, we change income
         // TODO: check this
-        this.BreweryService.setIncome(this.player);
+        this.BreweryService.createBeersIncome(this.player);
       }
-
-      this.setNewPrice(item);
+  
+      this.PlayerService.setNewPrice(item);
+      this.PlayerService.updatePlayer(this.player);
     }
-  }
-
-  setNewPrice(item): void {
-    // formula is : Price = baseCost * multiplier(^itemQuantity).
-    item.price = item.baseCost * Math.pow(1.07, item.qty);
-
-    if (item.price < item.baseCost) {
-      item.price = item.baseCost;
-    }
-
-    item.price = Math.round((item.price * 100) / 100);
-
-    this.PlayerService.updatePlayer(this.player);
   }
 }

@@ -1,5 +1,6 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Player, Event} from '../../models';
+import {PlayerService} from '../../services/player/player.service';
 import {EventService} from '../../services/event/event.service';
 import {BreweryService} from '../../services/brewery/brewery.service';
 
@@ -26,6 +27,7 @@ export class EventComponent implements OnInit {
 
   constructor(public EventService: EventService,
               public BreweryService: BreweryService,
+              public PlayerService: PlayerService,
               @Inject(APP_CONFIG) private config: AppConfig) {
     this.getEventsList = this.EventService.getEventsList();
     this.breweriesLossEvents = [];
@@ -122,41 +124,35 @@ export class EventComponent implements OnInit {
     // get the number of breweries to remove
     this.chosenEventQty = Math.round(this.totalBreweries / chosenEvent.action.loss);
 
-    // check if loss amount exceed totalBreweries amount
-    if (this.chosenEventQty >= this.totalBreweries) {
-      // set all Breweries qty to 0
-      this.player.resources.breweries.forEach(function(brewery) {
-        brewery.qty = 0;
-      });
-
-      this.totalBreweries = 0;
-      // send value of totalBreweries to service
-      this.BreweryService.resetTotalBreweries();
-    } else {
+    if (this.chosenEventQty !== 0) {
       // get all Breweries with qty > 0.
       let breweriesWithQty = this.player.resources.breweries.filter(function(brewery){
         return brewery.qty > 0;
       });
-
+  
       for (let i = 0; i < this.chosenEventQty; i++) {
         // get a random brewery
         let randomDestroyedBreweries = breweriesWithQty[Math.floor(Math.random() * breweriesWithQty.length)];
-
+    
         // substract 1 brewery (because we are in a for loop)
         randomDestroyedBreweries.qty -= 1;
-
+    
         // if current brewery quantity drops to 0, we remove it from the array then never loop on it again preventing a
         // negative value
         if (randomDestroyedBreweries.qty === 0) {
           breweriesWithQty.splice(breweriesWithQty.indexOf(randomDestroyedBreweries), 1);
         }
-      }
 
+        this.PlayerService.setNewPrice(randomDestroyedBreweries);
+      }
+  
       // subtract chosenEventQty to totalBreweries then send value of totalBreweries to service
-      this.BreweryService.setSubstractTotalBreweries(this.chosenEventQty);
+      this.BreweryService.setSubstractTotalBreweries(this.player, this.chosenEventQty);
 
       // everytime we remove a brewery, we change income
-      this.BreweryService.setIncome(this.player);
+      this.BreweryService.createBeersIncome(this.player);
+  
+      this.PlayerService.updatePlayer(this.player);
     }
   }
 
@@ -170,5 +166,7 @@ export class EventComponent implements OnInit {
       // subtract this.chosenEvent.action.loss to beers.qty
       this.player.resources.beers.qty -= chosenEvent.action.loss;
     }
+  
+    this.BreweryService.createBeersIncome(this.player);
   }
 }
