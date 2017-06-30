@@ -28,8 +28,10 @@ export class FarmService {
     // check all farms to calculate income
     player.resources.farms.forEach((farm) => {
       farm.bank.income += farm.qty * farm.ratio * multiplicator;
+  
+      farm.bank.qty += farm.bank.income;
+  
+      farm.bank.qty = Math.round((farm.bank.qty * 100) / 100);
     });
-
-    return player;
   }
 }
